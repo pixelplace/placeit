@@ -189,9 +189,9 @@ table > thead > tr > th {
   float: left;
   color: #fff;
   font-size: 20px;
-  border-radius: 20px;
+  border-radius: 7px;
   margin-left: 20px !important;
-  padding: 0 10px !important;
+  padding: 0 8px 6px !important;
   background-color: #692325;
   font-family: Nunito !important;
 }
@@ -200,17 +200,19 @@ table > thead > tr > th {
   color: #fff;
   margin-right: 20px;
   font-size: 16px;
-  border-radius: 20px;
-  padding: 0 10px 3px !important;
+  border-radius: 7px;
+  padding: 0 8px 6px !important;
   background-color: #692325;
   font-family: Nunito !important;
 }
 
 .dividend,
 .faq {
-  font-size: 20px;
+  font-size: 18px;
   color: #fff !important;
   border-bottom: none;
+  font-family: Nunito !important;
+  padding-bottom: 12px;
 }
 
 .faq {
