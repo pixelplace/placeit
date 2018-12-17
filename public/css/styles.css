@@ -239,6 +239,7 @@ table > thead > tr > th {
   height: 100%;
   justify-content: center;
   width: 100%;
+  background: #d3d3d3;
 }
 
 .modal-body {
