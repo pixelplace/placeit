@@ -292,12 +292,13 @@ table > thead > tr > th {
 
 .modal-header,
 .modal-footer {
-  background-color: #e3dedb;
+  background-color: #571012;
 }
 .modal-header h5,
 .modal-footer h5 {
-  color: red;
-  font-size: 30px !important;
+  color: #fff;
+  font-size: 24px !important;
+  font-family: Nunito !important;
 }
 
 .time_counter {
