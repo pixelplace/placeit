@@ -175,7 +175,7 @@ table > thead > tr > th {
 }
 
 .header .center h1 {
-  margin-top: 5px !IMPORTANT;
+  /*margin-top: 5px !IMPORTANT; */
 }
 
 .header .right {
@@ -192,18 +192,18 @@ table > thead > tr > th {
   border-radius: 20px;
   margin-left: 20px !important;
   padding: 0 10px !important;
-  background-color: #3a3c42;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #692325;
+  font-family: Nunito !important;
 }
 
 .login {
   color: #fff;
   margin-right: 20px;
-  font-size: 20px;
+  font-size: 16px;
   border-radius: 20px;
-  padding: 0 10px !important;
-  background-color: #3a3c42;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 0 10px 3px !important;
+  background-color: #692325;
+  font-family: Nunito !important;
 }
 
 .dividend,
@@ -214,11 +214,13 @@ table > thead > tr > th {
 }
 
 .faq {
-  margin-right: 20%;
+  margin-right: 5%;
+  border-right: 1px solid #fff;
 }
 
 .dividend {
-  margin-left: 20%;
+  margin-left: 5%;
+  border-left: 1px solid #fff;
 }
 
 .container {
