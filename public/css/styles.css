@@ -1,0 +1,489 @@
+/* Our canvas is actually 50x50, but we are going to represent each pixel with a 10x10 box */
+
+html {
+  font-family: futura;
+  font-weight: 700;
+}
+
+body {
+  overflow: hidden;
+}
+
+canvas {
+  /*border: 1px solid #dddddd;*/
+  display: block;
+  image-rendering: pixelated;
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  font-family: sans-serif;
+}
+
+.tool {
+  width: 32px;
+  height: 32px;
+  padding: 6px !important;
+  border-radius: 0px !important;
+  font-size: 14px;
+  margin-bottom: 5px;
+  border: 2px solid #3A3C42;
+  /* background-color: #3A3C42; */
+  /* color: white; */
+}
+
+.color-brush {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px !important;
+  margin: 5px auto;
+}
+
+table > tbody > tr > td, table > thead > tr > th {
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.clr {
+  background-color: transparent;
+}
+
+.clr i {
+  color: white !important;
+
+}
+
+.color-items {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 80px;
+  background-color: white;
+  height: 40px;
+  width: 600px;
+  padding: 5px;
+  z-index: 1;
+}
+
+.color-item {
+  border: 1px solid grey;
+  width: 30px;
+  height: 30px;
+}
+
+.color-pan {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  background-color: #446622;
+  width: 15px;
+  height: 15px;
+  border-radius: 7px;
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+}
+
+#color,
+#x-coord,
+#y-coord {
+  display: none;
+}
+
+.toolbox {
+  position: fixed;
+  bottom: 0px;
+  right: 15px;
+  width: 50px;
+  text-align: center;
+  z-index: 1;
+}
+
+.coord {
+  display: none;
+  background: white;
+  width: 150px;
+  height: 50px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-width: 1px;
+  border-color: #000;
+  border-style: solid;
+  opacity: 1;
+  padding: 10px;
+  /* box-shadow: 5px 5px 5px black; */
+}
+
+.coord-color {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #000;
+  width: 30px;
+  height: 30px;
+  background-color: yellow;
+  float: left;
+}
+
+.coords {
+  font-size: 17px;
+  font-weight: bold;
+  padding: 0px 5px;
+  float: left;
+  line-height: 30px;
+}
+
+#color1 {
+  background-color: #e4e4e4;
+}
+
+.active {
+  background-color: coral !important;
+}
+
+.header {
+  align-items: center;
+  background: #ad1f23;
+  box-sizing: border-box;
+  display: flex;
+  height: 54px;
+  position: relative;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.header .left,
+.header .right {
+  width: 40%;
+  font-family: Nunito !important;
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  font-size: 14px;
+}
+
+.header .center {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  height: 54px;
+  justify-content: center;
+  line-height: 1;
+  width: 20%;
+  font-family: Nunito !important;
+}
+
+.header .center h1 {
+  margin-top: 5px !IMPORTANT;
+}
+
+.header .right {
+  justify-content: flex-end;
+}
+.header .left {
+  justify-content: flex-start;
+}
+
+.community {
+  float: left;
+  color: #fff;
+  font-size: 20px;  
+  border-radius: 20px;
+  margin-left: 20px !important;
+  padding: 0 10px !important;
+  background-color: #3A3C42;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.login {
+  color: #fff;
+  margin-right: 20px;
+  font-size: 20px;  
+  border-radius: 20px;
+  padding: 0 10px !important;
+  background-color: #3A3C42;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.dividend, .faq {
+  font-size: 20px;
+  color: #fff !important;
+  border-bottom: none;
+}
+
+.faq{
+  margin-right: 20%;
+}
+
+.dividend {
+  margin-left: 20%;
+}
+
+.container {
+  display: flex;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  margin-top: 3px;
+}
+
+.canvas-place {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.modal-body {
+  height: 65%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.modal-content {
+  margin: 100px 0;
+}
+
+.cell {
+  width: 35%;
+}
+
+.underline{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding-bottom: 30px;
+  margin-bottom: 40px;
+}
+
+.letter {
+  color: red;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.faq-modal {
+  height: 70%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.faq-modal > h5 {
+  text-align: left;
+  color: red;
+  padding: 20px 0;
+} 
+
+.faq-modal > p {
+  text-align: left;
+}
+
+.hide {
+  display: none;
+}
+
+.modal-header, .modal-footer {
+  background-color: #e3dedb;  
+}
+.modal-header h5 ,.modal-footer h5{
+  color: red;
+  font-size: 30px !important;
+}
+
+.time_counter{
+  position: fixed;
+  padding: 20px 0px;
+  border-radius: 50%;
+  background-color: #3A3C42;
+  border: 4px solid #c42a38;
+  width: 160px;
+  height: 160px;
+  left:10px;
+  bottom:80px;
+  box-shadow: 0px 0px 5px 5px grey;
+
+}
+
+.left_circle{   
+  margin-top: 20px;
+  color: #C4C5C7;  
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.ball-up{    
+  font-size: 15px;
+  margin-left: 20px;
+  width: 75%;      
+  color: white;
+  font-weight: bold;
+  border-bottom: 1px solid #C4C5C7;
+}
+.time{
+  height: 40px;
+  margin-bottom:20px;
+  font-weight: bold;
+  color: white;
+}
+.txt{
+  padding-top: 10px;
+  font-size: 16px;
+  color: white;
+}
+.coord_show{   
+    display: none;
+    width: 70%;    
+    margin: 0% 15%;
+    background-color: #3A3C42;    
+    border: 2px solid red;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px 5px grey;
+}
+.cart{
+  width: 50px;
+  height: 50px;
+  border: 2px solid #3A3C42; 
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+
+.spec-font {
+  font-family: futura;
+  font-weight: 700;
+}
+
+.count{
+  min-width: 15px;
+  background-color: #C42A38; 
+  color: white; 
+  position: fixed;
+  margin-top: -30px;
+  margin-left: 20px;  
+  height: 15px;
+  font-size: 12px;
+  border-radius: 2px;
+}
+
+.cart_list {
+  position: fixed;
+  background-color: #3A3C42; 
+  width: 300px;
+  border-radius: 8px;
+  display: none;
+  right:70px;
+  bottom:70px;
+  box-shadow: 0px 0px 5px 5px grey;
+}
+
+.cart_list button {
+  background-color: transparent;
+  color: white;
+}
+
+.table-container {
+  overflow-y: scroll;
+  height: 300px;
+}
+
+.table-container::-webkit-scrollbar, 
+.modal-body::-webkit-scrollbar,
+.faq-modal::-webkit-scrollbar {
+  width: 5px;
+}
+
+.table-container::-webkit-scrollbar-track,
+.modal-body::-webkit-scrollbar,
+.faq-modal::-webkit-scrollbar {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.table-container::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar,
+.faq-modal::-webkit-scrollbar {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+table#t01 > thead > tr {
+  font-weight: bold;
+  height: 40px;
+  background-color: #3A3C42;
+  color: #aaa;
+}
+
+table#t01 {
+  width: 100%;  
+}
+table#t01 > tbody > tr:nth-child(even) {
+  background-color: #3A3C42;
+  color: white;
+}
+table#t01 > tbody > tr:nth-child(odd) {
+  color: white;
+  background-color: rgba(196,42,56,.28);
+}
+
+.modal > .modal-content > .modal-header {
+  text-align: center;
+}
+
+#d01{
+  width: 160px;
+}
+.cart_list header{
+  height: 50px;
+  padding: 0 10px;
+}
+
+.cart_list header #cart_txt{
+  width: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: left;
+  line-height: 50px;
+  float: left;
+}
+
+.cart_list header .icon {
+  float: left;
+  width: 50%;
+  text-align: right;
+}
+
+.cart_list header .icon {
+  height: 50px;
+}
+
+.cart_list header .icon button {
+  height: 40px !important;
+  line-height: 40px;
+}
+
+.cart_list .footer{
+  padding: 20px;
+  width: 100%;
+  color: white;  
+  text-align: right;
+}
+
+.btn_buy{  
+  width: 100%;
+  height: 40px;
+  background-color: #c42a38;    
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  line-height: 40px;
+  border-radius: 8px;
+}
+
+#trash,#arrow-up,#refresh{
+  margin-top: 5px;
+  width:30px;
+  height: 30px;
+}

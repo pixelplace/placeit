@@ -1,0 +1,16 @@
+{
+  "name": "host-2b2p",
+  "version": "1.0.0",
+  "description": "2B2P",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "LickTheCheese",
+  "license": "ISC"
+}

@@ -1,0 +1,367 @@
+<html>
+  <head>
+    <title>PixelColab</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="/js/place.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body class="text-center">
+    <!-- The controls where our users will enter the coords and color to place. -->
+    <div class="header">
+        <div class="left">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn community" data-toggle="modal" data-target="#Communities">
+              Communities
+            </button>
+  
+            <!-- Modal -->
+            <div class="modal fade" id="Communities" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center">Communities</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <i class="fas fas-times" >&times;</i>   
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-bordered table-inverse table-responsive">
+                            <thead class="thead-inverse">
+                              <tr>
+                                <th class="">NO</th>
+                                <th class="cell">Community</th>
+                                <th class="cell">Member</th>
+                                <th class="cell">Pixels</th>
+                              </tr>
+                              </thead>
+                              <tbody id="communities">
+                                
+                              </tbody>
+                          </table>
+                        </div> 
+                        <div class="modal-footer">
+                          <button type="button" id="create_new_community" class="btn btn-primary" data-toggle="modal" data-target="#new_community">
+                            Create New Community
+                          </button>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+  
+            <div class="modal fade" id="new_community" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+              <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">New Community</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-new" style="padding: 60px">
+                    <form>
+                      <div class="form-group">
+                        <label for="">Community</label>
+                        <input id="add_community" type="text" class="form-control" placeholder="Community">
+                        <div class="alert alert-success hide">
+                          Insert your name.
+                        </div>
+                      </div>
+                      <button id="pay" type="submit" class="btn btn-primary">Pay</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <a class="btn dividend" data-toggle="modal" data-target="#Dividend">
+              Dividend
+            </a>
+  
+            <div class="modal fade" id="Dividend" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Dividend</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-dividend" style="padding: 60px">
+                      <h3>Total Pool</h3>
+                      <h6>(Since Last Dividend)</h6>
+                      <h1>5,234,732,49 TRX</h1>
+                      <div class="underline col-md-10 offset-md-1"></div>
+                      <h3>Avaliable Dividend</h3>
+                      <h6>(70% of Total Pool)</h6>
+                      <h1>3,559,889,56 TRX</h1>
+                      <h5>Dividend Countdoen : 16:43:26</h5>
+                      <h6>Top Community : ---------</h6>
+                      <div class="underline col-md-10 offset-md-1"></div>
+                      <div class="row">
+                        <span class="letter"><svg aria-hidden="true" data-prefix="far" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-star fa-w-18 fa-fw"><path fill="currentColor" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" class=""></path></svg> Total pool value must reach 7M TRX befor countdown of GMT 12:00 PM otherwise pool value will add to next countdown period without dividend</span>
+                        <span class="letter"><svg aria-hidden="true" data-prefix="far" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-star fa-w-18 fa-fw"><path fill="currentColor" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z" class=""></path></svg> Any member of winning community must hold Minimun 500 PLACE tokens to get rewarded from dividend</span>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <div class="center"><h1 class="text-center">PlaceMe</h1></div>
+        <div class="right">
+          <a class="btn faq" data-toggle="modal" data-target="#faq">
+            FAQ
+          </a>
+  
+          <div class="modal fade" id="faq" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">FAQ</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="faq-modal" style="padding: 30px">
+                      <h5>WHAT IS TRONPIXEL?</h5>
+                      <p>TronPixel is a collaborative artwork based on the TRON blockchain. You may use the toolbar to paint pixels by purchasing with TRON(TRX) tokens.</p>
+                      <h5>HOW DO I PLAY?</h5>
+                      <p>1, first, you will need a TRON Chrome wallet, please click here to download: TronLink https://goo.gl/Yb4NRU (if you cannot visit Google play store, you may click the link below to download with a user guidehttps://s3.amazonaws.com/trondice/Chromewallet/TRONlink.zip<br/>
+                        2, click to sign in and bind with your TronLink wallet.<br/> 
+                        3, select the toolbar to paint on the canvas (you may choose 15 colors or use the eraser to delete a certain pixel), and make your order in the shopping cart.<br/>
+                      </p>
+                      <h5>HOW TO EARN TRX?</h5>
+                      <p>TronPixel provides a number of ways to earn profit: Profit Sharing, Sales Profit, Jackpot, and Referrals. Every pixel has an independent price, starting with 20 TRX, all first-time pixel payments will enter the “Contract Proceeds”.</p>
+                      <h5>HOW ARE CONTRACT PROCEEDS DISTRIBUTED?</h5>
+                      <p>55% allocated to the Profit Sharing:<br/> 
+                        10% allocated to Jackpot;<br/>
+                        5% paid as Referral Reward;<br/>
+                        20% to developer team;<br/>
+                        10% to operation team.<br/>
+                      </p>
+                      <h5>HOW TO EARN SALES PROFIT?</h5>
+                      <p>Every pixel starts with 20 TRX, which can be purchased by the next Player with 1.35 times the original price. Hence, the original buyer gets his payment back, while 75% of the 35% price gap goes to the original owner as profit, and 25% goes to the Contract Proceeds./p>
+                      <h5>HOW DOES THE PROFIT SHARING WORK?</h5>
+                      <p>Every pixel you own is counted as your share of the Profit Sharing pool. The more pixels you buy and own, the more share you get. Your profit will accumulate in real time in the game, the more share you have, the more profit you can earn. Once your pixel is bought by someone else, you will lose your share of that pixel, but you will not lose the profit you already earned. The profit will be added to your account balance, funds will be available for withdrawal after the Activation Threshold is met.</p>
+                      <h5>WHO CAN WIN THE JACKPOT?</h5>
+                      <p>After the Activation Threshold is met, if the total value do not increase by 10,000 TRX in 24 hours, the last user to purchase a pixel will receive the entire Jackpot. If 24 hours transactions exceed 10,000 TRX, the clock will continue ticking. 
+                        After this, the game will keep going with a different Contract Proceeds distribution rule:<br/> 
+                        65% - Profit Sharing<br/> 
+                        5% - Referral Reward<br/>
+                        20% - Developer team<br/> 
+                        10% - Operation team<br/>
+                        HOW DO I EARN REFE<br/>
+                      </p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+  
+          <!-- Button trigger modal -->
+          <button type="button" class="btn login" data-toggle="modal" data-target="#Login">
+            Login
+          </button>
+  
+          <!-- Modal -->
+          <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title">My Account</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                  <div class="modal-login" style="padding: 20px;">
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <label for="">Account Address : </label>
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                      </div>
+                    
+                      <div class="form-group col-md-6">
+                        <label for="">Balance : </label>
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">TRX</span>
+                          </div>
+                        </div>
+                      </div>
+                    
+  
+                      <div class="form-group col-md-12">
+                        <label for="basic-url">Number of Shares(PLACES) hold : </label>
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">PLACES</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="underline col-md-10 offset-md-1"></div>
+  
+                      <form class="form-inline col-md-9 offset-md-2">
+                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Join Community : </label>
+                        <select class="custom-select my-1 mr-sm-2 W-50" id="inlineFormCustomSelectPref">
+                          <option selected>Choose...</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary my-1">Pay</button>
+                      </form>
+                      
+                      <div class="underline col-md-10 offset-md-1"></div>
+  
+                      <div class="form-group col-md-6">
+                        <label for="">Community : </label>
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="">Total Shares Held By Community : </label>
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">TRX</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="">Current Rank of Community : </label>
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                      </div>
+                    
+                      <div class="form-group col-md-6">
+                        <label for="">Total Pixels Owned By Community : </label>
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="">My Shares In Community : </label>
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="">Total Pixels Owned By Me : </label>
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    <div>
+    <input id="x-coord" />
+    <input id="y-coord" />
+    <div class="canvas-place">
+      <!-- This canvas holds our, well, canvas. -->
+      <canvas onmouseup="down=0;" onmousedown="down=1;" id="place"></canvas>
+      <div class="showCanvas"></div>  
+    </div>
+    <div class="controls">
+      <input type="color" id="color" value="#000000" name="color">
+      <div class="toolbox">
+        <button class="btn  cart" type="button" id="shopping_cart">
+          <i class="fa  fa-shopping-cart shopping_cart"></i>
+          <div class="count">0</div>
+        </button>
+        <button class="btn btn-default tool" type="button" id="download">
+          <i class="fa fa-save"></i>
+        </button>
+        <button class="btn btn-default tool" type="button" id="zoom-in">
+          <i class="fa fa-search-plus"></i>
+        </button>
+        <button class="btn btn-default tool" type="button" id="zoom-out">
+          <i class="fa fa-search-minus"></i>
+        </button>
+        <button class="btn btn-default tool" type="button" id="grid-toggle">
+          <i class="fa fa-th"></i>
+        </button>
+        <button class="btn btn-default tool" type="button" id="drag">
+          <i class="fa fa-arrows"></i>
+        </button>
+        <button class="btn btn-default tool color-brush" type="button" id="color-picker">
+          <div class="color-pan"></div>
+          <i class="fa fa-paint-brush"></i>
+        </button>
+      </div>
+    </div>
+    <div class="color-items">
+        <button id="color16" class="color-item" style="background-color: #ffffff;"></button>
+        <button id="color1" class="color-item" style="background-color: #e4e4e4;"></button>
+        <button id="color2" class="color-item" style="background-color: #888888;"></button>
+        <button id="color3" class="color-item" style="background-color: #222222;"></button>
+        <button id="color4" class="color-item" style="background-color: #a06a42;"></button>
+        <button id="color5" class="color-item" style="background-color: #e50000;"></button>
+        <button id="color6" class="color-item" style="background-color: #e59500;"></button>
+        <button id="color7" class="color-item" style="background-color: #e5d900;"></button>
+        <button id="color8" class="color-item" style="background-color: #94e044;"></button>
+        <button id="color9" class="color-item" style="background-color: #02be01;"></button>
+        <button id="color10" class="color-item" style="background-color: #00d3dd;"></button>
+        <button id="color11" class="color-item" style="background-color: #0083c7;"></button>
+        <button id="color12" class="color-item" style="background-color: #0000ea;"></button>
+        <button id="color13" class="color-item" style="background-color: #820080;"></button>
+        <button id="color14" class="color-item" style="background-color: #cf6ee4;"></button>
+        <button id="color15" class="color-item" style="background-color: #ffa7d1;"></button>
+    </div>  
+    <div class="coord">
+      <div class="coord-color"></div>
+      <div class="coords">
+        <span class="coord-x"></span>
+        <span>,&nbsp;</span>
+        <span class="coord-y"></span>
+      </div>
+    </div>        
+    <div class="time_counter">        
+        <span class="left_circle">TotalPool </span>           
+        <div class="ball-up">25394.348172 TRX</div>               
+        <span class="left_circle">Time Left</span>    
+        <div class="time"></div>      
+        <div class="coord_show"><h5 class="txt"></h5></div>
+    </div>
+    
+    <div class="cart_list">
+      <header>
+        <span id="cart_txt">CART</span>
+        <div class="icon">
+          <button class="btn btn-default tool" type="button" id="refresh">
+            <i class="fa fa-refresh refresh"></i>
+          </button>
+          <button class="btn btn-default tool" type="button" id="trash">
+            <i class="fa fa-trash-o trash"></i>
+          </button>
+          <button class="btn btn-default tool" type="button" id="arrow-up">
+            <i class="fa fa-arrow-up arrow-up"></i> 
+          </button>
+        </div>
+      </header>
+      <div class="table-container">
+        <table id="t01">
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Price</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody class="pixel_list">              
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="footer">
+          <span>TOTAL</span>
+          <br>
+          <span><span class="pixelCnt">0</span> Pixels <span class="trxCnt">0</span> TRX</span>
+        </div>
+        <div class="btn_buy">BUY</div>
+      </div>
+    </div>
+  </body>
+</html>
+
