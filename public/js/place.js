@@ -562,7 +562,19 @@ $(document).ready(() => {
   initialize()
   counter()
   setTimeout(tronLoginCheck,2000);
-  
+  //Try to set handle address change event
+  let intervalID = setInterval(function() {
+      if (typeof window.tronWeb == 'object') {
+          window.tronWeb.on("addressChanged", showAccountInfo)
+          clearInterval(intervalID);
+      }
+  }, 10)
+  //Try to get realtime balance
+  setInterval(function() {
+    if (typeof window.tronWeb == 'object') {
+       showAccountInfo();
+    }
+}, 1000)
   async function tronLoginCheck(){
       try{
         if (!window.tronWeb) throw 'You must install tronlink';
