@@ -561,4 +561,29 @@ $(document).ready(() => {
 
   initialize()
   counter()
+  setTimeout(tronLoginCheck,2000);
+  
+  async function tronLoginCheck(){
+      try{
+        if (!window.tronWeb) throw 'You must install tronlink';
+        if (!(window.tronWeb && window.tronWeb.ready)) throw'You must login Tronlink to interact with contract';
+        showAccountInfo();
+        }
+        catch(e){
+          showModal('Stop',e,tronLoginCheck)
+        }
+  }
+  async function showAccountInfo(){
+    $('#account-address').val(tronWeb.defaultAddress.base58);
+    $('#account-balance').val((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
+
+  }
+  function showModal(title,content,callback){
+    $('#alert-title').text(title);
+    $('#alert-content').text(content);
+    $('#alert-modal').modal('show');
+    $('#alert-modal').on('hidden.bs.modal', function (e) {
+      callback();
+    })
+  }
 })
