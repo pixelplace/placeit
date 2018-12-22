@@ -544,18 +544,7 @@ $(document).ready(() => {
       $('.alert').removeClass('hide')
     } else {
       $('.alert').addClass('hide')
-      var iTag = ''
-      if (tableIndex == 1)
-        iTag = "<i class='fa fa-trophy' style='color: red;'></i>&nbsp;"
-      $('#communities').append(
-        "<tr><td scope='row'>" +
-          tableIndex +
-          '</td><td>' +
-          iTag +
-          name +
-          '</td><td>0</td><td>0</td></tr>'
-      )
-      tableIndex++
+      TRON.createNewCommunicty(name);
     }
   })
 
