@@ -1,6 +1,7 @@
 var TRON={
-    CONTRACT_ADDRESS:"TTUwQrSG4V8GK75AyrBJknCcdGCULBCaU2",
+    CONTRACT_ADDRESS:"TBFZPXnDSyyoZeoJiaAL8xFU5xPvqeKdVQ",
     contractInstance:"",
+    ListCommunity:[],
     init:async function(){
         var contractInfo=await window.tronWeb.trx.getContract(this.CONTRACT_ADDRESS);
         this.contractInstance=window.tronWeb.contract(contractInfo.abi.entrys,contractInfo.contract_address);
@@ -8,7 +9,33 @@ var TRON={
     createNewCommunicty:async function(name){
         await this.contractInstance.createNewCommunicty(StringToBytes(name)).send({callValue:1000000000});
     },
-
+    buyPixels:async function(pixelsData){
+        let buyPositions=[];
+        let buyColors=[];
+        pixelsData.forEach(item=>{
+            let tempPosition=new Uint16Array(2);
+            tempPosition.set([item.x,item.y]);
+            let position= new Uint8Array(tempPosition.buffer);
+            buyPositions.push(position);
+            let tempColor=new Uint16Array(3);
+            let num=getColor(item.color);
+            let b = num & 0xFF;
+            let g = (num & 0xFF00) >>> 8;
+            let r = (num & 0xFF0000) >>> 16;
+            tempColor.set([r,g,b]);
+            let color=new Uint8Array(tempColor.buffer);
+            buyColors.push(color);
+        })
+        let buyPrice=10000000*buyColors.length;
+        console.log(buyPositions);console.log(buyColors);
+        await this.contractInstance.buyPixels(buyPositions,buyColors).send({callValue:buyPrice});
+    },
+    joinCommunity:async function(name){
+        await this.contractInstance.joinCommunity(StringToBytes(name)).send({callValue:100000000});
+    },
+    leaveCommunity:async function(){
+        await this.contractInstance.leaveCommunity().send({callValue:1000000});
+    },
 }
 var timeOutID=setTimeout(tryInstall,100)
 function tryInstall(){
@@ -20,19 +47,26 @@ function tryInstall(){
         timeOutID=setTimeout(tryInstall,100)
     }
 }
+let newCommunitiesSeleted="";
 async function upDateGameStatus(){
-    let listCommunity=(await TRON.contractInstance.viewTotalCommunities().call()).map(e=>tronWeb.toUtf8(e));
+    TRON.ListCommunity=(await TRON.contractInstance.viewTotalCommunities().call()).map(e=>hex2a(e.slice(2)));
     let communitiesTable="";
-
-    listCommunity.forEach((item,key)=>{
+    let communitiesSeleted="";
+    TRON.ListCommunity.forEach((item,key)=>{
         communitiesTable+= "<tr><td scope='row'>" +
           key +
           `</td><td><i class='fa fa-trophy' style='color: red;'></i>&nbsp;` +
           item +
-          '</td><td>0</td><td>0</td></tr>'
+          '</td><td>0</td><td>0</td></tr>';
+          communitiesSeleted+=`<option value="${item}">${item}</option>`
     })
     $('#communities').html(communitiesTable);
-
+    let currentSelect="";
+    if(newCommunitiesSeleted!=communitiesSeleted){
+        $('#listCommunity').html(communitiesSeleted);
+        newCommunitiesSeleted=communitiesSeleted;
+        console.log(communitiesSeleted);
+    }
 }
-setInterval(upDateGameStatus,100)
+setInterval(upDateGameStatus,1000)
 

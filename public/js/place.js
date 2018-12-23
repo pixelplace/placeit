@@ -15,7 +15,7 @@ $(document).ready(() => {
   var canvasData = []
   var canvasImg = []
 
-  var oldPixels = []
+  window.oldPixels = []//public it
 
   var gridToggle = $('#grid-toggle')
   var gridShow = false
@@ -33,25 +33,6 @@ $(document).ready(() => {
 
   var countDownDate = 0
 
-  function getColor(color) {
-    if (color[0] == '#') {
-      if (color.length == 7) {
-        return parseInt(color.substr(1, 6), 16)
-      } else if (color.length == 4) {
-        color = color[1] + color[1] + color[2] + color[2] + color[3] + color[3]
-        val = parseInt(color, 16)
-        return val
-      }
-    } else if (color.startsWith('rgb')) {
-      rgbVal = color.substr(4).split(',')
-      return (
-        (parseInt(rgbVal[0]) << 16) +
-        (parseInt(rgbVal[1]) << 8) +
-        parseInt(rgbVal[2])
-      )
-    }
-  }
-
   function setCanvasColor(x, y, cr) {
     idx = (y * widthCanvas + x) * 4
     canvasImg.data[idx] = (cr & 0xff0000) >> 16
@@ -60,7 +41,7 @@ $(document).ready(() => {
     canvasImg.data[idx + 3] = 255
   }
 
-  $(window).resize(function() {
+  $(window).resize(function () {
     canvas.width = canvas.clientWidth
     canvas.height = canvas.clientHeight
     widthCanvas = canvas.clientWidth
@@ -99,7 +80,7 @@ $(document).ready(() => {
     canvas.addEventListener('mouseout', handleMouseOut, false)
     canvas.addEventListener('click', handleMouseClick, false)
 
-    gridToggle.click(function() {
+    gridToggle.click(function () {
       gridShow = gridShow ? false : true
       if (gridShow) $(this).addClass('active')
       else $(this).removeClass('active')
@@ -157,6 +138,7 @@ $(document).ready(() => {
       $('.count').html(cartCnt)
       $('.pixelCnt').html(cartCnt)
       $('.trxCnt').html(cartCnt)
+      cart=[]
     })
 
     $('#download').click(() => {
@@ -200,23 +182,23 @@ $(document).ready(() => {
         coordsShow = false
         $('#drag').addClass('active')
         $('#place')
-          .on('mouseover', function() {
+          .on('mouseover', function () {
             $(this).css('cursor', 'grab')
           })
-          .mouseout(function() {
+          .mouseout(function () {
             $(this).css('cursor', 'auto')
           })
       } else {
         coordsShow = false
         $('#drag').removeClass('active')
         $('#place')
-          .on('mouseover', function() {
+          .on('mouseover', function () {
             $(this).css(
               'cursor',
               'url(data:image/x-icon;base64,AAACAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAhYWFAPqv6ADgm4sASkpKAJ/l7QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAAAEiIAAAAAAAAAAAAAAAAAAxEiIAAAAAAAAAAAAAAAADMxEgAAAAAAAAAAAAAAAAMzMxAAAAAAAAAAAAAAAAAzMzMAAAAAAAAAAAAAAAADMzMwAAAAAAAAAAAAAAAAMzMzAAAAAAAAAAAAAAAAAzMzMAAAAAAAAAAAAAAAADMzMwAAAAAAAAAAAAAAAABTMzAAAAAAAAAAAAAAAAAFVTMAAAAAAAAAAAAAAAAABFVQAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////////////////////////////////////////////////////////////////////////////////////P////h////wP///4H///8D///+B////A////gf///wP///4H///+D////B////w////8///////////////w==), auto'
             )
           })
-          .mouseout(function() {
+          .mouseout(function () {
             $(this).css('cursor', 'auto')
           })
       }
@@ -232,7 +214,7 @@ $(document).ready(() => {
       }
     })
 
-    $('.color-item').click(function() {
+    $('.color-item').click(function () {
       var newColor = $(this).css('background-color')
       $('.color-pan').css('background-color', newColor)
 
@@ -242,13 +224,13 @@ $(document).ready(() => {
 
     $('.color-items').hide()
     $('#place')
-      .on('mouseover', function() {
+      .on('mouseover', function () {
         $(this).css(
           'cursor',
           'url(data:image/x-icon;base64,AAACAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAhYWFAPqv6ADgm4sASkpKAJ/l7QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAAAEiIAAAAAAAAAAAAAAAAAAxEiIAAAAAAAAAAAAAAAADMxEgAAAAAAAAAAAAAAAAMzMxAAAAAAAAAAAAAAAAAzMzMAAAAAAAAAAAAAAAADMzMwAAAAAAAAAAAAAAAAMzMzAAAAAAAAAAAAAAAAAzMzMAAAAAAAAAAAAAAAADMzMwAAAAAAAAAAAAAAAABTMzAAAAAAAAAAAAAAAAAFVTMAAAAAAAAAAAAAAAAABFVQAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////////////////////////////////////////////////////////////////////////////////////P////h////wP///4H///8D///+B////A////gf///wP///4H///+D////B////w////8///////////////w==), auto'
         )
       })
-      .mouseout(function() {
+      .mouseout(function () {
         $(this).css('cursor', 'auto')
       })
   }
@@ -309,7 +291,7 @@ $(document).ready(() => {
     })
 
     if (pixelIndex < 0) {
-      oldPixels.push({ x: xPos, y: yPos, color: canvasData[yPos][xPos] })
+ 
       var newItem =
         "<tr id='item-" +
         oldPixels.length +
@@ -321,18 +303,20 @@ $(document).ready(() => {
         oldPixels.length +
         "'></i></span></td></tr>"
       $('.pixel_list').append(newItem)
-      $('#del-item-' + oldPixels.length).on('click', function(event) {
+      $('#del-item-' + oldPixels.length).on('click', function (event) {
         event.preventDefault()
         var id = parseInt(
           $(this)
             .attr('id')
             .substr(9)
         )
+       
         var x = oldPixels[id - 1].x
         var y = oldPixels[id - 1].y
         var color = oldPixels[id - 1].color
         canvasData[y][x] = color
         draw()
+        oldPixels.splice(id-1,1)
         socket.emit(
           'color',
           {
@@ -361,7 +345,7 @@ $(document).ready(() => {
 
     canvasData[yPos][xPos] = currentColor
     draw()
-
+    oldPixels.push({ x: parseInt($('#x-coord').val()), y: parseInt($('#y-coord').val()), color: currentColor})
     socket.emit('color', {
       col: parseInt($('#x-coord').val()),
       row: parseInt($('#y-coord').val()),
@@ -537,7 +521,7 @@ $(document).ready(() => {
   }
 
   var tableIndex = 1
-  $('#pay').click(function(event) {
+  $('#pay').click(function (event) {
     event.preventDefault()
     var name = $('#add_community').val()
     if (name == '') {
@@ -547,39 +531,49 @@ $(document).ready(() => {
       TRON.createNewCommunicty(name);
     }
   })
-
+  $('.btn_buy').click(function(event){
+    console.log(oldPixels);
+    TRON.buyPixels(oldPixels);
+  })
+  $('#btn_join').click(function(event){
+    var name = $('#listCommunity').val()
+    TRON.joinCommunity(name);
+  })
+  $('#btn_leave').click(function(event){
+    TRON.leaveCommunity();
+  })
   initialize()
   counter()
-  setTimeout(tronLoginCheck,2000);
+  setTimeout(tronLoginCheck, 2000);
   //Try to set handle address change event
-  let intervalID = setInterval(function() {
-      if (typeof window.tronWeb == 'object') {
-          window.tronWeb.on("addressChanged", showAccountInfo)
-          clearInterval(intervalID);
-      }
+  let intervalID = setInterval(function () {
+    if (typeof window.tronWeb == 'object') {
+      window.tronWeb.on("addressChanged", showAccountInfo)
+      clearInterval(intervalID);
+    }
   }, 10)
   //Try to get realtime balance
-  setInterval(function() {
+  setInterval(function () {
     if (typeof window.tronWeb == 'object') {
-       showAccountInfo();
+      showAccountInfo();
     }
-}, 1000)
-  async function tronLoginCheck(){
-      try{
-        if (!window.tronWeb) throw 'You must install tronlink';
-        if (!(window.tronWeb && window.tronWeb.ready)) throw'You must login Tronlink to interact with contract';
-        showAccountInfo();
-        }
-        catch(e){
-          showModal('Stop',e,tronLoginCheck)
-        }
+  }, 1000)
+  async function tronLoginCheck() {
+    try {
+      if (!window.tronWeb) throw 'You must install tronlink';
+      if (!(window.tronWeb && window.tronWeb.ready)) throw 'You must login Tronlink to interact with contract';
+      showAccountInfo();
+    }
+    catch (e) {
+      showModal('Stop', e, tronLoginCheck)
+    }
   }
-  async function showAccountInfo(){
+  async function showAccountInfo() {
     $('#account-address').val(tronWeb.defaultAddress.base58);
     $('#account-balance').val((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
 
   }
-  function showModal(title,content,callback){
+  function showModal(title, content, callback) {
     $('#alert-title').text(title);
     $('#alert-content').text(content);
     $('#alert-modal').modal('show');
