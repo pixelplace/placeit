@@ -36,6 +36,9 @@ var TRON={
     leaveCommunity:async function(){
         await this.contractInstance.leaveCommunity().send({callValue:1000000});
     },
+     usertoCommunity:async function(){
+     await this.contractInstance.usertoCommunity().call();
+    },
 }
 var timeOutID=setTimeout(tryInstall,100)
 function tryInstall(){
