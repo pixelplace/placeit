@@ -41,7 +41,7 @@ var TRON={
         return hex2a((await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call()).slice(2));
     },
     viewTotalPixelsInCommunity:async function(){
-        console.log(await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(usertoCommunity())).call());
+        console.log(await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call());
         
     }    
 }
