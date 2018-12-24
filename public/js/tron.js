@@ -46,7 +46,7 @@ var TRON={
     },
     viewTotalUsersInCommunity:async function(){
         //console.log(await this.contractInstance.viewTotalUsersInCommunity(StringToBytes(TRON.usertoCommunity())).call());
-        return (await this.contractInstance.viewTotalUsersInCommunity(StringToBytes('pixomad')).call());
+        return (await this.contractInstance.viewTotalUsersInCommunity().call());
     }     
 }
 var timeOutID=setTimeout(tryInstall,100)
@@ -81,7 +81,7 @@ async function upDateGameStatus(){
     }
     $('#currentCommunity').val(await TRON.usertoCommunity());
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
-    $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity());
+    $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity('pixomad'));
 }
 setInterval(upDateGameStatus,1000)
 
