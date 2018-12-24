@@ -61,7 +61,7 @@ function tryInstall(){
 }
 let newCommunitiesSeleted="";
 async function upDateGameStatus(){
-    await viewTotalUsersInCommunity.contractInstance.viewTotalUsersInCommunity().call());
+    await viewTotalUsersInCommunity.contractInstance.viewTotalUsersInCommunity().call();
     TRON.ListCommunity=(await TRON.contractInstance.viewTotalCommunities().call()).map(e=>hex2a(e.slice(2)));
     let communitiesTable="";
     let communitiesSeleted="";
