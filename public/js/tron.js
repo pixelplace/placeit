@@ -42,7 +42,7 @@ var TRON={
     },
     viewTotalPixelsInCommunity:async function(){
         console.log(await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call());
-        
+        return hex2a((await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).slice(2));
     }    
 }
 var timeOutID=setTimeout(tryInstall,100)
@@ -76,6 +76,7 @@ async function upDateGameStatus(){
         console.log(communitiesSeleted);
     }
     $('#currentCommunity').val(await TRON.usertoCommunity());
+    $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
 }
 setInterval(upDateGameStatus,1000)
 
