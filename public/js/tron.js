@@ -46,7 +46,7 @@ var TRON={
     },
     viewTotalUsersInCommunity:async function(){
         //console.log(await this.contractInstance.viewTotalUsersInCommunity(StringToBytes(TRON.usertoCommunity())).call());
-        return (await this.contractInstance.viewTotalUsersInCommunity(StringToBytes('anhthu')).call());
+        return (await this.contractInstance.viewTotalUsersInCommunity(StringToBytes('pixomad')).call());
     }     
 }
 var timeOutID=setTimeout(tryInstall,100)
