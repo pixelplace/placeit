@@ -531,6 +531,10 @@ $(document).ready(() => {
       TRON.createNewCommunicty(name);
     }
   })
+  $('#buy_tokens').click(function (event) {
+    event.preventDefault()
+      TRON.buyToken();
+  })  
   $('.btn_buy').click(function(event){
     console.log(oldPixels);
     TRON.buyPixels(oldPixels);
