@@ -533,7 +533,7 @@ $(document).ready(() => {
   })
   $('#buy_tokens').click(function (event) {
     event.preventDefault()
-      TRON.buyToken();
+      TRON.buyTokens();
   })  
   $('.btn_buy').click(function(event){
     console.log(oldPixels);
