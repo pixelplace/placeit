@@ -42,7 +42,7 @@ var TRON={
     },
     viewTotalPixelsInCommunity:async function(){
         console.log(await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call());
-        return (await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call()).map(e=>hex2a(e.slice(2)));
+        return (await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call());
     }    
 }
 var timeOutID=setTimeout(tryInstall,100)
