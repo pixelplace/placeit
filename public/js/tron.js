@@ -9,6 +9,9 @@ var TRON={
     createNewCommunicty:async function(name){
         await this.contractInstance.createNewCommunicty(StringToBytes(name)).send({callValue:1000000000});
     },
+    buyTokens:async function(){
+        await this.contractInstance.buyTokens().send({callValue:sellPrice});
+    },    
     buyPixels:async function(pixelsData){
         let buyPositions=[];
         let buyColors=[];
