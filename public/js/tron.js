@@ -39,7 +39,11 @@ var TRON={
     usertoCommunity:async function(){
         console.log(await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call());
         return hex2a((await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call()).slice(2));
-    }
+    },
+    viewTotalPixelsInCommunity:async function(){
+        console.log(await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(await TRON.usertoCommunity())).call());
+        
+    }    
 }
 var timeOutID=setTimeout(tryInstall,100)
 function tryInstall(){
