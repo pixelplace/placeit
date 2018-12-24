@@ -42,7 +42,7 @@ var TRON={
     },
     viewTotalPixelsInCommunity:async function(){
         //console.log(await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call());
-        return (await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call());
+        return (await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes('pixomad')).call());
     },
     viewTotalUsersInCommunity:async function(){
         //console.log(await this.contractInstance.viewTotalUsersInCommunity(StringToBytes(TRON.usertoCommunity())).call());
