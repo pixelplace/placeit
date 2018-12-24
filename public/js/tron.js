@@ -50,6 +50,10 @@ var TRON={
     viewTotalUsersInCommunity:async function(){
         //console.log(await this.contractInstance.viewTotalUsersInCommunity(StringToBytes(TRON.usertoCommunity())).call());
         return (await this.contractInstance.viewTotalUsersInCommunity(StringToBytes($('#currentCommunity').val())).call());
+    },
+    balanceOf:async function(){
+        //return (await this.contractInstance.balanceOf(StringToBytes($('#currentCommunity').val())).call());
+        return hex2a((await this.contractInstance.balanceOf(tronWeb.defaultAddress.hex).call()).slice(2));
     }     
 }
 var timeOutID=setTimeout(tryInstall,100)
@@ -87,6 +91,7 @@ async function upDateGameStatus(){
     $('#currentCommunity').val(await TRON.usertoCommunity());
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
     $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity());
+    $('#UserTokens').val(await TRON.balanceOf());
 }
 setInterval(upDateGameStatus,1000)
 
