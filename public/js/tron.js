@@ -36,6 +36,10 @@ var TRON={
     leaveCommunity:async function(){
         await this.contractInstance.leaveCommunity().send({callValue:1000000});
     },
+    usertoCommunity:async function(){
+        console.log(await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call());
+        return hex2a((await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call()).slice(2));
+    }
 }
 var timeOutID=setTimeout(tryInstall,100)
 function tryInstall(){
@@ -67,6 +71,7 @@ async function upDateGameStatus(){
         newCommunitiesSeleted=communitiesSeleted;
         console.log(communitiesSeleted);
     }
+    $('#currentCommunity').val(await TRON.usertoCommunity());
 }
 setInterval(upDateGameStatus,1000)
 
