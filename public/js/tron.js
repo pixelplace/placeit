@@ -45,7 +45,7 @@ var TRON={
         return (await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call());
     },
     viewTotalUsersInCommunity:async function(){
-        console.log(await this.contractInstance.viewTotalUsersInCommunity(StringToBytes(TRON.usertoCommunity())).call());
+        //console.log(await this.contractInstance.viewTotalUsersInCommunity(StringToBytes(TRON.usertoCommunity())).call());
         return (await this.contractInstance.viewTotalUsersInCommunity(StringToBytes(TRON.usertoCommunity())).call());
     }     
 }
