@@ -61,6 +61,7 @@ function tryInstall(){
 }
 let newCommunitiesSeleted="";
 async function upDateGameStatus(){
+    await viewTotalUsersInCommunity.contractInstance.viewTotalUsersInCommunity().call());
     TRON.ListCommunity=(await TRON.contractInstance.viewTotalCommunities().call()).map(e=>hex2a(e.slice(2)));
     let communitiesTable="";
     let communitiesSeleted="";
@@ -70,7 +71,7 @@ async function upDateGameStatus(){
           `</td><td><i class='fa fa-trophy' style='color: red;'></i>&nbsp;` +
           item +
           `</td><td>` +
-          await this.contractInstance.viewTotalUsersInCommunity(StringToBytes(item)).call()) +            
+           viewTotalUsersInCommunity(item) +            
           '</td><td>0</td></tr>';
           communitiesSeleted+=`<option value="${item}">${item}</option>`
     })
