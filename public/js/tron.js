@@ -53,7 +53,7 @@ var TRON={
     },
     balanceOf:async function(){
         //return (await this.contractInstance.balanceOf(StringToBytes($('#currentCommunity').val())).call());
-        return (await this.contractInstance.balanceOf(tronWeb.defaultAddress.hex).call());
+        return hex2a((await this.contractInstance.balanceOf(tronWeb.defaultAddress.hex).call()).slice(2));
     }     
 }
 var timeOutID=setTimeout(tryInstall,100)
