@@ -109,7 +109,7 @@ async function upDateGameStatus(){
     let share = ((await TRON.userTotalPixels())/(await TRON.viewTotalPixelsInCommunity()))*100;
     console.log(share);
     $('#pool_dividend').html(dividend);
-    $('#UserShare').html(share);
+    $('#UserShare').val(share);
 }
 setInterval(upDateGameStatus,1000)
 
