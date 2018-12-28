@@ -59,8 +59,8 @@ var TRON={
     communityPoolVolume:async function(){
         return (await this.contractInstance.communityPoolVolume().call()).toString()/1000000;
     },
-    checkWinnerCommunity:async function(){
-        return tronWeb.address.fromHex(await this.contractInstance.checkWinnerCommunity().call());
+    pickWinner:async function(){
+        return tronWeb.address.fromHex(await this.contractInstance.pickWinner().call());
     }      
 }
 var timeOutID=setTimeout(tryInstall,100)
