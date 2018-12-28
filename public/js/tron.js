@@ -46,6 +46,9 @@ var TRON={
         //console.log(await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call());
         return hex2a((await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call()).slice(2));
     },
+    userTotalPixels:async function(){
+        return hex2a((await this.contractInstance.userTotalPixels(tronWeb.defaultAddress.hex).call()).slice(2));
+    },    
     viewTotalPixelsInCommunity:async function(){
         //console.log(await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call());
         return (await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes($('#currentCommunity').val())).call());
@@ -97,6 +100,7 @@ async function upDateGameStatus(){
     }
     $('#currentCommunity').val(await TRON.usertoCommunity());
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
+    $('#UserPixels').val(await TRON.userTotalPixels());
     $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity());
     $('#UserTokens').val(await TRON.balanceOf());
     $('#pool_value_dividend').html(await TRON.communityPoolVolume());
