@@ -96,7 +96,7 @@ async function upDateGameStatus(){
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
     $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity());
     $('#UserTokens').val(await TRON.balanceOf());
-    $('#pool_value').val(await TRON.communityPoolVolume());
+    $('#pool_value').html(await TRON.communityPoolVolume());
 }
 setInterval(upDateGameStatus,1000)
 
