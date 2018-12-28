@@ -565,8 +565,8 @@ $(document).ready(() => {
   }, 1000)
   async function tronLoginCheck() {
     try {
-      //if (!window.tronWeb) throw 'You must install tronlink';
-      //if (!(window.tronWeb && window.tronWeb.ready)) throw 'You must login Tronlink to interact with contract';
+      if (!window.tronWeb) throw 'You must install tronlink';
+      if (!(window.tronWeb && window.tronWeb.ready)) throw 'You must login Tronlink to interact with contract';
       showAccountInfo();
     }
     catch (e) {
