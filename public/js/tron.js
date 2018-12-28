@@ -90,12 +90,13 @@ async function upDateGameStatus(){
     if(newCommunitiesSeleted!=communitiesSeleted){
         $('#listCommunity').html(communitiesSeleted);
         newCommunitiesSeleted=communitiesSeleted;
-        console.log(communitiesSeleted);
+        console.log(await TRON.communityPoolVolume());
     }
     $('#currentCommunity').val(await TRON.usertoCommunity());
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
     $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity());
     $('#UserTokens').val(await TRON.balanceOf());
+    console.log(communitiesSeleted);
     $('#pool_value').html(await TRON.communityPoolVolume());
 }
 setInterval(upDateGameStatus,1000)
