@@ -98,6 +98,8 @@ async function upDateGameStatus(){
     $('#UserTokens').val(await TRON.balanceOf());
     $('#pool_value_dividend').html(await TRON.communityPoolVolume());
     $('#pool_value').html(await TRON.communityPoolVolume());
+    let dividend = (await TRON.communityPoolVolume()*70)/100;
+    $('#pool_dividend').html(dividend);
 }
 setInterval(upDateGameStatus,1000)
 
