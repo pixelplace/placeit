@@ -10,8 +10,8 @@ var TRON={
         await this.contractInstance.createNewCommunicty(StringToBytes(name)).send({callValue:1000000000});
     },
     buyTokens:async function(value){
-        await this.contractInstance.buyTokens(StringToBytes(value)).send({callValue:1000000000});
-    },     
+        await this.contractInstance.buyTokens(tronWeb.defaultAddress.hex,StringToBytes(value)).send({callValue:1000000000});
+    },      
     buyPixels:async function(pixelsData){
         let buyPositions=[];
         let buyColors=[];
