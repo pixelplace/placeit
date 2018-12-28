@@ -96,7 +96,7 @@ async function upDateGameStatus(){
     if(newCommunitiesSeleted!=communitiesSeleted){
         $('#listCommunity').html(communitiesSeleted);
         newCommunitiesSeleted=communitiesSeleted;
-        console.log(await TRON.checkWinnerCommunity());
+        //console.log(await TRON.checkWinnerCommunity());
     }
     $('#currentCommunity').val(await TRON.usertoCommunity());
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
@@ -107,6 +107,7 @@ async function upDateGameStatus(){
     $('#pool_value').html(await TRON.communityPoolVolume());
     let dividend = (await TRON.communityPoolVolume()*70)/100;
     let share = ((await TRON.userTotalPixels())/(await TRON.viewTotalPixelsInCommunity()))*100;
+    console.log(share);
     $('#pool_dividend').html(dividend);
     $('#my_share').html(share);
 }
