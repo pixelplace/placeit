@@ -534,7 +534,8 @@ $(document).ready(() => {
   $('#buy_tokens').click(function (event) {
     event.preventDefault()
     var value = $('#tokens_value').val()
-      TRON.transfer(value);
+        console.log(value);
+      TRON.buyTokens(value);
   })  
   $('.btn_buy').click(function(event){
     console.log(oldPixels);
