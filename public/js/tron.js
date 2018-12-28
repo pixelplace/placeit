@@ -11,10 +11,7 @@ var TRON={
     },
     buyTokens:async function(value){
         await this.contractInstance.buyTokens(StringToBytes(value)).send({callValue:1000000000});
-    },  
-    transfer:async function(){
-        await this.contractInstance.transfer().send({callValue:1000000000});
-    },    
+    },     
     buyPixels:async function(pixelsData){
         let buyPositions=[];
         let buyColors=[];
