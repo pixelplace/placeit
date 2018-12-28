@@ -106,7 +106,7 @@ async function upDateGameStatus(){
     $('#pool_value_dividend').html(await TRON.communityPoolVolume());
     $('#pool_value').html(await TRON.communityPoolVolume());
     let dividend = (await TRON.communityPoolVolume()*70)/100;
-    let share = ((await TRON.userTotalPixels())/(await TRON.viewTotalPixelsInCommunity()))*100;
+    let share = (((await TRON.userTotalPixels())/(await TRON.viewTotalPixelsInCommunity()))*100).toFixed(2);
     console.log(share);
     $('#pool_dividend').html(dividend);
     $('#UserShare').val(share);
