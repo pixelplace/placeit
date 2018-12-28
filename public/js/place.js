@@ -533,6 +533,7 @@ $(document).ready(() => {
   })
   $('#buy_tokens').click(function (event) {
     event.preventDefault()
+    var value = $('#tokens_value').val()
       TRON.buyTokens();
   })  
   $('.btn_buy').click(function(event){
