@@ -90,7 +90,7 @@ async function upDateGameStatus(){
     if(newCommunitiesSeleted!=communitiesSeleted){
         $('#listCommunity').html(communitiesSeleted);
         newCommunitiesSeleted=communitiesSeleted;
-        console.log(ToString(await TRON.communityPoolVolume()));
+        console.log(await TRON.communityPoolVolume());
     }
     $('#currentCommunity').val(await TRON.usertoCommunity());
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
