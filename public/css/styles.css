@@ -531,6 +531,6 @@ table#t01 > tbody > tr:nth-child(odd) {
   text-decoration: none;
   display: block;
 }
-.dropdown-content a:hover {background-color: #ad1f23 !IMPORTANT}
+.dropdown-content a:hover {background-color: #ad1f23 !IMPORTANT;color: #fff !IMPORTANT;}
 .dropdown:hover .dropdown-content {display: block;}
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
