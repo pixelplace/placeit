@@ -521,14 +521,33 @@ $(document).ready(() => {
   }
 
   var tableIndex = 1
-  $('#pay').click(function (event) {
+  $('#pay').click(async function (event) {
     event.preventDefault()
     var name = $('#add_community').val()
+  
     if (name == '') {
-      $('.alert').removeClass('hide')
+       $('.alert').removeClass('hide')
+       $('.alert').html('Insert your name.')
+    }else if(hasWhiteSpace(name)==true){
+       $('.alert').html('Community name without Space')
+        $('.alert').removeClass('hide')
     } else {
       $('.alert').addClass('hide')
-      TRON.createNewCommunicty(name);
+      var check1 = await TRON.viewCommunityExist(name);
+      if(check1==true)
+      {
+        $('.alert').html('Community name already exists')
+         $('.alert').removeClass('hide')
+      }else{
+       var result = await TRON.createNewCommunicty(name);  
+      $('.alert').addClass('hide')
+      $('.modal').modal('hide');
+       $('#new_community').hide();
+        showModal('Success', 'Community ' + name + ' created. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ','')
+         return false;
+
+      }
+      
     }
   })
   $('#buy_tokens').click(function (event) {
@@ -544,10 +563,12 @@ $(document).ready(() => {
        showModal('Error', 'You must Join 1 Community to Buy Pixels','')
       return false;
     }else{
-      result = await TRON.buyPixels(oldPixels);  
-      $('.cart_list').hide();
+     var result = await TRON.buyPixels(oldPixels);  
+     if(result){
       EmptyCart();
-      showModal('Success', 'You Buy Pixels',showAccountInfo)
+     $('.cart_list').hide();
+     showModal('Success', 'You Bought Pixel. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+   }
     }
     
   })
@@ -626,7 +647,7 @@ $(document).ready(() => {
   }
   function showModal(title, content, callback) {
     $('#alert-title').text(title);
-    $('#alert-content').text(content);
+    $('#alert-content').html(content);
     $('#alert-modal').modal('show');
     $('#alert-modal').on('hidden.bs.modal', function (e) {
       callback();

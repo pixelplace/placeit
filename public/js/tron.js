@@ -7,7 +7,7 @@ var TRON={
         this.contractInstance=window.tronWeb.contract(contractInfo.abi.entrys,contractInfo.contract_address);
     },
     createNewCommunicty:async function(name){
-        await this.contractInstance.createNewCommunicty(StringToBytes(name)).send({callValue:1000000000});
+        return await this.contractInstance.createNewCommunicty(StringToBytes(name)).send({callValue:1000000000});
     },
     buyTokens:async function(){
         await this.contractInstance.buyTokens().send({callValue:100000000});
@@ -63,7 +63,10 @@ var TRON={
     },
     checkWinnerCommunity:async function(){
         return hex2a((await this.contractInstance.checkWinnerCommunity().call()).substr(2));
-    }      
+    },
+    viewCommunityExist:async function(community){
+        return (await this.contractInstance.viewCommunityExist(StringToBytes(community)).call());
+    }, 
 }
 var timeOutID=setTimeout(tryInstall,100)
 function tryInstall(){
@@ -75,21 +78,61 @@ function tryInstall(){
         timeOutID=setTimeout(tryInstall,100)
     }
 }
+
 let newCommunitiesSeleted="";
 async function upDateGameStatus(){
     TRON.ListCommunity=(await TRON.contractInstance.viewTotalCommunities().call()).map(e=>hex2a(e.slice(2)));
+    
     let communitiesTable="";
     let communitiesSeleted="";
-    TRON.ListCommunity.forEach((item,key)=>{
+    let userComRank = 0;
+    let communityArray = [];
+    //TRON.ListCommunity.forEach((item,key)=>{
+        for (const item of TRON.ListCommunity) {
+        let totalUsers = await TRON.contractInstance.viewTotalUsersInCommunity(StringToBytes(item)).call();
+        let totalPixels = await TRON.contractInstance.viewTotalPixelsInCommunity(StringToBytes(item)).call();
+        totalPixels = tronWeb.toDecimal(totalPixels);
+        communityArray.push({"item" : item,"totalUsers" : totalUsers,"totalPixels":totalPixels});
+        // communitiesTable+= "<tr><td scope='row'>" +
+        //   i +
+        //   `</td><td><i class='fa fa-trophy' style='color: red;'></i>&nbsp;` +
+        //   item +
+        //   `</td><td>` +
+        //    totalUsers +            
+        //   '</td><td>' + 
+        //   totalPixels +
+        //   '</td></tr>';
+        //   communitiesSeleted+=`<option value="${item}">${item}</option>`
+        //   i++;
+    }
+    communityArray = helper.arr.multisort(communityArray, ['totalPixels'], ['DESC']);
+    let i =1;
+    let trophy = '';
+    let userCommunity = hex2a(await TRON.usertoCommunity());
+    let topCommunity = '';
+    for (const item of communityArray){
+        if(i==1){
+            topCommunity = item.item;
+            trophy = "</td><td><i class='fa fa-trophy' style='color: red;'></i>&nbsp;"
+        }else{
+            trophy = "</td><td>&nbsp;"
+        }
+        if(userCommunity==item.item){
+            userComRank = i;
+        }
         communitiesTable+= "<tr><td scope='row'>" +
-          key +
-          `</td><td><i class='fa fa-trophy' style='color: red;'></i>&nbsp;` +
-          item +
+          i +
+          trophy +
+          item.item +
           `</td><td>` +
-           item +            
-          '</td><td>0</td></tr>';
-          communitiesSeleted+=`<option value="${item}">${item}</option>`
-    })
+           item.totalUsers +            
+          '</td><td>' + 
+          item.totalPixels +
+          '</td></tr>';
+          i++;
+    }
+    $('#topCommunity').html(topCommunity);
+    $('#userCommunityRank').val(userComRank);
     $('#communities').html(communitiesTable);
     let currentSelect="";
     if(newCommunitiesSeleted!=communitiesSeleted){
