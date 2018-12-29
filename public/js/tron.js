@@ -87,7 +87,7 @@ async function upDateGameStatus(){
           `</td><td><i class='fa fa-trophy' style='color: red;'></i>&nbsp;` +
           item +
           `</td><td>` +
-           item +            
+           (await TRON.viewTotalUsersInCommunity()) +            
           '</td><td>0</td></tr>';
           communitiesSeleted+=`<option value="${item}">${item}</option>`
     })
