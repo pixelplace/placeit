@@ -537,13 +537,50 @@ $(document).ready(() => {
         console.log(value);
       TRON.buyTokens(value);
   })  
-  $('.btn_buy').click(function(event){
-    console.log(oldPixels);
-    TRON.buyPixels(oldPixels);
+  $('.btn_buy').click(async function(event){
+    var test = await TRON.usertoCommunity();   
+    if(isEmpty(test)){
+      //alert('You must be Join 1 Community to Buy Pixels.'); 
+       showModal('Error', 'You must Join 1 Community to Buy Pixels','')
+      return false;
+    }else{
+      result = await TRON.buyPixels(oldPixels);  
+      $('.cart_list').hide();
+      EmptyCart();
+      showModal('Success', 'You Buy Pixels',showAccountInfo)
+    }
+    
   })
-  $('#btn_join').click(function(event){
+
+ function EmptyCart(){
+  oldPixels.forEach((pixel, index) => {
+        var x = pixel.x
+        var y = pixel.y
+        var color = pixel.color
+        canvasData[y][x] = color
+        socket.emit('color', {
+          row: y + 1,
+          col: x + 1,
+          color: color
+        })
+      })
+      oldPixels = []
+      cartCnt = 0
+      draw()
+      $('.pixel_list').html('')
+      $('.count').html(cartCnt)
+      $('.pixelCnt').html(cartCnt)
+      $('.trxCnt').html(cartCnt)
+      cart=[]
+ }
+  
+  
+  $('#btn_join').click(async function(event){
     var name = $('#listCommunity').val()
-    TRON.joinCommunity(name);
+    var joinCommunityResult = await TRON.joinCommunity(name);
+    $('.modal').modal('hide');
+    showModal('Success', 'You Have successfully Joined Community',showAccountInfo);
+    return false;
   })
   $('#btn_leave').click(function(event){
     TRON.leaveCommunity();
@@ -562,6 +599,7 @@ $(document).ready(() => {
   setInterval(function () {
     if (typeof window.tronWeb == 'object') {
       showAccountInfo();
+      
     }
   }, 1000)
   async function tronLoginCheck() {
@@ -577,7 +615,14 @@ $(document).ready(() => {
   async function showAccountInfo() {
     $('#account-address').val(tronWeb.defaultAddress.base58);
     $('#account-balance').val((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
-
+     var test = await TRON.usertoCommunity();  
+      if(isEmpty(test)){
+        $('#LeaveCommunityDiv').hide();
+        $('.communityData').hide();
+      }else{
+        $('#currentCommunity').val(hex2a(test));
+        $('#JoinCommunityDiv').hide();
+      }
   }
   function showModal(title, content, callback) {
     $('#alert-title').text(title);

@@ -29,25 +29,27 @@ var TRON={
             let color=new Uint8Array(tempColor.buffer);
             buyColors.push(color);
         })
+        //let buyPrice=10000000*buyColors.length;
         let buyPrice=10000000*buyColors.length;
         console.log(buyPositions);console.log(buyColors);
-        await this.contractInstance.buyPixels(buyPositions,buyColors).send({callValue:buyPrice});
+        return await this.contractInstance.buyPixels(buyPositions,buyColors).send({callValue:buyPrice});
     },
     joinCommunity:async function(name){
-        await this.contractInstance.joinCommunity(StringToBytes(name)).send({callValue:100000000});
+       return await this.contractInstance.joinCommunity(StringToBytes(name)).send({callValue:100000000});
     },
     leaveCommunity:async function(){
         await this.contractInstance.leaveCommunity().send({callValue:1000000});
     },
     usertoCommunity:async function(){
         //console.log(await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call());
-        return hex2a((await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call()).slice(2));
+        //return hex2a((await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call()).slice(2));
+        return (await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call()).slice(2);
     },
     userTotalPixels:async function(){
         return (await this.contractInstance.userTotalPixels(tronWeb.defaultAddress.hex).call());
     },    
     viewTotalPixelsInCommunity:async function(){
-        //console.log(await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes(TRON.usertoCommunity())).call());
+        //console.log(await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes($('#currentCommunity').val())).call());
         return (await this.contractInstance.viewTotalPixelsInCommunity(StringToBytes($('#currentCommunity').val())).call());
     },
     viewTotalUsersInCommunity:async function(){
@@ -95,7 +97,7 @@ async function upDateGameStatus(){
         newCommunitiesSeleted=communitiesSeleted;
         console.log(await TRON.checkWinnerCommunity());
     }
-    $('#currentCommunity').val(await TRON.usertoCommunity());
+    //$('#currentCommunity').val(await hex2a(TRON.usertoCommunity()));
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
     $('#UserPixels').val(await TRON.userTotalPixels());
     $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity());
