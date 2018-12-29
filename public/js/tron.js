@@ -38,7 +38,7 @@ var TRON={
        return await this.contractInstance.joinCommunity(StringToBytes(name)).send({callValue:100000000});
     },
     leaveCommunity:async function(){
-        await this.contractInstance.leaveCommunity().send({callValue:1000000});
+       return await this.contractInstance.leaveCommunity().send({callValue:1000000});
     },
     usertoCommunity:async function(){
         //console.log(await this.contractInstance.usertoCommunity(tronWeb.defaultAddress.hex).call());
@@ -129,6 +129,7 @@ async function upDateGameStatus(){
           '</td><td>' + 
           item.totalPixels +
           '</td></tr>';
+          communitiesSeleted+=`<option value="${item.item}">${item.item}</option>`
           i++;
     }
     $('#topCommunity').html(topCommunity);

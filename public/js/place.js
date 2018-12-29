@@ -550,15 +550,22 @@ $(document).ready(() => {
       
     }
   })
-  $('#buy_tokens').click(function (event) {
+  $('#buy_tokens').click( async function (event) {
     event.preventDefault()
     var value = $('#tokens_value').val()
-        console.log(value);
+      var test = await TRON.usertoCommunity();   
+    if(isEmpty(test) || hex2a(test)==""){
+      //alert('You must be Join 1 Community to Buy Pixels.'); 
+      $('.alert').removeClass('hide')
+       $('.alert').html('You must Join 1 Community to Buy Tokens.')
+      return false;
+    }else{   
       TRON.buyTokens(value);
+    }
   })  
   $('.btn_buy').click(async function(event){
     var test = await TRON.usertoCommunity();   
-    if(isEmpty(test)){
+    if(isEmpty(test) || hex2a(test)==""){
       //alert('You must be Join 1 Community to Buy Pixels.'); 
        showModal('Error', 'You must Join 1 Community to Buy Pixels','')
       return false;
@@ -601,10 +608,20 @@ $(document).ready(() => {
     var joinCommunityResult = await TRON.joinCommunity(name);
     $('.modal').modal('hide');
     showModal('Success', 'You Have successfully Joined Community',showAccountInfo);
-    return false;
+    $('#LeaveCommunityDiv').show();
+    $('.communityData').show();
+    $('#JoinCommunityDiv').hide();
+
+          return false;
   })
-  $('#btn_leave').click(function(event){
-    TRON.leaveCommunity();
+  $('#btn_leave').click(async function(event){
+    var result = await TRON.leaveCommunity();
+    $('.modal').modal('hide');
+    showModal('Success', 'You Left Community. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+    $('#LeaveCommunityDiv').hide();
+    $('.communityData').hide();
+    $('#JoinCommunityDiv').show();
+    showAccountInfo();
   })
   initialize()
   counter()
@@ -637,7 +654,8 @@ $(document).ready(() => {
     $('#account-address').val(tronWeb.defaultAddress.base58);
     $('#account-balance').val((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
      var test = await TRON.usertoCommunity();  
-      if(isEmpty(test)){
+
+      if(isEmpty(test) || hex2a(test)==""){
         $('#LeaveCommunityDiv').hide();
         $('.communityData').hide();
       }else{
