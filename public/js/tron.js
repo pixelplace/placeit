@@ -63,7 +63,7 @@ var TRON={
         return (await this.contractInstance.communityPoolVolume().call()).toString()/1000000;
     },
     checkWinnerCommunity:async function(){
-        return tronWeb.address.fromHex((await this.contractInstance.checkWinnerCommunity().call()).toString());
+        return tronWeb.address.fromHex((await this.contractInstance.checkWinnerCommunity().call()).substr(2));
     }      
 }
 var timeOutID=setTimeout(tryInstall,100)
@@ -96,7 +96,7 @@ async function upDateGameStatus(){
     if(newCommunitiesSeleted!=communitiesSeleted){
         $('#listCommunity').html(communitiesSeleted);
         newCommunitiesSeleted=communitiesSeleted;
-        //console.log(await TRON.checkWinnerCommunity());
+        console.log(await TRON.checkWinnerCommunity());
     }
     $('#currentCommunity').val(await TRON.usertoCommunity());
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
