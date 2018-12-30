@@ -1,5 +1,6 @@
 var TRON={
-    CONTRACT_ADDRESS:"TMXTr26TT7hAAhUmqMobEDQs2ykacMsKf2",
+    //CONTRACT_ADDRESS:"TMXTr26TT7hAAhUmqMobEDQs2ykacMsKf2",
+    CONTRACT_ADDRESS:"TRNwLs9yA1MV1ko3TCKSoMyZ3mrk6awEeZ",
     contractInstance:"",
     ListCommunity:[],
     init:async function(){
@@ -66,7 +67,10 @@ var TRON={
     },
     viewCommunityExist:async function(community){
         return (await this.contractInstance.viewCommunityExist(StringToBytes(community)).call());
-    }, 
+    },
+    viewPixelOwner:async function(pixelXY){
+        return (await this.contractInstance.viewCommunityExist(StringToBytes(pixelXY)).call());
+    },
 }
 var timeOutID=setTimeout(tryInstall,100)
 function tryInstall(){
