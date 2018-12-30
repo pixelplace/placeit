@@ -49,23 +49,43 @@ $(document).ready(() => {
 
     draw()
   })
+function minsToMidnight() {
+  //var date = new Date().toLocaleString("en-US", {timeZone: "Europe/London"})
+  var now = new Date();
+  var then = new Date(now);
+  then.setHours(24, 0, 0, 0);
+  return (then - now) / 6e4;
+}
 
+console.log(minsToMidnight());
   function counter() {
     setInterval(() => {
-      countDownDate
-      now = new Date().getTime()
-      distance = countDownDate - now
-      hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-      seconds = Math.floor((distance % (1000 * 60)) / 1000)
-      str = hours + ':' + minutes + ':' + seconds
+      var date = new Date().toLocaleString("en-US", {timeZone: "Europe/London"})
+     countDownDate = new Date(date)
+    //  countDownDate
+      var i = 60;
+      var h = 23 - countDownDate.getHours();
+      if(h<10){
+        h = '0'+h;
+      }
+      var m =  59 - countDownDate.getMinutes();
+       if(m<10){
+        m = '0'+m;
+      }
+      var s =   countDownDate.getSeconds();
+      s = i-s
+      if(s<10){
+        s = '0'+s;
+      }
+      str = h + ':' + m + ':' + s
+      i++;
       $('div.time').html(str)
     }, 1000)
   }
 
   function initialize() {
-    countDownDate = new Date('Dec 18, 2018 17:00:00').getTime()
-
+    
+   // countDownDate = new Date().getTime()
     canvas.width = canvas.clientWidth
     canvas.height = canvas.clientHeight
     widthCanvas = canvas.clientWidth
@@ -412,13 +432,24 @@ $(document).ready(() => {
       oldY = Y
       $('.coord').css('display', 'none')
 
-      setTimeout(() => {
+       setTimeout(async() => {
         if (X == oldX && Y == oldY && isMouseIn) {
           var mousePos = getMousePos(canvas, event)
           var row = parseInt((mousePos.x - xleftView) / step)
           var col = parseInt((mousePos.y - ytopView) / step)
+          var pixelX = row + 1;
+          var pixelY = col + 1;
+          // pixelX = pixelX.toString();
+          // pixelY = pixelY.toString();
+          // var pixelXY = StringToBytes('575,256');
+          // let result = await TRON.viewPixelOwner('429,229');
+          // console.log(pixelXY);
+          // console.log(result);
+
           $('.coord-x').text(row + 1)
           $('.coord-y').text(col + 1)
+
+         // console.log(StringToBytes('576,256'));
           if (row >= 0 && row < CANVAS_ROWS && col >= 0 && col < CANVAS_COLS) {
             $('.coord').css('display', 'block')
             $('.coord-color').css('background-color', canvasData[col][row])
