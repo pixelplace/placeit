@@ -1,6 +1,6 @@
 var TRON={
     //CONTRACT_ADDRESS:"TMXTr26TT7hAAhUmqMobEDQs2ykacMsKf2",
-    CONTRACT_ADDRESS:"TDcpi7VfV4mLgfkMvgkbK2ZwDLA3WHAfX8",
+    CONTRACT_ADDRESS:"TK4uzqUmoatZDP7QsDLuwdrHwzoFxEPAEw",
     contractInstance:"",
     ListCommunity:[],
     init:async function(){
@@ -74,7 +74,7 @@ var TRON={
         return (await this.contractInstance.viewCommunityExist(StringToBytes(community)).call());
     },
     viewPixelOwner:async function(pixelXY){
-        return (await this.contractInstance.viewCommunityExist(StringToBytes(pixelXY)).call());
+        return (await this.contractInstance.viewPixelOwner(pixelXY).call());
     },
     PixelPurchased:async function(){
        
