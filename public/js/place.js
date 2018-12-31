@@ -76,6 +76,7 @@ $(document).ready(() => {
     }, 1000)
   }
 
+  
   function initialize() {
     
    // countDownDate = new Date().getTime()
@@ -118,6 +119,7 @@ $(document).ready(() => {
       })
     })
 
+   
     $('#shopping_cart').click(() => {
       if ($('.cart_list').css('display') == 'none') {
         $('.cart_list').show('slow')
@@ -329,7 +331,7 @@ $(document).ready(() => {
         var y = oldPixels[id -1].y
         var color = oldPixels[id -1].color
         canvasData[y][x] = color
-        draw()
+       // draw()
         oldPixels.splice(id,1)
         socket.emit(
           'color',
@@ -373,9 +375,15 @@ $(document).ready(() => {
       $('.pixelCnt').html(cartCnt)
     }
     ///////
+    //yPos = yPos - 1
+    //xPos = xPos - 1
+    
     canvasData[yPos][xPos] = currentColor
-    draw()
+    
+   // canvasData[parseInt($('#x-coord').val())][parseInt($('#y-coord').val())] = currentColor
+   // draw()
     oldPixels.push({ x: parseInt($('#x-coord').val()), y: parseInt($('#y-coord').val()), color: currentColor})
+    //console.log(oldPixels)
     socket.emit('color', {
       col: parseInt($('#x-coord').val()),
       row: parseInt($('#y-coord').val()),
@@ -394,7 +402,7 @@ $(document).ready(() => {
     var y = oldPixels[id - 1].y
     var color = oldPixels[id - 1].color
     canvasData[y][x] = color
-    draw()
+   // draw()
     socket.emit('color', {
       row: y + 1,
       col: x + 1,
@@ -458,13 +466,13 @@ $(document).ready(() => {
 
           $('.coord-x').text(row + 1)
           $('.coord-y').text(col + 1)
-console.log(tronWeb.address.toHex("TBBnsH1UJMMyjAKWQj3cKtfSmQzsDK78aN"))
+          //console.log(tronWeb.address.toHex("TBBnsH1UJMMyjAKWQj3cKtfSmQzsDK78aN"))
 
            let tempPosition=new Uint16Array(2);
            tempPosition.set([pixelX,pixelY]);
            let position= new Uint8Array(tempPosition.buffer);
            let results = await TRON.viewPixelOwner(position)
-           console.log(results);
+           //console.log(results);
            if(results!=410000000000000000000000000000000000000000) {
               $('.coords-user').html('<i class="fa fa-user"></i><span class="userAddress">'+tronWeb.address.fromHex(results)+'</span>')
             }else{
@@ -473,25 +481,7 @@ console.log(tronWeb.address.toHex("TBBnsH1UJMMyjAKWQj3cKtfSmQzsDK78aN"))
 
 
 
-          //const results = await tronWeb.getEventResult('TDcpi7VfV4mLgfkMvgkbK2ZwDLA3WHAfX8', '1544498532000','PixelPurchased');
-                       //sinceTimestamp = 1544498532000, 
-                       //eventName = 'PixelPurchased', 
-                       //blockNumber = 6540, 
-                       //size = 20, page = 1);
-      //  results.forEach(item=>{
-        //  console.log(item)
-       //   let buyer = item.result.buyer
-       //   let colorArray = item.result.colorArray
-       //   let pixelPositionArray = item.result.pixelPositionArray
-       //   let communityName = item.result.communityName
-       //   console.log(tronWeb.toUtf8(pixelPositionArray))
-       //   console.log(tronWeb.defaultAddress.hex)
-         // console.log(tronWeb.defaultAddress.hex)
-          //console.log(tronWeb.toUtf8(pixelPositionArray))
-          //console.log(tronWeb.fromUtf8(pixelPositionArray))
-          //console.log(tronWeb.toAscii(pixelPositionArray))
-          //console.log(tronWeb.toDecimal(pixelPositionArray))
-       // })
+         
 
          // var t = await TRON.PixelPurchased();
          // console.log(StringToBytes('576,256'));
@@ -663,10 +653,12 @@ console.log(tronWeb.address.toHex("TBBnsH1UJMMyjAKWQj3cKtfSmQzsDK78aN"))
     }else{
       console.log(oldPixels)
      var result = await TRON.buyPixels(oldPixels);  
+     
      if(result){
-      EmptyCart();
-     $('.cart_list').hide();
-     showModal('Success', 'You Bought Pixel. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+       showModal('Success', 'You Bought Pixel. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+       EmptyCart();
+      $('.cart_list').hide();
+      return false;
    }
     }
     
@@ -677,20 +669,20 @@ function hidealert(){
 }, 4000);
 }
  function EmptyCart(){
-  oldPixels.forEach((pixel, index) => {
-        var x = pixel.x
-        var y = pixel.y
-        var color = pixel.color
-        canvasData[y][x] = color
-        socket.emit('color', {
-          row: y + 1,
-          col: x + 1,
-          color: color
-        })
-      })
+  // oldPixels.forEach((pixel, index) => {
+  //       var x = pixel.x
+  //       var y = pixel.y
+  //       var color = pixel.color
+  //       canvasData[y][x] = color
+  //       socket.emit('color', {
+  //         row: y + 1,
+  //         col: x + 1,
+  //         color: color
+  //       })
+  //     })
       oldPixels = []
       cartCnt = 0
-      draw()
+      //draw()
       $('.pixel_list').html('')
       $('.count').html(cartCnt)
       $('.pixelCnt').html(cartCnt)
@@ -767,4 +759,30 @@ function hidealert(){
       callback();
     })
   }
+  setTimeout( async function (){
+     const results = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS, '1544498532000','PixelPurchased');
+                       //sinceTimestamp = 1544498532000, 
+                       //eventName = 'PixelPurchased', 
+                       //blockNumber = 6540, 
+                       //size = 20, page = 1);
+                       console.log(results);
+       results.forEach(item=>{
+         console.log(item)
+         let buyer = item.result.buyer
+         let colorArray = item.result.colorArray
+         let pixelPositionArray = item.result.pixelPositionArray
+         let communityName = item.result.communityName
+         //console.log(hex2a(buyer))
+         console.log(pixelPositionArray)
+         
+         console.log(tronWeb.toAscii(colorArray))
+         //console.log(tronWeb.toUtf8('079CB001CB739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE'))
+         //console.log(tronWeb.defaultAddress.hex)
+        // console.log(tronWeb.defaultAddress.hex)
+         // console.log(tronWeb.toUtf8(pixelPositionArray))
+          //console.log(tronWeb.fromUtf8(pixelPositionArray))
+          //console.log(tronWeb.toAscii(pixelPositionArray))
+          //console.log(tronWeb.toDecimal(pixelPositionArray))
+       }) 
+   }, 5000)
 })
