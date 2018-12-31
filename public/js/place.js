@@ -269,6 +269,7 @@ $(document).ready(() => {
   }
 
   function handleMouseClick(event) {
+    
     $('.cart_list').hide()
     if (dragEnable) return
     var mousePos = getMousePos(canvas, event)
@@ -305,7 +306,7 @@ $(document).ready(() => {
       if (pixel.x == xPos && pixel.y == yPos) pixelIndex = index
     })
 
-    if (pixelIndex < 0) {
+   // if (pixelIndex < 0) {
  
       var newItem =
         "<tr id='item-" +
@@ -373,7 +374,8 @@ $(document).ready(() => {
       $('.count').html(cartCnt)
       $('.trxCnt').html(cartCnt * 10)
       $('.pixelCnt').html(cartCnt)
-    }
+   
+   // }
     ///////
     //yPos = yPos - 1
     //xPos = xPos - 1
@@ -761,7 +763,7 @@ function hidealert(){
     })
   }
   setTimeout( async function (){
-     const results = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS, '1544498532000','PixelPurchased');
+     let results = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS, '1544498532000','PixelPurchased');
                        //sinceTimestamp = 1544498532000, 
                        //eventName = 'PixelPurchased', 
                        //blockNumber = 6540, 
@@ -773,7 +775,8 @@ function hidealert(){
          let colorArray = item.result.colorArray
          let pixelPositionArray = item.result.pixelPositionArray
          let communityName = item.result.communityName
-         //console.log(hex2a(buyer))
+
+         console.log(hex2a(pixelPositionArray))
          console.log(pixelPositionArray)
          
          console.log(tronWeb.toAscii(colorArray))
