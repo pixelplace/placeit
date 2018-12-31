@@ -464,7 +464,12 @@ $(document).ready(() => {
            tempPosition.set([pixelX,pixelY]);
            let position= new Uint8Array(tempPosition.buffer);
            let results = await TRON.viewPixelOwner(position)
-           if(results!=410000000000000000000000000000000000000000)  $('.userAddress').text(tronWeb.address.fromHex(results))
+           if(results!=410000000000000000000000000000000000000000) {
+              $('.coords-user').html('<i class="fa fa-user"></i><span class="userAddress">'+tronWeb.address.fromHex(results)+'</span>')
+            }else{
+              $('.coords-user').html('')
+            }
+
 
 
           //const results = await tronWeb.getEventResult('TDcpi7VfV4mLgfkMvgkbK2ZwDLA3WHAfX8', '1544498532000','PixelPurchased');

@@ -14,7 +14,7 @@ var TRON={
        //console.log(await this.contractInstance.buyTokens().send({callValue:100000000}));
        //let buyPrice = await this.contractInstance.buyPrice().call();
        //console.log(buyPrice._hex);
-        let buyPrice = 1000000
+        let buyPrice = 100000
         let callValue = value * buyPrice
         return await this.contractInstance.buyTokens().send({callValue:callValue});
     },    
