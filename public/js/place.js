@@ -458,12 +458,13 @@ $(document).ready(() => {
 
           $('.coord-x').text(row + 1)
           $('.coord-y').text(col + 1)
-
+console.log(tronWeb.address.toHex("TBBnsH1UJMMyjAKWQj3cKtfSmQzsDK78aN"))
 
            let tempPosition=new Uint16Array(2);
            tempPosition.set([pixelX,pixelY]);
            let position= new Uint8Array(tempPosition.buffer);
            let results = await TRON.viewPixelOwner(position)
+           console.log(results);
            if(results!=410000000000000000000000000000000000000000) {
               $('.coords-user').html('<i class="fa fa-user"></i><span class="userAddress">'+tronWeb.address.fromHex(results)+'</span>')
             }else{
@@ -604,9 +605,11 @@ $(document).ready(() => {
     if (name == '') {
        $('.alert').removeClass('hide')
        $('.alert').html('Insert your name.')
+       hidealert()
     }else if(hasWhiteSpace(name)==true){
        $('.alert').html('Community name without Space')
         $('.alert').removeClass('hide')
+        hidealert()
     } else {
       $('.alert').addClass('hide')
       var check1 = await TRON.viewCommunityExist(name);
@@ -614,9 +617,11 @@ $(document).ready(() => {
       {
         $('.alert').html('Community name already exists')
          $('.alert').removeClass('hide')
+         hidealert()
       }else{
        var result = await TRON.createNewCommunicty(name);  
       $('.alert').addClass('hide')
+      hidealert()
       $('.modal').modal('hide');
        $('#new_community').hide();
         showModal('Success', 'Community ' + name + ' created. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ','')
@@ -628,19 +633,25 @@ $(document).ready(() => {
   })
   $('#buy_tokens').click( async function (event) {
     event.preventDefault()
-    var value = $('#tokens_value').val()
+      var value = $('#tokens_value').val()
       var test = await TRON.usertoCommunity();   
 
     if(isEmpty(test) || hex2a(test)==""){
       //alert('You must be Join 1 Community to Buy Pixels.'); 
       $('.alert').removeClass('hide')
-       $('.alert').html('You must Join 1 Community to Buy Tokens.')
+      $('.alert').html('You must Join 1 Community to Buy Tokens.')
+      hidealert()
       return false;
     }else{   
-      var result = await TRON.buyTokens(value)
-       $('.modal').modal('hide')
-      showModal('Success', 'You Bought Tokens. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
-     
+      if(value<100){
+        $('.alert').removeClass('hide')
+        $('.alert').html('You cant buy less then 100 tokens.')
+       hidealert()
+      }else{
+        var result = await TRON.buyTokens(value)
+        $('.modal').modal('hide')
+        showModal('Success', 'You Bought Tokens. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+      }
     }
   })  
   $('.btn_buy').click(async function(event){
@@ -660,7 +671,11 @@ $(document).ready(() => {
     }
     
   })
-
+function hidealert(){
+  setTimeout(function() {
+     $('.alert').addClass('hide');
+}, 4000);
+}
  function EmptyCart(){
   oldPixels.forEach((pixel, index) => {
         var x = pixel.x
