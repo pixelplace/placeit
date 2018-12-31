@@ -550,8 +550,9 @@ $(document).ready(() => {
          //console.log(convertCoord('1c02db0100000000000000000000000000000000000000000000000000000000'))
          let communityName = item.result.communityName
          let coordition = convertCoord(pixelPositionArray);
-         console.log(coordition)
-         let color=convertColor(colorArray.toString());
+         // console.log(colorArray)
+         let color=convertColor(colorArray);
+         //console.log(color)
          let x = coordition.x;
          let y = coordition.y;
          let r = color.r;
@@ -560,7 +561,7 @@ $(document).ready(() => {
          let colorCode = rgbToHex(r,g,b)
         // debugger;
          //console.log('R = '+r+'G= '+ g + 'B= ' + b);
-         console.log(colorCode)
+         //console.log(colorCode)
          canvasData[y][x] = colorCode
          draw()
        }) 

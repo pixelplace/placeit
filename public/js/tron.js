@@ -6,7 +6,7 @@ var TRON={
     init:async function(){
         var contractInfo=await window.tronWeb.trx.getContract(this.CONTRACT_ADDRESS);
         this.contractInstance=window.tronWeb.contract(contractInfo.abi.entrys,contractInfo.contract_address);
-        this.hookPixelPurchased();
+        //this.hookPixelPurchased();
     },
     createNewCommunicty:async function(name){
         return await this.contractInstance.createNewCommunicty(StringToBytes(name)).send({callValue:1000000000});

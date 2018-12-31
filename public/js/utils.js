@@ -16,9 +16,9 @@ function convertCoord(hexString) {
     return {x,y};
 }
 function convertColor(hexString) {
-    let r= parseInt(hexString.substr(0, 4), 16);
-    let g=parseInt(hexString.substr(4, 4), 16);
-    let b= parseInt(hexString.substr(8, 4), 16);
+    let r= parseInt(hexString.substr(0, 2), 16);
+    let g=parseInt(hexString.substr(4, 2), 16);
+    let b= parseInt(hexString.substr(8, 2), 16);
     return {r,g,b};
 }
 function componentToHex(c) {
