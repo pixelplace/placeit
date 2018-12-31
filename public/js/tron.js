@@ -6,6 +6,7 @@ var TRON={
     init:async function(){
         var contractInfo=await window.tronWeb.trx.getContract(this.CONTRACT_ADDRESS);
         this.contractInstance=window.tronWeb.contract(contractInfo.abi.entrys,contractInfo.contract_address);
+        this.hookPixelPurchased();
     },
     createNewCommunicty:async function(name){
         return await this.contractInstance.createNewCommunicty(StringToBytes(name)).send({callValue:1000000000});
@@ -76,10 +77,17 @@ var TRON={
     viewPixelOwner:async function(pixelXY){
         return (await this.contractInstance.viewPixelOwner(pixelXY).call());
     },
-    PixelPurchased:async function(){
-       
-        return (await this.contractInstance.PixelPurchased().call());
-    },
+    hookPixelPurchased:async function(){
+        await this.contractInstance.PixelPurchased().watch(
+            (err, result) => {
+              if (err) throw console.error("Failed to bind event listener:", err);
+              let coordition = convertCoord(result.pixelPositionArray);
+              let color=convertColor(result.colorArray);
+              console.log(coordition);
+              console.log(color);
+
+            })
+    }
 }
 var timeOutID=setTimeout(tryInstall,100)
 function tryInstall(){

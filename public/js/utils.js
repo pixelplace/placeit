@@ -10,6 +10,17 @@ function hex2a(hexx) {
         str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
     return str;
 }
+function convertCoord(hexString) {
+    let x= parseInt(hexString.substr(0, 4), 16);
+    let y=parseInt(hexString.substr(4, 4), 16);
+    return {x,y};
+}
+function convertColor(hexString) {
+    let r= parseInt(hexString.substr(0, 4), 16);
+    let g=parseInt(hexString.substr(4, 4), 16);
+    let b= parseInt(hexString.substr(8, 4), 16);
+    return {r,g,b};
+}
 function getColor(color) {
     if (color[0] == '#') {
       if (color.length == 7) {
@@ -34,6 +45,9 @@ function isEmpty(obj) {
             return false;
     }
     return true;
+}
+function convertHex4BytesToCoord(inputString){
+
 }
 if( typeof helper == 'undefined' ) {
   var helper = { } ;
