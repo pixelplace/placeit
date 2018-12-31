@@ -50,6 +50,7 @@ $(document).ready(() => {
     draw()
   })
 
+ 
   function counter() {
     setInterval(() => {
       var date = new Date().toLocaleString("en-US", {timeZone: "Europe/London"})
@@ -111,6 +112,7 @@ $(document).ready(() => {
       draw()
     })
 
+    
     $('#submit').click(() => {
       socket.emit('color', {
         col: parseInt($('#x-coord').val()),
@@ -474,7 +476,9 @@ $(document).ready(() => {
            tempPosition.set([pixelX,pixelY]);
            let position= new Uint8Array(tempPosition.buffer);
            let results = await TRON.viewPixelOwner(position)
-           //console.log(results);
+           console.log('pixelX = ' + pixelX + ' pixelY= ' + pixelY)
+           console.log(position);
+           console.log(results);
            if(results!=410000000000000000000000000000000000000000) {
               $('.coords-user').html('<i class="fa fa-user"></i><span class="userAddress">'+tronWeb.address.fromHex(results)+'</span>')
               $('.coord').addClass('coord-hover')
@@ -536,6 +540,31 @@ $(document).ready(() => {
       y: evt.clientY - rect.top
     }
   }
+
+  setTimeout( async function (){
+     let results = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS, '1544498532000','PixelPurchased');
+       results.forEach(item=>{
+         let buyer = item.result.buyer
+         let colorArray = item.result.colorArray
+         let pixelPositionArray = item.result.pixelPositionArray
+         //console.log(convertCoord('1c02db0100000000000000000000000000000000000000000000000000000000'))
+         let communityName = item.result.communityName
+         let coordition = convertCoord(pixelPositionArray);
+         console.log(coordition)
+         let color=convertColor(colorArray.toString());
+         let x = coordition.x;
+         let y = coordition.y;
+         let r = color.r;
+         let g = color.g;
+         let b = color.b;
+         let colorCode = rgbToHex(r,g,b)
+        // debugger;
+         //console.log('R = '+r+'G= '+ g + 'B= ' + b);
+         console.log(colorCode)
+         canvasData[y][x] = colorCode
+         draw()
+       }) 
+   }, 10000)
 
   function draw() {
 
@@ -764,29 +793,23 @@ function hidealert(){
   }
   setTimeout( async function (){
      let results = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS, '1544498532000','PixelPurchased');
-                       //sinceTimestamp = 1544498532000, 
-                       //eventName = 'PixelPurchased', 
-                       //blockNumber = 6540, 
-                       //size = 20, page = 1);
-                       console.log(results);
        results.forEach(item=>{
-         console.log(item)
          let buyer = item.result.buyer
          let colorArray = item.result.colorArray
          let pixelPositionArray = item.result.pixelPositionArray
          let communityName = item.result.communityName
-
-         console.log(hex2a(pixelPositionArray))
-         console.log(pixelPositionArray)
-         
-         console.log(tronWeb.toAscii(colorArray))
-         //console.log(tronWeb.toUtf8('079CB001CB739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE739CE'))
-         //console.log(tronWeb.defaultAddress.hex)
-        // console.log(tronWeb.defaultAddress.hex)
-         // console.log(tronWeb.toUtf8(pixelPositionArray))
-          //console.log(tronWeb.fromUtf8(pixelPositionArray))
-          //console.log(tronWeb.toAscii(pixelPositionArray))
-          //console.log(tronWeb.toDecimal(pixelPositionArray))
+         let coordition = convertCoord(pixelPositionArray.toString());
+         let color=convertColor(colorArray.toString());
+         let x = coordition.x;
+         let y = coordition.y;
+         let r = color.r;
+         let g = color.g;
+         let b = color.b;
+         let colorCode = rgbToHex(r,g,b)
+         //console.log('R = '+r+'G= '+ g + 'B= ' + b);
+        // console.log(colorCode)
+         //canvasData[y][x] = colorCode
+         //draw()
        }) 
-   }, 5000)
+   }, 40000)
 })

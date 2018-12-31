@@ -11,8 +11,8 @@ function hex2a(hexx) {
     return str;
 }
 function convertCoord(hexString) {
-    let x= parseInt(hexString.substr(0, 4), 16);
-    let y=parseInt(hexString.substr(4, 4), 16);
+    let x= parseInt(hexString.substr(2, 4), 16);
+    let y=parseInt(hexString.substr(0, 2), 16);
     return {x,y};
 }
 function convertColor(hexString) {
@@ -20,6 +20,14 @@ function convertColor(hexString) {
     let g=parseInt(hexString.substr(4, 4), 16);
     let b= parseInt(hexString.substr(8, 4), 16);
     return {r,g,b};
+}
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 function getColor(color) {
     if (color[0] == '#') {
