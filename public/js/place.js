@@ -475,6 +475,7 @@ $(document).ready(() => {
            //console.log(results);
            if(results!=410000000000000000000000000000000000000000) {
               $('.coords-user').html('<i class="fa fa-user"></i><span class="userAddress">'+tronWeb.address.fromHex(results)+'</span>')
+              $('.coord').addClass('coord-hover')
             }else{
               $('.coords-user').html('')
             }
