@@ -1,6 +1,6 @@
 var TRON={
     //CONTRACT_ADDRESS:"TMXTr26TT7hAAhUmqMobEDQs2ykacMsKf2",
-    CONTRACT_ADDRESS:"TRNwLs9yA1MV1ko3TCKSoMyZ3mrk6awEeZ",
+    CONTRACT_ADDRESS:"TDcpi7VfV4mLgfkMvgkbK2ZwDLA3WHAfX8",
     contractInstance:"",
     ListCommunity:[],
     init:async function(){
@@ -10,8 +10,13 @@ var TRON={
     createNewCommunicty:async function(name){
         return await this.contractInstance.createNewCommunicty(StringToBytes(name)).send({callValue:1000000000});
     },
-    buyTokens:async function(){
-        await this.contractInstance.buyTokens().send({callValue:100000000});
+    buyTokens:async function(value){
+       //console.log(await this.contractInstance.buyTokens().send({callValue:100000000}));
+       //let buyPrice = await this.contractInstance.buyPrice().call();
+       //console.log(buyPrice._hex);
+        let buyPrice = 1000000
+        let callValue = value * buyPrice
+        return await this.contractInstance.buyTokens().send({callValue:callValue});
     },    
     buyPixels:async function(pixelsData){
         let buyPositions=[];
@@ -70,6 +75,10 @@ var TRON={
     },
     viewPixelOwner:async function(pixelXY){
         return (await this.contractInstance.viewCommunityExist(StringToBytes(pixelXY)).call());
+    },
+    PixelPurchased:async function(){
+       
+        return (await this.contractInstance.PixelPurchased().call());
     },
 }
 var timeOutID=setTimeout(tryInstall,100)

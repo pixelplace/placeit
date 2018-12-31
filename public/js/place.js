@@ -49,15 +49,7 @@ $(document).ready(() => {
 
     draw()
   })
-function minsToMidnight() {
-  //var date = new Date().toLocaleString("en-US", {timeZone: "Europe/London"})
-  var now = new Date();
-  var then = new Date(now);
-  then.setHours(24, 0, 0, 0);
-  return (then - now) / 6e4;
-}
 
-console.log(minsToMidnight());
   function counter() {
     setInterval(() => {
       var date = new Date().toLocaleString("en-US", {timeZone: "Europe/London"})
@@ -80,6 +72,7 @@ console.log(minsToMidnight());
       str = h + ':' + m + ':' + s
       i++;
       $('div.time').html(str)
+      $('#dividendCountDown').html(str)
     }, 1000)
   }
 
@@ -330,13 +323,14 @@ console.log(minsToMidnight());
             .attr('id')
             .substr(9)
         )
-       
-        var x = oldPixels[id - 1].x
-        var y = oldPixels[id - 1].y
-        var color = oldPixels[id - 1].color
+       //console.log(oldPixels);
+        
+        var x = oldPixels[id -1].x
+        var y = oldPixels[id -1].y
+        var color = oldPixels[id -1].color
         canvasData[y][x] = color
         draw()
-        oldPixels.splice(id-1,1)
+        oldPixels.splice(id,1)
         socket.emit(
           'color',
           {
@@ -355,6 +349,23 @@ console.log(minsToMidnight());
         $('.pixelCnt').html(cartCnt)
         $('.trxCnt').html(cartCnt * 10)
         $('.count').html(cartCnt)
+
+      //   $('.pixel_list').html('')
+      //    oldPixels.forEach((pixel, index) => {
+      //   var newItem =
+      //   "<tr id='item-" +
+      //   index +
+      //   "'><td>" +
+      //   (oldPixels[index].x + 1) +
+      //   ' , ' +
+      //   (oldPixels[index].y + 1) +
+      //   "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close' id='del-item-" +
+      //   index +
+      //   "'></i></span></td></tr>"
+        
+      //   $('.pixel_list').append(newItem)
+      // })
+
       })
       cartCnt++
       $('.count').html(cartCnt)
@@ -362,7 +373,6 @@ console.log(minsToMidnight());
       $('.pixelCnt').html(cartCnt)
     }
     ///////
-
     canvasData[yPos][xPos] = currentColor
     draw()
     oldPixels.push({ x: parseInt($('#x-coord').val()), y: parseInt($('#y-coord').val()), color: currentColor})
@@ -372,8 +382,8 @@ console.log(minsToMidnight());
       color: currentColor
     })
   }
-
   function deleteItem(event) {
+   
     event.preventDefault()
     var id = parseInt(
       $(this)
@@ -448,7 +458,27 @@ console.log(minsToMidnight());
 
           $('.coord-x').text(row + 1)
           $('.coord-y').text(col + 1)
+          //const results = await tronWeb.getEventResult('TDcpi7VfV4mLgfkMvgkbK2ZwDLA3WHAfX8', '1544498532000','PixelPurchased');
+                       //sinceTimestamp = 1544498532000, 
+                       //eventName = 'PixelPurchased', 
+                       //blockNumber = 6540, 
+                       //size = 20, page = 1);
+      //  results.forEach(item=>{
+        //  console.log(item)
+       //   let buyer = item.result.buyer
+       //   let colorArray = item.result.colorArray
+       //   let pixelPositionArray = item.result.pixelPositionArray
+       //   let communityName = item.result.communityName
+       //   console.log(tronWeb.toUtf8(pixelPositionArray))
+       //   console.log(tronWeb.defaultAddress.hex)
+         // console.log(tronWeb.defaultAddress.hex)
+          //console.log(tronWeb.toUtf8(pixelPositionArray))
+          //console.log(tronWeb.fromUtf8(pixelPositionArray))
+          //console.log(tronWeb.toAscii(pixelPositionArray))
+          //console.log(tronWeb.toDecimal(pixelPositionArray))
+       // })
 
+         // var t = await TRON.PixelPurchased();
          // console.log(StringToBytes('576,256'));
           if (row >= 0 && row < CANVAS_ROWS && col >= 0 && col < CANVAS_COLS) {
             $('.coord').css('display', 'block')
@@ -500,6 +530,7 @@ console.log(minsToMidnight());
   }
 
   function draw() {
+
     canvasImg = ctx.createImageData(widthCanvas, heightCanvas)
 
     xMax = CANVAS_COLS * step
@@ -585,13 +616,17 @@ console.log(minsToMidnight());
     event.preventDefault()
     var value = $('#tokens_value').val()
       var test = await TRON.usertoCommunity();   
+
     if(isEmpty(test) || hex2a(test)==""){
       //alert('You must be Join 1 Community to Buy Pixels.'); 
       $('.alert').removeClass('hide')
        $('.alert').html('You must Join 1 Community to Buy Tokens.')
       return false;
     }else{   
-      TRON.buyTokens(value);
+      var result = await TRON.buyTokens(value)
+       $('.modal').modal('hide')
+      showModal('Success', 'You Bought Tokens. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+     
     }
   })  
   $('.btn_buy').click(async function(event){
@@ -601,6 +636,7 @@ console.log(minsToMidnight());
        showModal('Error', 'You must Join 1 Community to Buy Pixels','')
       return false;
     }else{
+      console.log(oldPixels)
      var result = await TRON.buyPixels(oldPixels);  
      if(result){
       EmptyCart();
