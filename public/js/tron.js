@@ -1,6 +1,5 @@
 var TRON={
-    //CONTRACT_ADDRESS:"TMXTr26TT7hAAhUmqMobEDQs2ykacMsKf2",
-    CONTRACT_ADDRESS:"TY8d1zMAUhMSGqHJtLqPoocchTmmHjfy3o",
+    CONTRACT_ADDRESS:"TE4ANBWxDSkWagCFTDaUZg4Xk8JkyLuCj1",
     contractInstance:"",
     ListCommunity:[],
     init:async function(){
@@ -38,7 +37,7 @@ var TRON={
         })
         //let buyPrice=10000000*buyColors.length;
         let buyPrice=10000000*buyColors.length;
-        console.log(buyPositions);console.log(buyColors);
+        //console.log(buyPositions);console.log(buyColors);
         return await this.contractInstance.buyPixels(buyPositions,buyColors).send({callValue:buyPrice});
     },
     joinCommunity:async function(name){
