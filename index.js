@@ -58,5 +58,5 @@ io.on("connection", socket => {
 })
 
 // Start listening for connections
-server.listen(process.env.PORT || 54325)
+server.listen(process.env.PORT || 3000)
 console.log(Date()+' Sucsessfully started listening on Port 54325');
