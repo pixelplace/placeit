@@ -595,7 +595,7 @@ $(document).ready(() => {
              let communityName = item.result.communityName
 
              let coordition = convertCoord(pixelPositionArray);
-             //console.log(coordition)
+             console.log(coordition)
              let color=convertColor(colorArray);
              //console.log(item)
              let x = coordition.x;

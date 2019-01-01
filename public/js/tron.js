@@ -15,7 +15,8 @@ var TRON={
        //let buyPrice = await this.contractInstance.buyPrice().call();
        //console.log(buyPrice._hex);
         let buyPrice = 100000
-        let callValue = value * buyPrice
+        let callValue = parseInt(value)/10
+        callValue = callValue * 1000000
         return await this.contractInstance.buyTokens().send({callValue:callValue});
     },    
     buyPixels:async function(pixelsData){
@@ -62,7 +63,7 @@ var TRON={
         return (await this.contractInstance.viewTotalUsersInCommunity(StringToBytes($('#currentCommunity').val())).call());
     },
     balanceOf:async function(){
-        return (await this.contractInstance.balanceOf(tronWeb.defaultAddress.hex).call());
+        return (await this.contractInstance.balanceOf(tronWeb.defaultAddress.hex).call()/100000000);
     },
     communityPoolVolume:async function(){
         return (await this.contractInstance.communityPoolVolume().call()).toString()/1000000;
@@ -167,11 +168,15 @@ async function upDateGameStatus(){
     $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity());
     $('#UserTokens').val(await TRON.balanceOf());
     $('#pool_value_dividend').html(await TRON.communityPoolVolume());
-    $('#pool_value').html(await TRON.communityPoolVolume());
+    let pool_value = await TRON.communityPoolVolume()
+    $('#pool_value').html(pool_value);
     let dividend = (await TRON.communityPoolVolume()*70)/100;
     let share = (((await TRON.userTotalPixels())/(await TRON.viewTotalPixelsInCommunity()))*100).toFixed(2);
+    let possible_income = (pool_value*70)/100
+    possible_income = (possible_income * share) /100
     $('#pool_dividend').html(dividend);
     $('#UserShare').val(share);
+    $('#possible_income').val(possible_income)
 }
 setInterval(upDateGameStatus,1000)
 
