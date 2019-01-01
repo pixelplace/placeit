@@ -172,11 +172,9 @@ async function upDateGameStatus(){
     $('#pool_value').html(pool_value);
     let dividend = (await TRON.communityPoolVolume()*70)/100;
     let share = (((await TRON.userTotalPixels())/(await TRON.viewTotalPixelsInCommunity()))*100).toFixed(2);
-    let possible_income = (pool_value*70)/100
-    possible_income = (possible_income * share) /100
     $('#pool_dividend').html(dividend);
     $('#UserShare').val(share);
-    $('#possible_income').val(possible_income)
+    $('#possible_income').val(dividend * share)
 }
 setInterval(upDateGameStatus,1000)
 
