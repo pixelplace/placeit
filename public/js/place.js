@@ -459,6 +459,7 @@ $(document).ready(() => {
       $('.coord').css('display', 'none')
 
        setTimeout(async() => {
+
         if (X == oldX && Y == oldY && isMouseIn) {
           var mousePos = getMousePos(canvas, event)
           var row = parseInt((mousePos.x - xleftView) / step)
@@ -481,8 +482,8 @@ $(document).ready(() => {
            let position= new Uint8Array(tempPosition.buffer);
            let results = await TRON.viewPixelOwner(position)
           // console.log('pixelX = ' + pixelX + ' pixelY= ' + pixelY)
-           //console.log(position);
-           //console.log(results);
+          // console.log(position);
+          // console.log(results);
            if(results!=410000000000000000000000000000000000000000) {
               $('.coords-user').html('<i class="fa fa-user"></i><span class="userAddress">'+tronWeb.address.fromHex(results)+'</span>')
               $('.coord').addClass('coord-hover')
@@ -654,6 +655,8 @@ $(document).on('click', '.deleteItem', function(event){
              //console.log(item)
              let x = coordition.x;
              let y = coordition.y;
+             x = x - 1
+             y = y - 1
              let r = color.r;
              let g = color.g;
              let b = color.b;
