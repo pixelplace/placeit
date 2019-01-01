@@ -115,7 +115,6 @@ $(document).ready(() => {
       draw()
     })
 
-    
     $('#submit').click(() => {
       socket.emit('color', {
         col: parseInt($('#x-coord').val()),
@@ -322,43 +321,43 @@ $(document).ready(() => {
         (xPos + 1) +
         ' , ' +
         (yPos + 1) +
-        "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close' id='del-item-" +
+        "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close deleteItem' id='del-item-" +
         oldPixels.length +
         "'></i></span></td></tr>"
       $('.pixel_list').append(newItem)
-      $('#del-item-' + oldPixels.length).on('click', function (event) {
-        event.preventDefault()
-        var id = parseInt(
-          $(this)
-            .attr('id')
-            .substr(9)
-        )
-       //console.log(oldPixels);
-        
-        var x = oldPixels[id -1].x
-        var y = oldPixels[id -1].y
-        var color = oldPixels[id -1].color
-        global.canvasData[y][x] = color
-       // draw()
-        oldPixels.splice(id,1)
-        socket.emit(
-          'color',
-          {
-            row: y + 1,
-            col: x + 1,
-            color: color
-          },
-          false
-        )
-        cartCnt--
-        $('#item-' + id).remove()
+      // $('#del-item-' + oldPixels.length).on('click', function (event) {
+      //   event.preventDefault()
+      //   var id = parseInt(
+      //     $(this)
+      //       .attr('id')
+      //       .substr(9)
+      //   )
+      // console.log(oldPixels)
+      // console.log(id)
+      //   var x = oldPixels[id].x
+      //   var y = oldPixels[id].y
+      //   var color = oldPixels[id].color
+      //   global.canvasData[y][x] = '#FFF'
+      //   draw()
+      //   oldPixels.splice(id,1)
+      //   socket.emit(
+      //     'color',
+      //     {
+      //       row: y,
+      //       col: x,
+      //       color: color
+      //     },
+      //     false
+      //   )
+      //   cartCnt--
+      //   $('#item-' + id).remove()
 
-        if (cartCnt < 0) {
-          cartCnt = 0
-        }
-        $('.pixelCnt').html(cartCnt)
-        $('.trxCnt').html(cartCnt * 10)
-        $('.count').html(cartCnt)
+      //   if (cartCnt < 0) {
+      //     cartCnt = 0
+      //   }
+      //   $('.pixelCnt').html(cartCnt)
+      //   $('.trxCnt').html(cartCnt * 10)
+      //   $('.count').html(cartCnt)
 
       //   $('.pixel_list').html('')
       //    oldPixels.forEach((pixel, index) => {
@@ -376,7 +375,7 @@ $(document).ready(() => {
       //   $('.pixel_list').append(newItem)
       // })
 
-      })
+     ///asda })
       cartCnt++
       $('.count').html(cartCnt)
       $('.trxCnt').html(cartCnt * 10)
@@ -481,7 +480,7 @@ $(document).ready(() => {
            tempPosition.set([pixelX,pixelY]);
            let position= new Uint8Array(tempPosition.buffer);
            let results = await TRON.viewPixelOwner(position)
-           console.log('pixelX = ' + pixelX + ' pixelY= ' + pixelY)
+          // console.log('pixelX = ' + pixelX + ' pixelY= ' + pixelY)
            //console.log(position);
            //console.log(results);
            if(results!=410000000000000000000000000000000000000000) {
@@ -538,6 +537,60 @@ $(document).ready(() => {
     lastY = Y
   }
 
+$(document).on('click', '.deleteItem', function(event){
+      event.preventDefault()
+        var id = parseInt(
+          $(this)
+            .attr('id')
+            .substr(9)
+        )
+       // debugger;
+      console.log(oldPixels)
+      console.log(id)
+        var x = oldPixels[id].x
+        var y = oldPixels[id].y
+        //var color = oldPixels[id].color
+        var color = '#FFF'
+        global.canvasData[y][x] = '#FFFFFF'
+        
+        oldPixels.splice(id,1)
+        socket.emit(
+          'color',
+          {
+            row: y,
+            col: x,
+            color: color
+          },
+          false
+        )
+        cartCnt--
+        $('.pixel_list').html('')
+        oldPixels.forEach((pixel, index) => {
+          ///  if (pixel.x == xPos+1 && pixel.y == yPos+1) pixelIndex = index
+            var newItem =
+        "<tr id='item-" +
+        index +
+        "'><td>" +
+        (pixel.x) +
+        ' , ' +
+        (pixel.y) +
+        "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close deleteItem' id='del-item-" +
+        index +
+        "'></i></span></td></tr>"
+      $('.pixel_list').append(newItem)
+          })
+
+        draw()
+
+
+
+        if (cartCnt < 0) {
+          cartCnt = 0
+        }
+        $('.pixelCnt').html(cartCnt)
+        $('.trxCnt').html(cartCnt * 10)
+        $('.count').html(cartCnt)
+});
   function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect()
     return {
@@ -595,7 +648,8 @@ $(document).ready(() => {
              let communityName = item.result.communityName
 
              let coordition = convertCoord(pixelPositionArray);
-             console.log(coordition)
+
+            // console.log(coordition)
              let color=convertColor(colorArray);
              //console.log(item)
              let x = coordition.x;
@@ -608,7 +662,7 @@ $(document).ready(() => {
              //console.log('R = '+r+'G= '+ g + 'B= ' + b);
              //console.log(colorCode)
              global.canvasData[y][x] = colorCode
-            //console.log( coordition);
+            
         }
 
        }) 

@@ -10,11 +10,20 @@ function hex2a(hexx) {
         str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
     return str;
 }
+
+// function convertCoord(hexString) {
+//     let x= parseInt(hexString.substr(2, 4), 16);
+//     let y=parseInt(hexString.substr(4, 2), 16);
+    
+//      return {x,y};
+// }
+
 function convertCoord(hexString) {
-    let x= parseInt(hexString.substr(2, 4), 16);
-    let y=parseInt(hexString.substr(0, 2), 16);
+    let x = parseInt(hexString.substr(2, 2)+hexString.substr(0,2), 16);
+    let y =parseInt(hexString.substr(6,2)+hexString.substr(4,2), 16);
     return {x,y};
 }
+
 function convertColor(hexString) {
     let r= parseInt(hexString.substr(0, 2), 16);
     let g=parseInt(hexString.substr(4, 2), 16);
