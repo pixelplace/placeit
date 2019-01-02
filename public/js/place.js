@@ -340,6 +340,8 @@ function handleMouseClick(event) {
     oldPixels.length + "'></i></span></td></tr>";
 
     $('.pixel_list').append(newItem)
+
+    oldPixels.push({ x: parseInt($('#x-coord').val()), y: parseInt($('#y-coord').val()), color: currentColor})
   }
 
      
@@ -356,7 +358,7 @@ function handleMouseClick(event) {
     
    // global.canvasData[parseInt($('#x-coord').val())][parseInt($('#y-coord').val())] = currentColor
    // draw()
-   oldPixels.push({ x: parseInt($('#x-coord').val()), y: parseInt($('#y-coord').val()), color: currentColor})
+   
     //console.log(oldPixels)
     socket.emit('color', {
       col: parseInt($('#x-coord').val()),
@@ -766,16 +768,20 @@ $('#buy_tokens').click( async function (event) {
     }
   })  
 $('.btn_buy').click(async function(event){
+   console.log(oldPixels)
   var test = await TRON.usertoCommunity();   
   if(isEmpty(test) || hex2a(test)==""){
+    console.log("11111111")
       //alert('You must be Join 1 Community to Buy Pixels.'); 
       showModal('Error', 'You must Join 1 Community to Buy Pixels','')
       return false;
     }else{
-     // console.log(oldPixels)
+      console.log("22222222")
+      console.log(oldPixels);
      var result = await TRON.buyPixels(oldPixels);  
-     
+     console.log(result)
      if(result){
+      console.log("333333333333")
        showModal('Success', 'You Bought Pixel. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
        EmptyCart();
        $('.cart_list').hide();
