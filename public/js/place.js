@@ -611,7 +611,7 @@ function handleMouseMove(event) {
   }
   
   async function draw() {
-    
+   
     setTimeout( async function (){
        let ALLPixelDimensions = await TRON.viewALLPixelDimensions()
        let ALLPixelColors = await TRON.viewALLPixelColors()
@@ -629,6 +629,7 @@ function handleMouseMove(event) {
          let colorCode = rgbToHex(r,g,b)
          global.canvasData[y][x] = colorCode
       })
+      draw()
     }, 5000)
     
     // let ALLPixelDimensions = TRON.viewALLPixelDimensions()
