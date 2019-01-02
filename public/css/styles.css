@@ -105,8 +105,8 @@ table > thead > tr > th {
   width: 150px;
   height: 50px;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  /*top: 0px;*/
+  /*left: 0px;*/
   z-index: 500;
   border-width: 1px;
   border-color: #000;

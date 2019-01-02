@@ -170,8 +170,17 @@ $(document).ready(() => {
       $("#grid-toggle").addClass('active');
       gridShow = gridShow ? false : true
       // draw()
+
+      // zoom x10
+      nCenterDotX = parseInt(((widthCanvas / 2 - xleftView) / step + 10))
+      nCenterDotY = parseInt(((heightCanvas / 2 - ytopView) / step + 10))
+
+      xleftView -= nCenterDotX
+      ytopView -= nCenterDotY
+
+      step += 10
     }
-    if (step < 80) {
+    if (step < 80 && step > 1) {
 
       nCenterDotX = parseInt((widthCanvas / 2 - xleftView) / step + 1)
       nCenterDotY = parseInt((heightCanvas / 2 - ytopView) / step + 1)
@@ -181,10 +190,9 @@ $(document).ready(() => {
 
       step += 1
 
-
     }
     draw()
-  })
+  });
 
    $('#zoom-out').click(() => {
     if (step <= 2) {
@@ -511,12 +519,34 @@ function handleMouseMove(event) {
           $('.coord').css('display', 'block')
           $('.coord-color').css('background-color', global.canvasData[col][row])
 
-          var top = mousePos.y + 15
-          var left = mousePos.x + 35
-          if (mousePos.x > widthCanvas / 2) left = mousePos.x - 150
-            if (mousePos.y > heightCanvas / 2) top = mousePos.y - 15 - 50
-              $('.coord').css('top', top)
-            $('.coord').css('left', left)
+
+          var top = mousePos.y + 30;
+          var left = mousePos.x + 30;
+          var bottom = mousePos.y + 30;
+          var right = mousePos.y + 30;
+
+
+          if(mousePos.y < 30 ) {
+            $('.coord').css('top', top + 30);
+          } else if(mousePos.y > heightCanvas - 76) {
+            $('.coord').css('top', top - 76);
+          } else {
+            $('.coord').css('top', top);
+          }
+
+          if(mousePos.x < 30 ) {
+           $('.coord').css('left', left + 30);
+          } else if(mousePos.x > (widthCanvas - 400)) {
+            $('.coord').css('left', left - 400);
+          } else {
+            $('.coord').css('left', left);
+          }
+
+          // if (mousePos.x > widthCanvas / 2) left = mousePos.x - 150
+            // if (mousePos.y > heightCanvas / 2) top = mousePos.y - 15 - 50
+
+            // $('.coord').css('top', top)
+            // $('.coord').css('left', left)
           }
         }
       }, 2000)
