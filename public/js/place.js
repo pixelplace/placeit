@@ -172,13 +172,15 @@ $(document).ready(() => {
       // draw()
 
       // zoom x10
-      nCenterDotX = parseInt(((widthCanvas / 2 - xleftView) / step + 10))
-      nCenterDotY = parseInt(((heightCanvas / 2 - ytopView) / step + 10))
+      for(var i=0; i< 10; i++){
+        nCenterDotX = parseInt(((widthCanvas / 2 - xleftView) / step + 1))
+        nCenterDotY = parseInt(((heightCanvas / 2 - ytopView) / step + 1))
 
-      xleftView -= nCenterDotX
-      ytopView -= nCenterDotY
+        xleftView -= nCenterDotX
+        ytopView -= nCenterDotY
 
-      step += 10
+        step += 1;
+      }
     }
     if (step < 80 && step > 1) {
 
@@ -310,91 +312,37 @@ function handleMouseClick(event) {
     cartCnt++;
 
     if (cartCnt < 10) $('.count').css('width', '10px')
-      else $('.count').css('width', '')
-        iscount = false
-      if (tempPixel.length > 1) {
-        for (i = 0; i < tempPixel.length; i++) {
-          row1 = tempPixel[i * 2 + 1]
-          col1 = tempPixel[i * 2 + 2]
-          if (row1 == NaN || col1 == NaN) {
-          } else if (row1 == row && col1 == col) {
-            iscount = true
-          }
+    else $('.count').css('width', '')
+    iscount = false
+    if (tempPixel.length > 1) {
+      for (i = 0; i < tempPixel.length; i++) {
+        row1 = tempPixel[i * 2 + 1]
+        col1 = tempPixel[i * 2 + 2]
+        if (row1 == NaN || col1 == NaN) {
+        } else if (row1 == row && col1 == col) {
+          iscount = true
         }
       }
     }
 
-    ///////
+
     var pixelIndex = -1
     oldPixels.forEach((pixel, index) => {
       if (pixel.x == xPos+1 && pixel.y == yPos+1) pixelIndex = index
 
     })
-    if(pixelIndex>=0) return false;
-   // if (pixelIndex < 0) {
+    if(pixelIndex>=0){
+      return false;
+    }
 
-    var newItem =
-    "<tr id='item-" +
-    oldPixels.length +
-    "'><td>" +
-    (xPos + 1) +
-    ' , ' +
-    (yPos + 1) +
+    var newItem = "<tr id='item-" + oldPixels.length + "'><td>" + (xPos + 1) + ' , ' + (yPos + 1) +
     "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close deleteItem' id='del-item-" +
-    oldPixels.length +
-    "'></i></span></td></tr>"
+    oldPixels.length + "'></i></span></td></tr>";
+
     $('.pixel_list').append(newItem)
-      // $('#del-item-' + oldPixels.length).on('click', function (event) {
-      //   event.preventDefault()
-      //   var id = parseInt(
-      //     $(this)
-      //       .attr('id')
-      //       .substr(9)
-      //   )
-      // console.log(oldPixels)
-      // console.log(id)
-      //   var x = oldPixels[id].x
-      //   var y = oldPixels[id].y
-      //   var color = oldPixels[id].color
-      //   global.canvasData[y][x] = '#FFF'
-      //   draw()
-      //   oldPixels.splice(id,1)
-      //   socket.emit(
-      //     'color',
-      //     {
-      //       row: y,
-      //       col: x,
-      //       color: color
-      //     },
-      //     false
-      //   )
-      //   cartCnt--
-      //   $('#item-' + id).remove()
+  }
 
-      //   if (cartCnt < 0) {
-      //     cartCnt = 0
-      //   }
-      //   $('.pixelCnt').html(cartCnt)
-      //   $('.trxCnt').html(cartCnt * 10)
-      //   $('.count').html(cartCnt)
-
-      //   $('.pixel_list').html('')
-      //    oldPixels.forEach((pixel, index) => {
-      //   var newItem =
-      //   "<tr id='item-" +
-      //   index +
-      //   "'><td>" +
-      //   (oldPixels[index].x + 1) +
-      //   ' , ' +
-      //   (oldPixels[index].y + 1) +
-      //   "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close' id='del-item-" +
-      //   index +
-      //   "'></i></span></td></tr>"
-
-      //   $('.pixel_list').append(newItem)
-      // })
-
-     ///asda })
+     
      $('.count').html(cartCnt)
      $('.trxCnt').html(cartCnt * 10)
      $('.pixelCnt').html(cartCnt)
