@@ -184,4 +184,3 @@ async function upDateGameStatus(){
     $('#possible_income').val(dividend * share)
 }
 setInterval(upDateGameStatus,1000)
-

@@ -170,8 +170,19 @@ $(document).ready(() => {
       $("#grid-toggle").addClass('active');
       gridShow = gridShow ? false : true
       // draw()
+
+      // zoom x10
+      for(var i=0; i< 10; i++){
+        nCenterDotX = parseInt(((widthCanvas / 2 - xleftView) / step + 1))
+        nCenterDotY = parseInt(((heightCanvas / 2 - ytopView) / step + 1))
+
+        xleftView -= nCenterDotX
+        ytopView -= nCenterDotY
+
+        step += 1;
+      }
     }
-    if (step < 80) {
+    if (step < 80 && step > 1) {
 
       nCenterDotX = parseInt((widthCanvas / 2 - xleftView) / step + 1)
       nCenterDotY = parseInt((heightCanvas / 2 - ytopView) / step + 1)
@@ -181,10 +192,9 @@ $(document).ready(() => {
 
       step += 1
 
-
     }
     draw()
-  })
+  });
 
    $('#zoom-out').click(() => {
     if (step <= 2) {
@@ -302,91 +312,39 @@ function handleMouseClick(event) {
     cartCnt++;
 
     if (cartCnt < 10) $('.count').css('width', '10px')
-      else $('.count').css('width', '')
-        iscount = false
-      if (tempPixel.length > 1) {
-        for (i = 0; i < tempPixel.length; i++) {
-          row1 = tempPixel[i * 2 + 1]
-          col1 = tempPixel[i * 2 + 2]
-          if (row1 == NaN || col1 == NaN) {
-          } else if (row1 == row && col1 == col) {
-            iscount = true
-          }
+    else $('.count').css('width', '')
+    iscount = false
+    if (tempPixel.length > 1) {
+      for (i = 0; i < tempPixel.length; i++) {
+        row1 = tempPixel[i * 2 + 1]
+        col1 = tempPixel[i * 2 + 2]
+        if (row1 == NaN || col1 == NaN) {
+        } else if (row1 == row && col1 == col) {
+          iscount = true
         }
       }
     }
 
-    ///////
+
     var pixelIndex = -1
     oldPixels.forEach((pixel, index) => {
       if (pixel.x == xPos+1 && pixel.y == yPos+1) pixelIndex = index
 
     })
-    if(pixelIndex>=0) return false;
-   // if (pixelIndex < 0) {
+    if(pixelIndex>=0){
+      return false;
+    }
 
-    var newItem =
-    "<tr id='item-" +
-    oldPixels.length +
-    "'><td>" +
-    (xPos + 1) +
-    ' , ' +
-    (yPos + 1) +
+    var newItem = "<tr id='item-" + oldPixels.length + "'><td>" + (xPos + 1) + ' , ' + (yPos + 1) +
     "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close deleteItem' id='del-item-" +
-    oldPixels.length +
-    "'></i></span></td></tr>"
+    oldPixels.length + "'></i></span></td></tr>";
+
     $('.pixel_list').append(newItem)
-      // $('#del-item-' + oldPixels.length).on('click', function (event) {
-      //   event.preventDefault()
-      //   var id = parseInt(
-      //     $(this)
-      //       .attr('id')
-      //       .substr(9)
-      //   )
-      // console.log(oldPixels)
-      // console.log(id)
-      //   var x = oldPixels[id].x
-      //   var y = oldPixels[id].y
-      //   var color = oldPixels[id].color
-      //   global.canvasData[y][x] = '#FFF'
-      //   draw()
-      //   oldPixels.splice(id,1)
-      //   socket.emit(
-      //     'color',
-      //     {
-      //       row: y,
-      //       col: x,
-      //       color: color
-      //     },
-      //     false
-      //   )
-      //   cartCnt--
-      //   $('#item-' + id).remove()
 
-      //   if (cartCnt < 0) {
-      //     cartCnt = 0
-      //   }
-      //   $('.pixelCnt').html(cartCnt)
-      //   $('.trxCnt').html(cartCnt * 10)
-      //   $('.count').html(cartCnt)
+    oldPixels.push({ x: parseInt($('#x-coord').val()), y: parseInt($('#y-coord').val()), color: currentColor})
+  }
 
-      //   $('.pixel_list').html('')
-      //    oldPixels.forEach((pixel, index) => {
-      //   var newItem =
-      //   "<tr id='item-" +
-      //   index +
-      //   "'><td>" +
-      //   (oldPixels[index].x + 1) +
-      //   ' , ' +
-      //   (oldPixels[index].y + 1) +
-      //   "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close' id='del-item-" +
-      //   index +
-      //   "'></i></span></td></tr>"
-
-      //   $('.pixel_list').append(newItem)
-      // })
-
-     ///asda })
+     
      $('.count').html(cartCnt)
      $('.trxCnt').html(cartCnt * 10)
      $('.pixelCnt').html(cartCnt)
@@ -400,7 +358,7 @@ function handleMouseClick(event) {
     
    // global.canvasData[parseInt($('#x-coord').val())][parseInt($('#y-coord').val())] = currentColor
    // draw()
-   oldPixels.push({ x: parseInt($('#x-coord').val()), y: parseInt($('#y-coord').val()), color: currentColor})
+   
     //console.log(oldPixels)
     socket.emit('color', {
       col: parseInt($('#x-coord').val()),
@@ -511,12 +469,34 @@ function handleMouseMove(event) {
           $('.coord').css('display', 'block')
           $('.coord-color').css('background-color', global.canvasData[col][row])
 
-          var top = mousePos.y + 15
-          var left = mousePos.x + 35
-          if (mousePos.x > widthCanvas / 2) left = mousePos.x - 150
-            if (mousePos.y > heightCanvas / 2) top = mousePos.y - 15 - 50
-              $('.coord').css('top', top)
-            $('.coord').css('left', left)
+
+          var top = mousePos.y + 30;
+          var left = mousePos.x + 30;
+          var bottom = mousePos.y + 30;
+          var right = mousePos.y + 30;
+
+
+          if(mousePos.y < 30 ) {
+            $('.coord').css('top', top + 30);
+          } else if(mousePos.y > heightCanvas - 76) {
+            $('.coord').css('top', top - 76);
+          } else {
+            $('.coord').css('top', top);
+          }
+
+          if(mousePos.x < 30 ) {
+           $('.coord').css('left', left + 30);
+          } else if(mousePos.x > (widthCanvas - 400)) {
+            $('.coord').css('left', left - 400);
+          } else {
+            $('.coord').css('left', left);
+          }
+
+          // if (mousePos.x > widthCanvas / 2) left = mousePos.x - 150
+            // if (mousePos.y > heightCanvas / 2) top = mousePos.y - 15 - 50
+
+            // $('.coord').css('top', top)
+            // $('.coord').css('left', left)
           }
         }
       }, 2000)
@@ -789,16 +769,20 @@ $('#buy_tokens').click( async function (event) {
     }
   })  
 $('.btn_buy').click(async function(event){
+   console.log(oldPixels)
   var test = await TRON.usertoCommunity();   
   if(isEmpty(test) || hex2a(test)==""){
+    console.log("11111111")
       //alert('You must be Join 1 Community to Buy Pixels.'); 
       showModal('Error', 'You must Join 1 Community to Buy Pixels','')
       return false;
     }else{
-     // console.log(oldPixels)
+      console.log("22222222")
+      console.log(oldPixels);
      var result = await TRON.buyPixels(oldPixels);  
-     
+     console.log(result)
      if(result){
+      console.log("333333333333")
        showModal('Success', 'You Bought Pixel. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
        EmptyCart();
        $('.cart_list').hide();
@@ -923,5 +907,6 @@ function EmptyCart(){
   //        //global.canvasData[y][x] = colorCode
   //        //draw()
   //      }) 
+  
   //  }, 40000)
 })
