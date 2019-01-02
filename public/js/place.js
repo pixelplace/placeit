@@ -609,7 +609,7 @@ function handleMouseMove(event) {
          let colorCode = rgbToHex(r,g,b)
          global.canvasData[y][x] = colorCode
       })
-      draw()
+    //  draw()
     }, 3000)
     
     // let ALLPixelDimensions = TRON.viewALLPixelDimensions()
