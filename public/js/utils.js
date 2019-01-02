@@ -63,9 +63,9 @@ function isEmpty(obj) {
     }
     return true;
 }
-function convertHex4BytesToCoord(inputString){
+//function convertHex4BytesToCoord(inputString){
 
-}
+//}
 if( typeof helper == 'undefined' ) {
   var helper = { } ;
 }
