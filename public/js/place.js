@@ -952,5 +952,6 @@ function EmptyCart(){
   //        //global.canvasData[y][x] = colorCode
   //        //draw()
   //      }) 
+  
   //  }, 40000)
 })
