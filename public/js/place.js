@@ -609,76 +609,72 @@ function handleMouseMove(event) {
       y: evt.clientY - rect.top
     }
   }
-
-  // setTimeout( async function (){
-  //    let results = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS, '1544498532000','PixelPurchased');
-  //      results.forEach(item=>{
-  //        let buyer = item.result.buyer
-  //        let colorArray = item.result.colorArray
-  //        let pixelPositionArray = item.result.pixelPositionArray
-  //        //console.log(convertCoord('1c02db0100000000000000000000000000000000000000000000000000000000'))
-  //        let communityName = item.result.communityName
-  //        let coordition = convertCoord(pixelPositionArray);
-  //        // console.log(colorArray)
-  //        let color=convertColor(colorArray);
-  //        //console.log(color)
-  //        let x = coordition.x;
-  //        let y = coordition.y;
-  //        let r = color.r;
-  //        let g = color.g;
-  //        let b = color.b;
-  //        let colorCode = rgbToHex(r,g,b)
-  //       // debugger;
-  //        //console.log('R = '+r+'G= '+ g + 'B= ' + b);
-  //        console.log(colorCode)
-  //        global.canvasData[y][x] = colorCode
-
-  //      }) 
-  //      draw()
-  //  }, 20000)
+  
   async function draw() {
-    let winTimestamp = '0';
-    let winnerData = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS,'0', 'PickWinnerData');
-    winnerData.forEach(item=>{
-      winTimestamp = winnerData.timestamp
-    })
-   //console.log(winTimestamp);
-   if(winTimestamp==0){
-    winTimestamp = '1544498532000'
-  }
+    
+    setTimeout( async function (){
+       let ALLPixelDimensions = await TRON.viewALLPixelDimensions()
+       let ALLPixelColors = await TRON.viewALLPixelColors()
+      ALLPixelDimensions.forEach((item, index)=>{
+        let coordition = convertCoord(item.substr(2,9));
+        let colorArray = ALLPixelColors[index]
+        let color=convertColor(colorArray.substr(2,13));
+        let x = coordition.x;
+         let y = coordition.y;
+         x = x - 1
+         y = y - 1
+         let r = color.r;
+         let g = color.g;
+         let b = color.b;
+         let colorCode = rgbToHex(r,g,b)
+         global.canvasData[y][x] = colorCode
+      })
+    }, 5000)
+    
+    // let ALLPixelDimensions = TRON.viewALLPixelDimensions()
+    // console.log(ALLPixelDimensions)
+  //   let winTimestamp = '0';
+  //   let winnerData = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS,'0', 'PickWinnerData');
+  //   winnerData.forEach(item=>{
+  //     winTimestamp = winnerData.timestamp
+  //   })
+  //  //console.log(winTimestamp);
+  //  if(winTimestamp==0){
+  //   winTimestamp = '1544498532000'
+  // }
 
-  let results = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS, '1544498532000' ,'PixelPurchased');
-  results.forEach(item=>{
-   let timestamp = item.result.timestamp
-   if(timestamp>=winTimestamp){
-     let buyer = item.result.buyer
-     let colorArray = item.result.colorArray
-     let pixelPositionArray = item.result.pixelPositionArray
+  // let results = await tronWeb.getEventResult(TRON.CONTRACT_ADDRESS, '1544498532000' ,'PixelPurchased');
+  // results.forEach(item=>{
+  //  let timestamp = item.result.timestamp
+  //  if(timestamp>=winTimestamp){
+  //    let buyer = item.result.buyer
+  //    let colorArray = item.result.colorArray
+  //    let pixelPositionArray = item.result.pixelPositionArray
 
-             //console.log(convertCoord('1c02db0100000000000000000000000000000000000000000000000000000000'))
-             let communityName = item.result.communityName
+  //            //console.log(convertCoord('1c02db0100000000000000000000000000000000000000000000000000000000'))
+  //            let communityName = item.result.communityName
 
-             let coordition = convertCoord(pixelPositionArray);
+  //            let coordition = convertCoord(pixelPositionArray);
 
-            // console.log(coordition)
-            let color=convertColor(colorArray);
-             //console.log(item)
-             let x = coordition.x;
-             let y = coordition.y;
-             x = x - 1
-             y = y - 1
-             let r = color.r;
-             let g = color.g;
-             let b = color.b;
-             let colorCode = rgbToHex(r,g,b)
-            // debugger;
-             //console.log('R = '+r+'G= '+ g + 'B= ' + b);
-             //console.log(colorCode)
-             global.canvasData[y][x] = colorCode
+  //           // console.log(coordition)
+  //           let color=convertColor(colorArray);
+  //            //console.log(item)
+  //            let x = coordition.x;
+  //            let y = coordition.y;
+  //            x = x - 1
+  //            y = y - 1
+  //            let r = color.r;
+  //            let g = color.g;
+  //            let b = color.b;
+  //            let colorCode = rgbToHex(r,g,b)
+  //           // debugger;
+  //            //console.log('R = '+r+'G= '+ g + 'B= ' + b);
+  //            //console.log(colorCode)
+  //            global.canvasData[y][x] = colorCode
 
-           }
+  //          }
 
-         }) 
+  //        }) 
        //draw()
 
 //console.log('pixel' + global.canvasData[492][512]);

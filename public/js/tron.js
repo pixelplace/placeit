@@ -1,6 +1,6 @@
 var TRON={
-    CONTRACT_ADDRESS:"TE4ANBWxDSkWagCFTDaUZg4Xk8JkyLuCj1",
-    //CONTRACT_ADDRESS:"TY8d1zMAUhMSGqHJtLqPoocchTmmHjfy3o",
+    //CONTRACT_ADDRESS:"TE4ANBWxDSkWagCFTDaUZg4Xk8JkyLuCj1",
+    CONTRACT_ADDRESS:"TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF",
     contractInstance:"",
     ListCommunity:[],
     init:async function(){
@@ -77,6 +77,12 @@ var TRON={
     },
     viewPixelOwner:async function(pixelXY){
         return (await this.contractInstance.viewPixelOwner(pixelXY).call());
+    },
+    viewALLPixelDimensions:async function(){
+        return (await this.contractInstance.viewALLPixelDimensions().call());
+    },
+    viewALLPixelColors:async function(){
+        return (await this.contractInstance.viewALLPixelColors().call());
     },
     hookPixelPurchased:async function(){
         await this.contractInstance.PixelPurchased().watch(
