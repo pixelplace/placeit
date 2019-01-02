@@ -10,7 +10,7 @@ body {
 canvas {
   /*border: 1px solid #dddddd;*/
   display: block;
-  image-rendering: pixelated;
+  /*image-rendering: pixelated;*/
   height: 100%;
   width: 100%;
 }
