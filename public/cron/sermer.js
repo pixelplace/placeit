@@ -18,7 +18,7 @@ const tronWeb = new TronWeb(
 
 async function pickWinnerCalling() {
 
-const contractInstance = await tronWeb.contract().at("TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF");
+const contractInstance = await tronWeb.contract().at("TNmbxuGgiudQc2wrtWbBCrJgPQwz6UojEF");
 
 const result  = await contractInstance.pickWinner().send();
 
