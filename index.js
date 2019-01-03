@@ -51,6 +51,7 @@ io.on("connection", socket => {
         col: data.col,
         color: data.color
       })
+      resetCanvas()
       console.log(Date()+" user sent pixel with color "+data.color+", X: "+data.col+", Y: "+data.row+", sent it to everyone else");
       
     }
