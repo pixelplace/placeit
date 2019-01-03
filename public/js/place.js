@@ -614,8 +614,26 @@ function handleMouseMove(event) {
       let colorCode = rgbToHex(r,g,b)
       global.canvasData[y][x] = colorCode
     })
+   
+    setTimeout( async function (){
+       let ALLPixelDimensions = await TRON.viewALLPixelDimensions()
+       let ALLPixelColors = await TRON.viewALLPixelColors()
+      ALLPixelDimensions.forEach((item, index)=>{
+        let coordition = convertCoord(item.substr(2,9));
+        let colorArray = ALLPixelColors[index]
+        let color=convertColor(colorArray.substr(2,13));
+        let x = coordition.x;
+         let y = coordition.y;
+         x = x - 1
+         y = y - 1
+         let r = color.r;
+         let g = color.g;
+         let b = color.b;
+         let colorCode = rgbToHex(r,g,b)
+         global.canvasData[y][x] = colorCode
+      })
     //  draw()
-    //}, 3000)
+    }, 3000)
     
     // let ALLPixelDimensions = TRON.viewALLPixelDimensions()
     // console.log(ALLPixelDimensions)
