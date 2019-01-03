@@ -8,7 +8,7 @@ dotenv.load();
 fs.createReadStream('.sample-env').pipe(fs.createWriteStream('.env'));
 
 //following cron will run every 24 hours GMT Time
-new CronJob('0 0 0 * * *', function() {
+//new CronJob('0 0 0 * * *', function() {
 
 //creating async function which does all the process
 async function pickWinnerCalling() {
@@ -26,7 +26,7 @@ const tronWeb = new TronWeb(
     privateKey
 );
 
-let contractInstance = await tronWeb.contract().at("TK4uzqUmoatZDP7QsDLuwdrHwzoFxEPAEw");
+let contractInstance = await tronWeb.contract().at("TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF");
 
 let result  = await contractInstance.pickWinner().send();
 
@@ -34,10 +34,10 @@ let result  = await contractInstance.pickWinner().send();
 let logEntry = new Date() +" -- " + result + "\n";
 fs.appendFileSync("execution-log.txt", logEntry);
 
-console.log(logEntry); 
+console.log('done'); 
 };
 
 //calling pickWinnerCalling function
 pickWinnerCalling();
 
-}, null, true, 'Europe/London');
+//}, null, true, 'Europe/London');
