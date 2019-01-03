@@ -4,8 +4,11 @@
   "description": "2B2P",
   "main": "index.js",
   "dependencies": {
+    "cron": "^1.6.0",
+    "dotenv": "^6.2.0",
     "express": "^4.16.3",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "tronweb": "^2.1.20"
   },
   "devDependencies": {},
   "scripts": {

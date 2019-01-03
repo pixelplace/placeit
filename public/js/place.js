@@ -45,6 +45,7 @@ $(document).ready(() => {
   }
 
   $(window).resize(function () {
+    console.log("resize")
     canvas.width = canvas.clientWidth
     canvas.height = canvas.clientHeight
     widthCanvas = canvas.clientWidth
@@ -85,9 +86,12 @@ $(document).ready(() => {
 
    // countDownDate = new Date().getTime()
    canvas.width = canvas.clientWidth
-   canvas.height = canvas.clientHeight
+   // canvas.width = canvas.clientWidth
+   canvas.height = 1000
+   // canvas.height = canvas.clientHeight
    widthCanvas = canvas.clientWidth
-   heightCanvas = canvas.clientHeight
+   heightCanvas = 1000
+   // heightCanvas = canvas.clientHeight
 
    xleftView = Math.round((widthCanvas - CANVAS_COLS) / 2)
    ytopView = Math.round((heightCanvas - CANVAS_ROWS) / 2)
@@ -215,7 +219,8 @@ $(document).ready(() => {
   })
 
    $('#drag').click(() => {
-    dragEnable = dragEnable ? false : true
+    dragEnable = dragEnable ? false : true;
+    console.log(dragEnable)
     if (dragEnable) {
       coordsShow = false
       $('#drag').addClass('active')
@@ -226,6 +231,8 @@ $(document).ready(() => {
       .mouseout(function () {
         $(this).css('cursor', 'auto')
       })
+
+
     } else {
       coordsShow = false
       $('#drag').removeClass('active')
@@ -312,42 +319,42 @@ function handleMouseClick(event) {
     cartCnt++;
 
     if (cartCnt < 10) $('.count').css('width', '10px')
-    else $('.count').css('width', '')
-    iscount = false
-    if (tempPixel.length > 1) {
-      for (i = 0; i < tempPixel.length; i++) {
-        row1 = tempPixel[i * 2 + 1]
-        col1 = tempPixel[i * 2 + 2]
-        if (row1 == NaN || col1 == NaN) {
-        } else if (row1 == row && col1 == col) {
-          iscount = true
+      else $('.count').css('width', '')
+        iscount = false
+      if (tempPixel.length > 1) {
+        for (i = 0; i < tempPixel.length; i++) {
+          row1 = tempPixel[i * 2 + 1]
+          col1 = tempPixel[i * 2 + 2]
+          if (row1 == NaN || col1 == NaN) {
+          } else if (row1 == row && col1 == col) {
+            iscount = true
+          }
         }
       }
+
+
+      var pixelIndex = -1
+      oldPixels.forEach((pixel, index) => {
+        if (pixel.x == xPos+1 && pixel.y == yPos+1) pixelIndex = index
+
+      })
+      if(pixelIndex>=0){
+        return false;
+      }
+
+      var newItem = "<tr id='item-" + oldPixels.length + "'><td>" + (xPos + 1) + ' , ' + (yPos + 1) +
+      "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close deleteItem' id='del-item-" +
+      oldPixels.length + "'></i></span></td></tr>";
+
+      $('.pixel_list').append(newItem)
+
+      oldPixels.push({ x: parseInt($('#x-coord').val()), y: parseInt($('#y-coord').val()), color: currentColor})
     }
 
 
-    var pixelIndex = -1
-    oldPixels.forEach((pixel, index) => {
-      if (pixel.x == xPos+1 && pixel.y == yPos+1) pixelIndex = index
-
-    })
-    if(pixelIndex>=0){
-      return false;
-    }
-
-    var newItem = "<tr id='item-" + oldPixels.length + "'><td>" + (xPos + 1) + ' , ' + (yPos + 1) +
-    "</td><td>10</td><td><span class='btn btn-default clr'><i class='fa fa-close close deleteItem' id='del-item-" +
-    oldPixels.length + "'></i></span></td></tr>";
-
-    $('.pixel_list').append(newItem)
-
-    oldPixels.push({ x: parseInt($('#x-coord').val()), y: parseInt($('#y-coord').val()), color: currentColor})
-  }
-
-     
-     $('.count').html(cartCnt)
-     $('.trxCnt').html(cartCnt * 10)
-     $('.pixelCnt').html(cartCnt)
+    $('.count').html(cartCnt)
+    $('.trxCnt').html(cartCnt * 10)
+    $('.pixelCnt').html(cartCnt)
 
    // }
     ///////
@@ -486,11 +493,11 @@ function handleMouseMove(event) {
 
           if(mousePos.x < 30 ) {
            $('.coord').css('left', left + 30);
-          } else if(mousePos.x > (widthCanvas - 400)) {
-            $('.coord').css('left', left - 400);
-          } else {
-            $('.coord').css('left', left);
-          }
+         } else if(mousePos.x > (widthCanvas - 400)) {
+          $('.coord').css('left', left - 400);
+        } else {
+          $('.coord').css('left', left);
+        }
 
           // if (mousePos.x > widthCanvas / 2) left = mousePos.x - 150
             // if (mousePos.y > heightCanvas / 2) top = mousePos.y - 15 - 50
@@ -536,8 +543,6 @@ function handleMouseMove(event) {
       .substr(9)
       )
        // debugger;
-       console.log(oldPixels)
-       console.log(id)
        var x = oldPixels[id].x
        var y = oldPixels[id].y
         //var color = oldPixels[id].color
@@ -591,24 +596,24 @@ function handleMouseMove(event) {
   }
   
   async function draw() {
-   
+
     //setTimeout( async function (){
-       let ALLPixelDimensions = await TRON.viewALLPixelDimensions()
-       let ALLPixelColors = await TRON.viewALLPixelColors()
-      ALLPixelDimensions.forEach((item, index)=>{
-        let coordition = convertCoord(item.substr(2,9));
-        let colorArray = ALLPixelColors[index]
-        let color=convertColor(colorArray.substr(2,13));
-        let x = coordition.x;
-         let y = coordition.y;
-         x = x - 1
-         y = y - 1
-         let r = color.r;
-         let g = color.g;
-         let b = color.b;
-         let colorCode = rgbToHex(r,g,b)
-         global.canvasData[y][x] = colorCode
-      })
+     let ALLPixelDimensions = await TRON.viewALLPixelDimensions()
+     let ALLPixelColors = await TRON.viewALLPixelColors()
+     ALLPixelDimensions.forEach((item, index)=>{
+      let coordition = convertCoord(item.substr(2,9));
+      let colorArray = ALLPixelColors[index]
+      let color=convertColor(colorArray.substr(2,13));
+      let x = coordition.x;
+      let y = coordition.y;
+      x = x - 1
+      y = y - 1
+      let r = color.r;
+      let g = color.g;
+      let b = color.b;
+      let colorCode = rgbToHex(r,g,b)
+      global.canvasData[y][x] = colorCode
+    })
     //  draw()
     //}, 3000)
     
@@ -769,28 +774,28 @@ $('#buy_tokens').click( async function (event) {
     }
   })  
 $('.btn_buy').click(async function(event){
-   console.log(oldPixels)
-  var test = await TRON.usertoCommunity();   
-  if(isEmpty(test) || hex2a(test)==""){
-    console.log("11111111")
+ console.log(oldPixels)
+ var test = await TRON.usertoCommunity();   
+ if(isEmpty(test) || hex2a(test)==""){
+  console.log("11111111")
       //alert('You must be Join 1 Community to Buy Pixels.'); 
       showModal('Error', 'You must Join 1 Community to Buy Pixels','')
       return false;
     }else{
       console.log("22222222")
       console.log(oldPixels);
-     var result = await TRON.buyPixels(oldPixels);  
-     console.log(result)
-     if(result){
-      console.log("333333333333")
-       showModal('Success', 'You Bought Pixel. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
-       EmptyCart();
-       $('.cart_list').hide();
-       return false;
-     }
-   }
+      var result = await TRON.buyPixels(oldPixels);  
+      console.log(result)
+      if(result){
+        console.log("333333333333")
+        showModal('Success', 'You Bought Pixel. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+        EmptyCart();
+        $('.cart_list').hide();
+        return false;
+      }
+    }
 
- })
+  })
 function hidealert(){
   setTimeout(function() {
    $('.alert').addClass('hide');
