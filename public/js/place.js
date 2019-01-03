@@ -87,10 +87,10 @@ $(document).ready(() => {
    // countDownDate = new Date().getTime()
    canvas.width = canvas.clientWidth
    // canvas.height = 1000
-   canvas.height = canvas.clientHeight - 50;
+   canvas.height = canvas.clientHeight;
    widthCanvas = canvas.clientWidth
    // heightCanvas = 1000
-   heightCanvas = canvas.clientHeight - 50;
+   heightCanvas = canvas.clientHeight;
 
    xleftView = Math.round((widthCanvas - CANVAS_COLS) / 2)
    ytopView = Math.round((heightCanvas - CANVAS_ROWS) / 2)
