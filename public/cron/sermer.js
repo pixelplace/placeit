@@ -18,13 +18,13 @@ const tronWeb = new TronWeb(
 
 async function pickWinnerCalling() {
 
-let contractInstance = await tronWeb.contract().at("TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF");
+const contractInstance = await tronWeb.contract().at("TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF");
 
-let result  = await contractInstance.pickWinner().send();
+const result  = await contractInstance.pickWinner().send();
 
 //writing log entry in the file for future reference
-let logEntry = new Date() +" -- " + result + "\n";
-fs.appendFileSync("execution-log.txt", logEntry);
+const logEntry = new Date() +" -- " + result + "\n";
+//fs.appendFileSync("execution-log.txt", logEntry);
 
 console.log(logEntry); 
 };
