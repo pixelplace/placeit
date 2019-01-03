@@ -34,7 +34,7 @@ let result  = await contractInstance.pickWinner().send();
 let logEntry = new Date() +" -- " + result + "\n";
 fs.appendFileSync("execution-log.txt", logEntry);
 
-console.log(logEntry); 
+console.log('done'); 
 };
 
 //calling pickWinnerCalling function
