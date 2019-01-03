@@ -6,7 +6,7 @@ const fullNode = new HttpProvider('https://api.shasta.trongrid.io'); // Full nod
 const solidityNode = new HttpProvider('https://api.shasta.trongrid.io'); // Solidity node http endpoint
 const eventServer = new HttpProvider('https://api.shasta.trongrid.io'); // Contract events http endpoint
 
-const privateKey = '62842a599b0b412178678f1990d74ce8841bd3966b3d92f02327f04c38eef6a4';
+const privateKey = 'fd4d54024bcfb123320f2c5899121b4ac42882bb57014bd6b6fbf87e59c8f994';
 
 const tronWeb = new TronWeb(
     fullNode,
@@ -16,28 +16,17 @@ const tronWeb = new TronWeb(
 );
 
 
-async function getBalance() {
+async function pickWinnerCalling() {
 
-    const address = 'TDrWQDWfmaF2UqbibG6M8eXBxY1nZYNUxP';
+let contractInstance = await tronWeb.contract().at("TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF");
 
-    // The majority of the function calls are asynchronus,
-    // meaning that they cannot return the result instantly.
-    // These methods therefore return a promise, which you can await.
-    const balance = await tronWeb.trx.getBalance(address);
-    console.log({balance});
+let result  = await contractInstance.pickWinner().send();
 
-    // You can also bind a `then` and `catch` method.
-    tronWeb.trx.getBalance(address).then(balance => {
-        console.log({balance});
-    }).catch(err => console.error(err));
+//writing log entry in the file for future reference
+let logEntry = new Date() +" -- " + result + "\n";
+fs.appendFileSync("execution-log.txt", logEntry);
 
-    // If you'd like to use a similar API to Web3, provide a callback function.
-    tronWeb.trx.getBalance(address, (err, balance) => {
-        if (err)
-            return console.error(err);
+console.log(logEntry); 
+};
 
-        console.log({balance});
-    });
-}
-
-getBalance();
+pickWinnerCalling();
