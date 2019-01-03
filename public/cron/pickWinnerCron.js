@@ -8,7 +8,7 @@ dotenv.load();
 fs.createReadStream('.sample-env').pipe(fs.createWriteStream('.env'));
 
 //following cron will run every 24 hours GMT Time
-new CronJob('0 0 0 * * *', function() {
+//new CronJob('0 0 0 * * *', function() {
 
 //creating async function which does all the process
 async function pickWinnerCalling() {
@@ -40,4 +40,4 @@ console.log(logEntry);
 //calling pickWinnerCalling function
 pickWinnerCalling();
 
-}, null, true, 'Europe/London');
+//}, null, true, 'Europe/London');
