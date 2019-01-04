@@ -529,6 +529,7 @@ table#t01 > tbody > tr:nth-child(odd) {
 .dropdown {
   position: relative;
   display: inline-block;
+  margin-right: 5%;
 }
 
 .dropdown-content {
