@@ -581,9 +581,9 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 .modalContent p{
   font-size: 24px;
-   font-family: 'Nunito Sans', sans-serif;
-    color: #c43338;
-    font-weight: 700;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #c43338;
+  font-weight: 700;
 }
 .modalContent a{
   /*position: absolute;*/
@@ -656,6 +656,7 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 .mdStatusContent{
   padding: 60px 24px;
+  font-family: 'Nunito Sans', sans-serif;
 }
 .mdStatusContent >h3{
   margin: 0;
