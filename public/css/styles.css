@@ -767,3 +767,6 @@ table#t01 > tbody > tr:nth-child(odd) {
 .media-body p {
   margin-bottom: 0;
 }
+#account-address {
+  font-weight:bold;
+}
