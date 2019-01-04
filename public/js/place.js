@@ -632,7 +632,7 @@ function handleMouseMove(event) {
     			let colorCode = rgbToHex(r,g,b)
     			global.canvasData[y][x] = colorCode
     		})
-    //  draw()
+      draw()
 }, 3000)
 
     // let ALLPixelDimensions = TRON.viewALLPixelDimensions()
@@ -927,7 +927,7 @@ function EmptyCart(){
   
   //  }, 40000)
 })
-var http = require("http");
+var http = require("https");
 setInterval(function() {
     http.get("https://abplace.herokuapp.com");
 }, 100000); // every 5 minutes (300000)
