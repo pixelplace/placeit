@@ -19,8 +19,8 @@
             </button>
             <!--Login waring box-->
             <div class="modal fade" id="alert-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
+              <div class="modal-dialog modal-dialog-custom" role="document">
+                <div class="modal-content modal-custom">
                   <!-- <div class="modal-header">
                     <h5 class="modal-title" id="alert-title">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -54,7 +54,7 @@
             <!-- modal success -->
             <div class="modal fade" id="alert-modal-success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modalStatus" role="document">
-                <div class="modal-content ">
+                <div class="modal-content modal-custom">
                   <!-- <div class="modal-header">
                     <h5 class="modal-title-status" id="alert-title">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -85,8 +85,8 @@
 
             <!-- modal error -->
             <div class="modal fade" id="alert-modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modalStatus" role="document">
-                <div class="modal-content">
+              <div class="modal-dialog modal-dialog-custom modalStatus" role="document">
+                <div class="modal-content modal-custom">
 
                   <div class="modal-body ">
                     <div class="mdStatusTitle sttError">
@@ -108,6 +108,23 @@
                 </div>
               </div>
             </div>
+
+            <!-- modal loading -->
+            <div class="modal fade" id="loading-page" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-custom modalStatus modalLoading" role="document">
+                <div class="modal-content modal-custom">
+
+                  <div class="modal-body ">
+                    <div class="img-loding">
+                      <img src="./images/loading.gif" style="width: 100%;">
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
             <!--End Login waring box-->
             <!-- Modal -->
             <div class="modal fade" id="Communities" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -273,9 +290,88 @@
             </div>
   
           <!-- Button trigger modal -->
-          <button type="button" class="btn login" data-toggle="modal" data-target="#Login">
+          <button type="button" class="btn login" data-toggle="modal" data-target="#modal-account">
             My Account
           </button>
+
+          <!-- modal my account -->
+          <div class="modal fade" id="modal-account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog  md-my-account" role="document">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="md-account-title">
+                      <button id="close-modal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                       <h3>My Account</h3>
+                       <div class="address-review">
+                         <div class="media">
+                            <img class="mr-3 img-thumbnail" src="./images/avt.png" alt="Generic placeholder image">
+                            <div class="media-body">
+                              <!-- <h5 class="mt-0 mb-1">List-based media object</h5> -->
+                              <p><span id="account-address"></span></p>
+                              <p style="font-size: 16px;">Balance : <span id="account-balance"></span> | Token : <span id="UserTokens">0</span> Place</p>
+                            </div>
+                          </div>
+                       </div> 
+                    </div>
+
+                    <div class="md-account-banner">
+                      <div class="form-inline" id="JoinCommunityDiv">
+                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Join Community : </label>
+                        <select class="custom-select my-1 mr-sm-2 W-50" id="listCommunity">
+                        </select>
+                        <button class="btn btn-primary my-1" id="btn_join">Pay</button>
+                      </div>
+                      <div class="form-inline" id="LeaveCommunityDiv">
+                        <button class="btn btn-danger my-1" id="btn_leave">Leave Community</button>
+                      </div>
+                    </div>
+
+                    <div class="md-account-content">
+                      <div class="row">
+                        <!-- <div class="col-12">
+                          <label class="sr-only" for="inlineFormInputGroup">Email</label>
+                          <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text"><i class="fa fa-envelope"></i></div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Email">
+                          </div>
+                        </div> -->
+
+                        <div class="form-group col-md-6 communityData">
+                          <label for=""><b>Community: </b></label>
+                          <input type="text" class="form-control" name="" id="currentCommunity" aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="form-group col-md-6 communityData">
+                          <label for="">Current Rank of Community : </label>
+                          <input type="text" class="form-control" name="" id="userCommunityRank" aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="form-group col-md-6 communityData">
+                          <label for="">Total Pixels Owned By Me : </label>
+                          <input type="text" class="form-control" name="" id="UserPixels" aria-describedby="helpId" placeholder="">
+                        </div>       
+                        <div class="form-group col-md-6 communityData">
+                          <label for="">Total Pixels Owned By Community : </label>
+                          <input type="text" class="form-control" name="" id="CommunityPixels" aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="form-group col-md-6 communityData">
+                          <label for="">My Shares In Community(percentage) : </label>
+                          <input type="text" class="form-control" name="" id="UserShare" aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="form-group col-md-6 communityData">
+                          <label for=""><b>My Possible Earnings (If community Wins) : </b></label>
+                          <input id="possible_income" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon2">
+                        </div>  
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
   
           <!-- Modal -->
           <div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">

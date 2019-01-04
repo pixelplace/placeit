@@ -605,12 +605,12 @@ table#t01 > tbody > tr:nth-child(odd) {
 .logoFooter{
   width: 75px;
 }
-.modal.show .modal-dialog{
+.modal.show .modal-dialog-custom{
   max-width: none;
   width: 600px !important;
   height: 600px !important;
 }
-.modal-content{
+.modal-custom{
   background: none;
   height: 100%;
   border: none;
@@ -679,4 +679,70 @@ table#t01 > tbody > tr:nth-child(odd) {
   color: #238639;
   font-size: 18px;
   font-family: 'Nunito Sans', sans-serif;
+}
+.modal.show .modalLoading{
+  height: 300px !important;
+}
+.img-loding{
+
+}
+.md-my-account{
+  max-width: 800px;
+}
+.md-my-account .modal-content{
+  border: none;
+  border-radius: 10px;
+  background: none;
+  overflow: hidden;
+}
+.md-my-account .modal-body{
+  overflow: hidden;
+  width: 100% !important;
+  padding: 0;
+  height: auto;
+}
+.md-account-title{
+  background: #186689;
+    color: #fff;
+    padding: 30px 60px 15px;
+    border-radius: 5px;
+    position: relative;
+}
+.md-account-title h3{
+  margin: 0;
+  margin-bottom: 20px;
+  text-align: left;
+  font-weight: bold;
+}
+.address-review{
+
+}
+.address-review .media {
+  width: 90px;
+}
+.address-review .media img{
+  width: 100%;
+  border-radius: 50%;
+}
+.address-review .media-body{
+
+}
+/*.address-review */
+.md-account-banner {
+  padding: 30px 60px;
+  background: #e4e4e4;
+  text-align: center;
+}
+.md-account-banner button{
+  margin: 0 auto;
+  text-align: center;
+}
+.md-account-content{
+  padding: 60px;
+  background: #fff;
+}
+.close-modal{
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }

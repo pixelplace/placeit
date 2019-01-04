@@ -776,14 +776,17 @@ $('#buy_tokens').click( async function (event) {
   }
 })  
 $('.btn_buy').click(async function(event){
+	$("#loading-page").modal("show");
 	var test = await TRON.usertoCommunity();   
 	if(isEmpty(test) || hex2a(test)==""){
+		$("#loading-page").modal("hide");
       //alert('You must be Join 1 Community to Buy Pixels.'); 
       showModalError('uh-oh..', 'You must Join any Community to Buy Pixels','')
       return false;
   }else{
   	var result = await TRON.buyPixels(oldPixels);  
   	if(result){
+  		$("#loading-page").modal("hide");
   		showModalSuccess('yay!!', 'You have successfully claimed pixels. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">Go To Explorer</a><br/> <span class="cool">Ok cool, Lets have more fun!</span> ',showAccountInfo)
   		EmptyCart();
   		$('.cart_list').hide();
@@ -868,8 +871,10 @@ function EmptyCart(){
   	}
   }
   async function showAccountInfo() {
-  	$('#account-address').val(tronWeb.defaultAddress.base58);
-  	$('#account-balance').val((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
+  	$('#account-address').text(tronWeb.defaultAddress.base58);
+  	// $('#account-address').val(tronWeb.defaultAddress.base58);
+  	$('#account-balance').text((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
+  	// $('#account-balance').val((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
   	var test = await TRON.usertoCommunity();  
 
   	if(isEmpty(test) || hex2a(test)==""){
