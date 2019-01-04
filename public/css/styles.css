@@ -768,8 +768,8 @@ table#t01 > tbody > tr:nth-child(odd) {
   margin-bottom: 0;
 }
 #account-address {
- font-weight: 500;
- font-size: 18px;
+ font-weight: 600;
+ font-size: 16px;
 }
 #JoinCommunityDiv label {
   font-size: 18px;
