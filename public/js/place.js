@@ -745,7 +745,7 @@ $('#pay').click(async function (event) {
 			hidealert()
 			$('.modal').modal('hide');
 			$('#new_community').hide();
-			showModalSuccess('Success', 'Community ' + name + ' created. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ','')
+			showModalSuccess('Hooray!', 'Community ' + name + ' created successfully. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">Go To Explorer</a><br/> <span class="cool">Ok cool, Lets own some pixels!</span>  ','')
 			return false;
 
 		}
@@ -765,13 +765,13 @@ $('#buy_tokens').click( async function (event) {
       return false;
   }else{   
   	if(value<100){
-  		$('.alert').removeClass('hide')
-  		$('.alert').html('You cant buy less then 100 tokens.')
+  		$('.alert alert-danger').removeClass('hide')
+  		$('.alert alert-danger').html('You cant buy less then 100 tokens.')
   		hidealert()
   	}else{
   		var result = await TRON.buyTokens(value)
   		$('.modal').modal('hide')
-  		showModalSuccess('Success', 'You Bought Tokens. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+  		showModalSuccess('wow', 'Tokens buying was successfull. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">Go To Explorer</a><br/> <span class="cool">Ok cool, Lets own some pixels!</span>  ',showAccountInfo)
   	}
   }
 })  
@@ -784,7 +784,7 @@ $('.btn_buy').click(async function(event){
   }else{
   	var result = await TRON.buyPixels(oldPixels);  
   	if(result){
-  		showModalSuccess('yay!!', 'You have successfully claimed pixels. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">Go To Explorer</a><br/> <span class="cool">Ok cool, Lets have more share!</span> ',showAccountInfo)
+  		showModalSuccess('yay!!', 'You have successfully claimed pixels. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">Go To Explorer</a><br/> <span class="cool">Ok cool, Lets have more fun!</span> ',showAccountInfo)
   		EmptyCart();
   		$('.cart_list').hide();
   		return false;
@@ -824,7 +824,7 @@ function EmptyCart(){
   	var name = $('#listCommunity').val()
   	var joinCommunityResult = await TRON.joinCommunity(name);
   	$('.modal').modal('hide');
-  	showModalSuccess('Success', 'You Have successfully Joined Community',showAccountInfo);
+  	showModalSuccess('Yew!!', 'You Have successfully Joined Community',showAccountInfo);
   	$('#LeaveCommunityDiv').show();
   	$('.communityData').show();
   	$('#JoinCommunityDiv').hide();
