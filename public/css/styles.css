@@ -773,6 +773,8 @@ table#t01 > tbody > tr:nth-child(odd) {
 #JoinCommunityDiv label {
   font-size: 18px;
 }
-#JoinCommunityDiv btn {
+#JoinCommunityDiv .btn {
   width: 100px;
+  background-color: #4149a2;
+  border-color: #4149a2;
 }
