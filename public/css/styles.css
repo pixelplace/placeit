@@ -682,6 +682,7 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 .modal.show .modalLoading{
   height: 300px !important;
+  top: 16%;
 }
 .img-loding{
 

@@ -776,11 +776,11 @@ $('#buy_tokens').click( async function (event) {
   }
 })  
 $('.btn_buy').click(async function(event){
-	$("#loading-page").modal("show");
+	$("#spinning-page").modal("show");
 
 	var test = await TRON.usertoCommunity();   
 	if(isEmpty(test) || hex2a(test)==""){
-		$("#loading-page").modal("hide");
+		$("#spinning-page").modal("hide");
       //alert('You must be Join 1 Community to Buy Pixels.'); 
       showModalError('uh-oh..', 'You must Join any Community to Buy Pixels','')
       return false;
