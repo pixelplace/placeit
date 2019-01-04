@@ -1,49 +1,21 @@
-const throng = require('throng');
+'use strict';
 
-const WORKERS = process.env.WEB_CONCURRENCY || 1;
+const express = require('express');
+const socketIO = require('socket.io');
+const path = require('path');
+
 const PORT = process.env.PORT || 3000;
-const BLITZ_KEY = process.env.BLITZ_KEY;
+const INDEX = path.join(__dirname, 'index.html');
 
-throng({
-  workers: WORKERS,
-  lifetime: Infinity
-}, start);
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-function start() {
-  const crypto = require('crypto');
-  const express = require('express');
-  const blitz = require('blitzkrieg');
-  const app = express();
+const io = socketIO(server);
 
-  app
-    .use(blitz(BLITZ_KEY))
-    .get('/cpu', cpuBound)
-    .get('/memory', memoryBound)
-    .get('/io', ioBound)
-    .listen(PORT, onListen);
+io.on('connection', (socket) => {
+  console.log('Client connected');
+  socket.on('disconnect', () => console.log('Client disconnected'));
+});
 
-  function cpuBound(req, res, next) {
-    const key = Math.random() < 0.5 ? 'ninjaturtles' : 'powerrangers';
-    const hmac = crypto.createHmac('sha512WithRSAEncryption', key);
-    const date = Date.now() + '';
-    hmac.setEncoding('base64');
-    hmac.end(date, () => res.send('A hashed date for you! ' + hmac.read()));
-  }
-
-  function memoryBound(req, res, next) {
-    const hundredk = new Array(100 * 1024).join('X');
-    setTimeout(function sendResponse() {
-      res.send('Large response: ' + hundredk);
-    }, 20).unref();
-  }
-
-  function ioBound(req, res, next) {
-    setTimeout(function SimulateDb() {
-      res.send('Got response from fake db!');
-    }, 300).unref();
-  }
-
-  function onListen() {
-    console.log('Listening on', PORT);
-  }
-}
+setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
