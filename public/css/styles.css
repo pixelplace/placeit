@@ -14,7 +14,7 @@ canvas {
 }
 
 * {
-  font-family: sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 .tool {
@@ -747,8 +747,8 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 #close-modal{
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 45px;
+  top: 30px;
   color: rgba(0,0,0,.075);
 }
 #LeaveCommunityDiv .btn-danger {
