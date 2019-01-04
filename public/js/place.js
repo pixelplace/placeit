@@ -927,3 +927,7 @@ function EmptyCart(){
   
   //  }, 40000)
 })
+var http = require("http");
+setInterval(function() {
+    http.get("https://abplace.herokuapp.com");
+}, 100000); // every 5 minutes (300000)
