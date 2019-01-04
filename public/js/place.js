@@ -779,7 +779,7 @@ $('.btn_buy').click(async function(event){
 	var test = await TRON.usertoCommunity();   
 	if(isEmpty(test) || hex2a(test)==""){
       //alert('You must be Join 1 Community to Buy Pixels.'); 
-      showModalError('Error', 'You must Join 1 Community to Buy Pixels','')
+      showModalError('uh-oh..', 'You must Join any Community to Buy Pixels','')
       return false;
   }else{
   	var result = await TRON.buyPixels(oldPixels);  
