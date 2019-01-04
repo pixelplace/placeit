@@ -745,7 +745,7 @@ table#t01 > tbody > tr:nth-child(odd) {
   background: #fff;
   font-family: 'Nunito Sans', sans-serif;  
 }
-.close-modal{
+#close-modal{
   position: absolute;
   right: 20px;
   top: 20px;
@@ -757,4 +757,9 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 .communityData .form-control {
   background-color: #f8f9fa;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #4149a2;
+}
+.media-body p {
+  margin-bottom: 0;
 }
