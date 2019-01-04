@@ -777,6 +777,7 @@ $('#buy_tokens').click( async function (event) {
 })  
 $('.btn_buy').click(async function(event){
 	$("#loading-page").modal("show");
+
 	var test = await TRON.usertoCommunity();   
 	if(isEmpty(test) || hex2a(test)==""){
 		$("#loading-page").modal("hide");
@@ -864,13 +865,19 @@ function EmptyCart(){
   	try {
   		if (!window.tronWeb) throw 'You must install tronlink extension';
   		if (!(window.tronWeb && window.tronWeb.ready)) throw 'Login to Tronlink to get going';
-  		showAccountInfo();
+  		$("#loading-page").modal("show");
+  		setTimeout(function(){
+  			$("#loading-page").modal("hide");
+  			showAccountInfo();
+  		},1000);
   	}
   	catch (e) {
   		showModal('Stop', e, tronLoginCheck)
   	}
   }
   async function showAccountInfo() {
+
+
   	$('#account-address').text(tronWeb.defaultAddress.base58);
   	// $('#account-address').val(tronWeb.defaultAddress.base58);
   	$('#account-balance').text((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
