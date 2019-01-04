@@ -548,3 +548,58 @@ table#t01 > tbody > tr:nth-child(odd) {
 .dropdown-content a:hover {background-color: #ad1f23 !IMPORTANT;color: #fff !IMPORTANT;}
 .dropdown:hover .dropdown-content {display: block;}
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+.modalCircle{
+  border-radius: 50%;
+  border: 5px solid #c43338;
+  background: #fff;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+.modalTitle{
+  width: 60%;
+  padding: 15px 0;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom: 5px solid #c43338;
+}
+.modalLogo{
+  width: 180px;
+  margin: 0 auto;
+}
+.modalLogo img{
+  width: 100%;
+}
+.modalContent{
+  padding: 150px 30px;
+}
+.modalContent a{
+  /*position: absolute;*/
+  margin-top: 30px;
+}
+.modalFooter{
+  padding: 15px;
+  text-align: center;
+  position: absolute;
+  bottom: 15px;
+  left: 20%;
+  right: 20%;
+  border-top: 5px solid #c43338;
+  /*width: 100%;*/
+}
+.logoFooter{
+  width: 75px;
+}
+.modal.show .modal-dialog{
+  max-width: none;
+  width: 600px !important;
+  height: 600px !important;
+}
+.modal-content{
+  background: none;
+  height: 100%;
+  border: none;
+}
