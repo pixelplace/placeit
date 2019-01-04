@@ -784,7 +784,7 @@ $('.btn_buy').click(async function(event){
   }else{
   	var result = await TRON.buyPixels(oldPixels);  
   	if(result){
-  		showModalSuccess('Success', 'You Bought Pixel. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+  		showModalSuccess('yay!', 'You Bought Pixel. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
   		EmptyCart();
   		$('.cart_list').hide();
   		return false;
