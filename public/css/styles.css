@@ -604,3 +604,60 @@ table#t01 > tbody > tr:nth-child(odd) {
   height: 100%;
   border: none;
 }
+
+/* modal status */
+.modalStatus{
+
+}
+.modalStatus .modal-content{
+
+}
+
+.modalStatus .modal-content{
+
+}
+.modalStatus .modal-content .modal-body{
+  width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  padding: 0;
+}
+.modalStatus .modal-content .modal-body .mdStatusTitle{
+
+}
+.modalStatus .modal-content .modal-body .sttError {
+
+}
+.iconTitle{
+  font-size: 90px;
+  color: #fff;
+  padding: 80px 15px;
+}
+.sttSuccess{
+  background: #6fc573;
+}
+.sttError{
+  background: #ff5722;
+}
+.iconTitle i{
+
+}
+.mdStatusContent{
+  padding: 60px 24px;
+}
+.mdStatusContent >h3{
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+  padding-bottom: 40px;
+}
+.mdStatusContent >p {
+  font-size: 18px;
+  text-align: center;
+  margin: 0;
+}
+.mdStatusContent .actBtn {
+  margin-top: 25px;
+  font-size: 18px;
+}

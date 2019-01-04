@@ -745,7 +745,7 @@ $('#pay').click(async function (event) {
 			hidealert()
 			$('.modal').modal('hide');
 			$('#new_community').hide();
-			showModal('Success', 'Community ' + name + ' created. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ','')
+			showModalSuccess('Success', 'Community ' + name + ' created. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ','')
 			return false;
 
 		}
@@ -771,7 +771,7 @@ $('#buy_tokens').click( async function (event) {
   	}else{
   		var result = await TRON.buyTokens(value)
   		$('.modal').modal('hide')
-  		showModal('Success', 'You Bought Tokens. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+  		showModalSuccess('Success', 'You Bought Tokens. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
   	}
   }
 })  
@@ -779,12 +779,12 @@ $('.btn_buy').click(async function(event){
 	var test = await TRON.usertoCommunity();   
 	if(isEmpty(test) || hex2a(test)==""){
       //alert('You must be Join 1 Community to Buy Pixels.'); 
-      showModal('Error', 'You must Join 1 Community to Buy Pixels','')
+      showModalError('Error', 'You must Join 1 Community to Buy Pixels','')
       return false;
   }else{
   	var result = await TRON.buyPixels(oldPixels);  
   	if(result){
-  		showModal('Success', 'You Bought Pixel. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+  		showModalSuccess('Success', 'You Bought Pixel. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
   		EmptyCart();
   		$('.cart_list').hide();
   		return false;
@@ -824,7 +824,7 @@ function EmptyCart(){
   	var name = $('#listCommunity').val()
   	var joinCommunityResult = await TRON.joinCommunity(name);
   	$('.modal').modal('hide');
-  	showModal('Success', 'You Have successfully Joined Community',showAccountInfo);
+  	showModalSuccess('Success', 'You Have successfully Joined Community',showAccountInfo);
   	$('#LeaveCommunityDiv').show();
   	$('.communityData').show();
   	$('#JoinCommunityDiv').hide();
@@ -834,7 +834,7 @@ function EmptyCart(){
   $('#btn_leave').click(async function(event){
   	var result = await TRON.leaveCommunity();
   	$('.modal').modal('hide');
-  	showModal('Success', 'You Left Community. check transaction here <a target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
+  	showModalSuccess('Success', 'You Left Community. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/'+ result +'">tronscan.org</a> ',showAccountInfo)
   	$('#LeaveCommunityDiv').hide();
   	$('.communityData').hide();
   	$('#JoinCommunityDiv').show();
@@ -885,6 +885,24 @@ function EmptyCart(){
   	$('#alert-content').html(content);
   	$('#alert-modal').modal('show');
   	$('#alert-modal').on('hidden.bs.modal', function (e) {
+  		callback();
+  	})
+  }
+
+  function showModalSuccess(title, content, callback) {
+  	$('#alert-title-success').text(title);
+  	$('#alert-content-success').html(content);
+  	$('#alert-modal-success').modal('show');
+  	$('#alert-modal-success').on('hidden.bs.modal', function (e) {
+  		callback();
+  	})
+  }
+
+  function showModalError(title, content, callback) {
+  	$('#alert-title-error').text(title);
+  	$('#alert-content-error').html(content);
+  	$('#alert-modal-error').modal('show');
+  	$('#alert-modal-error').on('hidden.bs.modal', function (e) {
   		callback();
   	})
   }
