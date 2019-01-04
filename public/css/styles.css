@@ -703,7 +703,7 @@ table#t01 > tbody > tr:nth-child(odd) {
   height: auto;
 }
 .md-account-title{
-  background: #186689;
+  background: #4149a2;
     color: #fff;
     padding: 30px 60px 15px;
     border-radius: 5px;
@@ -711,9 +711,10 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 .md-account-title h3{
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: left;
   font-weight: bold;
+  font-family: 'Nunito Sans', sans-serif;
 }
 .address-review{
 
@@ -726,7 +727,8 @@ table#t01 > tbody > tr:nth-child(odd) {
   border-radius: 50%;
 }
 .address-review .media-body{
-
+ padding-top: 10px;
+ font-family: 'Nunito Sans', sans-serif;  
 }
 /*.address-review */
 .md-account-banner {
@@ -741,9 +743,18 @@ table#t01 > tbody > tr:nth-child(odd) {
 .md-account-content{
   padding: 60px;
   background: #fff;
+  font-family: 'Nunito Sans', sans-serif;  
 }
 .close-modal{
   position: absolute;
   right: 20px;
   top: 20px;
+  color: rgba(0,0,0,.075);
+}
+#LeaveCommunityDiv .btn-danger {
+  background-color: #4149a2;
+  border-color: #4149a2;
+}
+.communityData .form-control {
+  background-color: #f8f9fa;
 }
