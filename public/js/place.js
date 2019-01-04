@@ -859,8 +859,8 @@ function EmptyCart(){
   }, 1000)
   async function tronLoginCheck() {
   	try {
-  		if (!window.tronWeb) throw 'You must install tronlink';
-  		if (!(window.tronWeb && window.tronWeb.ready)) throw 'You must login Tronlink to interact with contract';
+  		if (!window.tronWeb) throw 'You must install tronlink extension';
+  		if (!(window.tronWeb && window.tronWeb.ready)) throw 'Login to Tronlink to get going';
   		showAccountInfo();
   	}
   	catch (e) {
