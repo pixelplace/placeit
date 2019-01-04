@@ -770,3 +770,9 @@ table#t01 > tbody > tr:nth-child(odd) {
 #account-address {
   font-weight:bold;
 }
+#JoinCommunityDiv label {
+  font-size: 18px;
+}
+#JoinCommunityDiv btn {
+  width: 100px;
+}
