@@ -577,7 +577,10 @@ table#t01 > tbody > tr:nth-child(odd) {
   width: 100%;
 }
 .modalContent{
-  padding: 150px 30px;
+  padding: 40px 30px;
+}
+.modalContent p{
+  font-size: 24px;
 }
 .modalContent a{
   /*position: absolute;*/
