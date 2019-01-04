@@ -588,6 +588,8 @@ table#t01 > tbody > tr:nth-child(odd) {
 .modalContent a{
   /*position: absolute;*/
   margin-top: 30px;
+  background: #571746;
+  border: none;
 }
 .modalFooter{
   padding: 15px;
