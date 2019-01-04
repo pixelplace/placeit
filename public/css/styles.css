@@ -617,18 +617,18 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 
 /* modal status */
-.modalStatus{
+.modal.show .modalStatus{
+  width: 400px !important;
+}
+.modal.show .modalStatus .modal-content{
 
 }
-.modalStatus .modal-content{
 
-}
-
-.modalStatus .modal-content{
+.modal.show .modalStatus .modal-content{
 
 }
 .modalStatus .modal-content .modal-body{
-  width: 400px;
+  width: 100%;
   border-radius: 10px;
   overflow: hidden;
   background: #fff;
