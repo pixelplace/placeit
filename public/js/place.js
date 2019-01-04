@@ -765,8 +765,8 @@ $('#buy_tokens').click( async function (event) {
       return false;
   }else{   
   	if(value<100){
-  		$('.alert alert-danger').removeClass('hide')
-  		$('.alert alert-danger').html('You cant buy less then 100 tokens.')
+  		$('.alert .alert-danger').removeClass('hide')
+  		$('.alert .alert-danger').html('You cant buy less then 100 tokens.')
   		hidealert()
   	}else{
   		var result = await TRON.buyTokens(value)
