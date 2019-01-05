@@ -160,7 +160,7 @@ async function upDateGameStatus(){
           communitiesSeleted+=`<option value="${item.item}">${item.item}</option>`
           i++;
     }
-    $('#topCommunity').html(topCommunity);
+    $('#topCommunity').val(topCommunity);
     $('#userCommunityRank').val(userComRank);
     $('#communities').html(communitiesTable);
     let currentSelect="";
