@@ -882,9 +882,10 @@ color: #4c3d3d;
 }
 .counts{
  margin: 0;
- padding-top: 2.5rem;
+ padding-top: 2.9rem;
 }
 .counts p{
  padding-top: 1rem;
   font-size:16px;
+  font-weight: 600;
 }
