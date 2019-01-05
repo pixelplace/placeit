@@ -14,7 +14,7 @@ canvas {
 }
 
 * {
-  font-family: sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 .tool {
@@ -703,17 +703,26 @@ table#t01 > tbody > tr:nth-child(odd) {
   height: auto;
 }
 .md-account-title{
+<<<<<<< HEAD
   background: #186689;
   color: #fff;
   padding: 30px 60px 15px;
   border-radius: 5px;
   position: relative;
+=======
+  background: #4149a2;
+    color: #fff;
+    padding: 30px 60px 15px;
+    border-radius: 5px;
+    position: relative;
+>>>>>>> d618be7b1e927a2573350939c3cee954deae59b5
 }
 .md-account-title h3{
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-align: left;
   font-weight: bold;
+  font-family: 'Nunito Sans', sans-serif;
 }
 .address-review{
 
@@ -726,7 +735,8 @@ table#t01 > tbody > tr:nth-child(odd) {
   border-radius: 50%;
 }
 .address-review .media-body{
-
+ padding-top: 10px;
+ font-family: 'Nunito Sans', sans-serif;  
 }
 /*.address-review */
 .md-account-banner {
@@ -741,12 +751,45 @@ table#t01 > tbody > tr:nth-child(odd) {
 .md-account-content{
   padding: 60px;
   background: #fff;
+  font-family: 'Nunito Sans', sans-serif;  
 }
-.close-modal{
+#close-modal{
   position: absolute;
-  right: 20px;
-  top: 20px;
+ /* right: 20px;
+  top: 20px;*/
+  right: 45px;
+  top: 30px;
+  color: rgba(0,0,0,.075);
 }
+#LeaveCommunityDiv .btn-danger {
+  background-color: #4149a2;
+  border-color: #4149a2;
+}
+.communityData label {
+  font-family: 'Nunito Sans', sans-serif;
+  color: #4149a2;
+  font-weight:600;
+}
+.communityData .form-control {
+  background-color: #f8f9fa;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.media-body p {
+  margin-bottom: 0;
+}
+#account-address {
+ font-weight: 600;
+ font-size: 16px;
+}
+#JoinCommunityDiv label {
+  font-size: 18px;
+}
+#JoinCommunityDiv .btn {
+  width: 100px;
+  background-color: #4149a2;
+  border-color: #4149a2;
+}
+
 
 /*modal token*/
 .modal-500{

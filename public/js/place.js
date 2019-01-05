@@ -880,7 +880,7 @@ function EmptyCart(){
 
   	$('#account-address').text(tronWeb.defaultAddress.base58);
   	// $('#account-address').val(tronWeb.defaultAddress.base58);
-  	$('#account-balance').text((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
+  	$('#account-balance').text((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)/1000000));
   	// $('#account-balance').val((await tronWeb.trx.getBalance(tronWeb.defaultAddress.hex)).toLocaleString("en-us"));
   	var test = await TRON.usertoCommunity();  
 
