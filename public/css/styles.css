@@ -852,3 +852,10 @@ color: #4c3d3d;
   font-size: 0.9rem;
   font-weight: 600;
 }
+.dvd-account-title h3 {
+  margin: 0;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: 600;
+    font-family: 'Nunito Sans', sans-serif !important;
+}
