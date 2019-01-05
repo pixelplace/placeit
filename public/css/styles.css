@@ -867,3 +867,24 @@ color: #4c3d3d;
     font-weight: 600;
     font-family: 'Nunito Sans', sans-serif !important;
 }
+#dividendCountDown {
+  font-size: 40px;
+    border: 1px dotted #4149a2;
+    padding: 4px 12px;
+    border-radius: 12px;
+    background: #4149a2;
+    color: #fff;
+}
+.dvd-account-content{
+  padding: 60px;
+  background: #fff;
+  font-family: 'Nunito Sans', sans-serif;  
+}
+.md-account-content p{
+ margin: 0;
+ padding-top: 2.5rem;
+}
+.md-account-content .count{
+ padding-top: 1rem;
+  font-size:16px;
+}
