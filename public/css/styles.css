@@ -257,7 +257,7 @@ table > thead > tr > th {
 }
 
 .modal-body {
-  height: 65%;
+  height: auto;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -612,7 +612,7 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 .modal-custom{
   background: none;
-  height: 100%;
+  height: auto;
   border: none;
 }
 
