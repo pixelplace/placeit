@@ -17,225 +17,6 @@
             <button type="button" class="btn community" data-toggle="modal" data-target="#Communities">
               Communities
             </button>
-            <!--Login waring box-->
-            <div class="modal fade" id="alert-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-custom" role="document">
-                <div class="modal-content modal-custom">
-                  <!-- <div class="modal-header">
-                    <h5 class="modal-title" id="alert-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div> -->
-                  <div class="modal-body modalCircle">
-                    <div class="modalTitle">
-                      <div class="modalLogo">
-                        <img src="./images/placeit.png" style="width: 100%;">
-                      </div>
-                    </div>
-
-                    <div class="modalContent">
-                      <p id="alert-content"></p>
-                      <a class="btn btn-danger" href="https://chrome.google.com/webstore/detail/tronlink/ibnejdfjmmkpcnlpebklmnkoeoihofec" target="_blank">Install Tronlink</a>
-                    </div>
-
-                    <div class="modalFooter">
-                      <div class="modalLogo logoFooter">
-                        <img src="./images/tronlink.png" style="width: 140%;">
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <!-- modal success -->
-            <div class="modal fade" id="alert-modal-success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modalStatus" role="document">
-                <div class="modal-content modal-custom">
-                  <!-- <div class="modal-header">
-                    <h5 class="modal-title-status" id="alert-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div> -->
-                  <div class="modal-body ">
-                    <div class="mdStatusTitle sttSuccess">
-                      <div class="iconTitle"><i class="fa fa-smile-o"></i></div>
-                    </div>
-
-                    <div class="mdStatusContent">
-                      <h3 id="alert-title-success"></h3>
-
-                      <p id="alert-content-success"></p>
-
-                      <!-- <div class="actBtn">
-                        <a class="btn btn-success" href="">Go it!</a>
-                      </div> -->
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-
-            <!-- modal error -->
-            <div class="modal fade" id="alert-modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-custom modalStatus" role="document">
-                <div class="modal-content modal-custom">
-
-                  <div class="modal-body ">
-                    <div class="mdStatusTitle sttError">
-                      <div class="iconTitle"><i class="fa fa-times-circle"></i></div>
-                    </div>
-
-                    <div class="mdStatusContent">
-                      <h3 id="alert-title-error"></h3>
-
-                      <p id="alert-content-error"></p>
-
-                      <!-- <div class="actBtn">
-                        <a class="btn btn-danger" href="">Go back!</a>
-                      </div> -->
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <!-- modal loading -->
-            <div class="modal " id="spinning-page" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-custom modalStatus modalLoading" role="document">
-                <div class="modal-content modal-custom">
-
-                  <div class="modal-body " style="text-align: center;">
-                    <i class="fa fa-spinner fa-spin" style="font-size:90px; padding: 100px 0;"></i>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <!-- modal spinner -->
-            <div class="modal " id="loading-page" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-custom modalStatus modalLoading" role="document">
-                <div class="modal-content modal-custom">
-
-                  <div class="modal-body ">
-                    <div class="img-loding">
-                      <img src="./images/loading.gif" style="width: 100%;">
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <!--End Login waring box-->
-            <!-- Modal -->
-            <div class="modal fade" id="Communities" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-center">Communities</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <i class="fas fas-times" >&times;</i>   
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                          <table id="communityTable" class="table table-bordered table-inverse table-responsive">
-                            <thead class="thead-inverse">
-                              <tr>
-                                <th class="">NO</th>
-                                <th class="cell">Community</th>
-                                <th class="cell">Member</th>
-                                <th class="cell">Pixels</th>
-                              </tr>
-                              </thead>
-                              <tbody id="communities">
-                                
-                              </tbody>
-                          </table>
-                        </div> 
-                        <div class="modal-footer">
-                          <button type="button" id="create_new_community" class="btn btn-danger" data-toggle="modal" data-target="#new_community">
-                            Create New Community
-                          </button>
-                        </div>   
-                    </div>
-                </div>
-            </div>
-
-            <!-- modal Community -->
-            <!-- <div class="modal fade" id="new_community" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-500" role="document">
-                <div class="modal-content modal-custom">
-
-                  <div class="modal-body md-token">
-                    <div class="md-token-title">
-                      <h3>New Community</h3>
-
-                      <button id="btn-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-
-                    <div class="md-token-content">
-                      <form>
-                        <div class="md-token-content-top">
-                          <div class="form-group">
-                            <input id="add_community" type="text" class="form-control" placeholder="Community">
-                            <div class="alert alert-success hide">
-                              Insert your name.
-                            </div>
-                          </div>
-                          </div>
-                        </div>
-
-                        <div class="md-token-content-bottom">
-                          <button id="pay" type="submit" class="btn btn-success" style="width: 150px;">Pay</button>  
-                        </div>
-                      </form> 
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-            </div> -->
-
-  
-            <div class="modal fade" id="new_community" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-              <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content small-modal">
-                  <div class="modal-header">
-                    <h5 class="modal-title">New Community</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-new" style="padding: 60px">
-                    <form>
-                      <div class="form-group">
-                        <label for="">Community</label>
-                        <input id="add_community" type="text" class="form-control" placeholder="Community">
-                        <div class="alert alert-success hide">
-                          Insert your name.
-                        </div>
-                      </div>
-                      <button id="pay" type="submit" class="btn btn-primary">Pay</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
             
             <a class="btn dividend" data-toggle="modal" data-target="#Dividend">
               Dividend
@@ -630,6 +411,228 @@
         <div class="btn_buy">BUY</div>
       </div>
     </div>
+
+
+    <!-- all modal -->
+    <!--Login waring box-->
+            <div class="modal fade" id="alert-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-custom" role="document">
+                <div class="modal-content modal-custom" style="height: 100%;">
+                  <!-- <div class="modal-header">
+                    <h5 class="modal-title" id="alert-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div> -->
+                  <div class="modal-body modalCircle">
+                    <div class="modalTitle">
+                      <div class="modalLogo">
+                        <img src="./images/placeit.png" style="width: 100%;">
+                      </div>
+                    </div>
+
+                    <div class="modalContent">
+                      <p id="alert-content"></p>
+                      <a class="btn btn-danger" href="https://chrome.google.com/webstore/detail/tronlink/ibnejdfjmmkpcnlpebklmnkoeoihofec" target="_blank">Install Tronlink</a>
+                    </div>
+
+                    <div class="modalFooter">
+                      <div class="modalLogo logoFooter">
+                        <img src="./images/tronlink.png" style="width: 140%;">
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- modal success -->
+            <div class="modal fade" id="alert-modal-success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modalStatus" role="document">
+                <div class="modal-content modal-custom">
+                  <!-- <div class="modal-header">
+                    <h5 class="modal-title-status" id="alert-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div> -->
+                  <div class="modal-body ">
+                    <div class="mdStatusTitle sttSuccess">
+                      <div class="iconTitle"><i class="fa fa-smile-o"></i></div>
+                    </div>
+
+                    <div class="mdStatusContent">
+                      <h3 id="alert-title-success"></h3>
+
+                      <p id="alert-content-success"></p>
+
+                      <!-- <div class="actBtn">
+                        <a class="btn btn-success" href="">Go it!</a>
+                      </div> -->
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+            <!-- modal error -->
+            <div class="modal fade" id="alert-modal-error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-custom modalStatus" role="document">
+                <div class="modal-content modal-custom">
+
+                  <div class="modal-body ">
+                    <div class="mdStatusTitle sttError">
+                      <div class="iconTitle"><i class="fa fa-times-circle"></i></div>
+                    </div>
+
+                    <div class="mdStatusContent">
+                      <h3 id="alert-title-error"></h3>
+
+                      <p id="alert-content-error"></p>
+
+                      <!-- <div class="actBtn">
+                        <a class="btn btn-danger" href="">Go back!</a>
+                      </div> -->
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- modal loading -->
+            <div class="modal " id="spinning-page" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-custom modalStatus modalLoading" role="document">
+                <div class="modal-content modal-custom">
+
+                  <div class="modal-body " style="text-align: center;">
+                    <i class="fa fa-spinner fa-spin" style="font-size:90px; padding: 100px 0;"></i>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- modal spinner -->
+            <div class="modal " id="loading-page" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-custom modalStatus modalLoading" role="document">
+                <div class="modal-content modal-custom">
+
+                  <div class="modal-body ">
+                    <div class="img-loding">
+                      <img src="./images/loading.gif" style="width: 100%;">
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!--End Login waring box-->
+            <!-- Modal -->
+            <div class="modal fade" id="Communities" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center">Communities</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <i class="fas fas-times" >&times;</i>   
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                          <table id="communityTable" class="table table-bordered table-inverse table-responsive">
+                            <thead class="thead-inverse">
+                              <tr>
+                                <th class="">NO</th>
+                                <th class="cell">Community</th>
+                                <th class="cell">Member</th>
+                                <th class="cell">Pixels</th>
+                              </tr>
+                              </thead>
+                              <tbody id="communities">
+                                
+                              </tbody>
+                          </table>
+                        </div> 
+                        <div class="modal-footer">
+                          <button type="button" id="create_new_community" class="btn btn-danger" data-toggle="modal" data-target="#new_community">
+                            Create New Community
+                          </button>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal Community -->
+            <div class="modal fade" id="new_community" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-500" role="document">
+                <div class="modal-content modal-custom">
+
+                  <div class="modal-body md-token">
+                    <div class="md-token-title">
+                      <h3>New Community</h3>
+
+                      <button id="btn-close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+                    <div class="md-token-content">
+                      <form>
+                        <div class="md-token-content-top">
+                          <div class="form-group">
+                            <input id="add_community" type="text" class="form-control" placeholder="Community">
+                            <div class="alert alert-success hide">
+                              Insert your name.
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+
+                        <div class="md-token-content-bottom">
+                          <button id="pay" type="submit" class="btn btn-success" style="width: 150px;">Pay</button>  
+                        </div>
+                      </form> 
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="modal fade" id="new_community" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+              <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content small-modal">
+                  <div class="modal-header">
+                    <h5 class="modal-title">New Community</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-new" style="padding: 60px">
+                    <form>
+                      <div class="form-group">
+                        <label for="">Community</label>
+                        <input id="add_community" type="text" class="form-control" placeholder="Community">
+                        <div class="alert alert-success hide">
+                          Insert your name.
+                        </div>
+                      </div>
+                      <button id="pay" type="submit" class="btn btn-primary">Pay</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
     <script src="/js/place.js"></script>
     <script src="/js/tron.js"></script>
     <script src="/js/utils.js"></script>
