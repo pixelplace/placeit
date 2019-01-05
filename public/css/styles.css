@@ -886,6 +886,7 @@ color: #4c3d3d;
 }
 .counts p{
  padding-top: 1rem;
-  font-size:16px;
-  font-weight: 600;
+ font-size:16px;
+ font-weight: 600;
+ color: #4149a2;
 }
