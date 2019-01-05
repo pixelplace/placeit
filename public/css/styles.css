@@ -703,19 +703,16 @@ table#t01 > tbody > tr:nth-child(odd) {
   height: auto;
 }
 .md-account-title{
-<<<<<<< HEAD
-  background: #186689;
+  /*background: #186689;
+  color: #fff;
+  padding: 30px 60px 15px;
+  border-radius: 5px;
+  position: relative;*/
+  background: #4149a2;
   color: #fff;
   padding: 30px 60px 15px;
   border-radius: 5px;
   position: relative;
-=======
-  background: #4149a2;
-    color: #fff;
-    padding: 30px 60px 15px;
-    border-radius: 5px;
-    position: relative;
->>>>>>> d618be7b1e927a2573350939c3cee954deae59b5
 }
 .md-account-title h3{
   margin: 0;
@@ -756,10 +753,10 @@ table#t01 > tbody > tr:nth-child(odd) {
 #close-modal{
   position: absolute;
  /* right: 20px;
-  top: 20px;*/
-  right: 45px;
-  top: 30px;
-  color: rgba(0,0,0,.075);
+ top: 20px;*/
+ right: 45px;
+ top: 30px;
+ color: rgba(0,0,0,.075);
 }
 #LeaveCommunityDiv .btn-danger {
   background-color: #4149a2;
