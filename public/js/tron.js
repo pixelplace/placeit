@@ -1,6 +1,6 @@
 var TRON={
-    //CONTRACT_ADDRESS:"TE4ANBWxDSkWagCFTDaUZg4Xk8JkyLuCj1",
-    CONTRACT_ADDRESS:"TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF",
+    CONTRACT_ADDRESS:"TGKDdaxTuGin6r2nvx2YtAFJ3hUgkKSdvg",
+    //CONTRACT_ADDRESS:"TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF",
     contractInstance:"",
     ListCommunity:[],
     init:async function(){
