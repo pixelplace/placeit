@@ -836,3 +836,8 @@ table#t01 > tbody > tr:nth-child(odd) {
 .md-token-content-bottom{
   padding: 30px 45px;
 }
+
+/* background color*/
+.bgBlue{
+  background: #0794e9 !important;
+}
