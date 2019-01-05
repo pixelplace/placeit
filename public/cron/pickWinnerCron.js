@@ -26,7 +26,7 @@ const tronWeb = new TronWeb(
     privateKey
 );
 
-let contractInstance = await tronWeb.contract().at("TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF");
+let contractInstance = await tronWeb.contract().at("TQpVtBmX3kpaWudFuupVsrxXEwJfTh66gp");
 
 let result  = await contractInstance.pickWinner().send();
 
