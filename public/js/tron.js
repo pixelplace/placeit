@@ -174,12 +174,12 @@ async function upDateGameStatus(){
     $('#UserPixels').val(await TRON.userTotalPixels());
     $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity());
     $('#UserTokens').val(await TRON.balanceOf());
-    $('#pool_value_dividend').html(await TRON.communityPoolVolume());
+    $('#pool_value_dividend').val(await TRON.communityPoolVolume());
     let pool_value = await TRON.communityPoolVolume()
     $('#pool_value').html(pool_value);
     let dividend = (await TRON.communityPoolVolume()*70)/100;
     let share = (((await TRON.userTotalPixels())/(await TRON.viewTotalPixelsInCommunity()))*100).toFixed(2);
-    $('#pool_dividend').html(dividend);
+    $('#pool_dividend').val(dividend);
     $('#UserShare').val(share);
     $('#possible_income').val(parseInt((dividend * share)/100));
 }
