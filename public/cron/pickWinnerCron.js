@@ -26,18 +26,14 @@ const tronWeb = new TronWeb(
     privateKey
 );
 
-let contractInstance = await tronWeb.contract().at("TQpVtBmX3kpaWudFuupVsrxXEwJfTh66gp");
-
-let result  = await contractInstance.pickWinner().send();
-
+const contractInstance = await tronWeb.contract().at("TQpVtBmX3kpaWudFuupVsrxXEwJfTh66gp");
+const result  = await contractInstance.pickWinner().send();
 //writing log entry in the file for future reference
-let logEntry = new Date() +" -- " + result + "\n";
+const logEntry = new Date() +" -- " + result + "\n";
 fs.appendFileSync("execution-log.txt", logEntry);
-
-console.log('done'); 
+console.log(logEntry); 
 };
 
 //calling pickWinnerCalling function
 pickWinnerCalling();
-
 //}, null, true, 'Europe/London');
