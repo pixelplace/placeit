@@ -844,6 +844,7 @@ table#t01 > tbody > tr:nth-child(odd) {
 .modal-dividend {
   background: #e4e4e4;
   padding: 60px;
+  padding-top: 30px;
 }
 .modal-dividend .letter {
 color: #4c3d3d;
@@ -851,6 +852,13 @@ color: #4c3d3d;
   padding-top: 20px;
   font-size: 0.9rem;
   font-weight: 600;
+}
+.dvd-account-title{
+  background: #4149a2;
+  color: #fff;
+  padding: 30px 60px 15px;
+  border-radius: 5px;
+  position: relative;
 }
 .dvd-account-title h3 {
   margin: 0;
