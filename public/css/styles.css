@@ -841,3 +841,14 @@ table#t01 > tbody > tr:nth-child(odd) {
 .bgBlue{
   background: #0794e9 !important;
 }
+.modal-dividend {
+  background: #e4e4e4;
+  padding: 60px;
+}
+.modal-dividend .letter {
+color: #4c3d3d;
+  text-align: left;
+  padding-top: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
