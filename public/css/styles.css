@@ -145,7 +145,7 @@ table > thead > tr > th {
 }
 .userAddress { 
   padding: 0 10px;
- }
+}
 
 #color1 {
   background-color: #e4e4e4;
@@ -704,10 +704,10 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 .md-account-title{
   background: #186689;
-    color: #fff;
-    padding: 30px 60px 15px;
-    border-radius: 5px;
-    position: relative;
+  color: #fff;
+  padding: 30px 60px 15px;
+  border-radius: 5px;
+  position: relative;
 }
 .md-account-title h3{
   margin: 0;
@@ -746,4 +746,53 @@ table#t01 > tbody > tr:nth-child(odd) {
   position: absolute;
   right: 20px;
   top: 20px;
+}
+
+/*modal token*/
+.modal-500{
+  width: 500px;
+}
+.modal-500 .modal-custom{
+  height: auto;
+}
+.modal-500 .md-token{
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+  padding: 0;
+  height: auto;
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.75);
+}
+.md-token-title{
+  position: relative;
+  background: #b94126;
+  color: #fff;
+  overflow: hidden;
+}
+.md-token-title h3{
+  margin: 0;
+  padding: 30px 15px;
+  font-weight: bold;
+}
+.md-token-title button{
+  position: absolute;
+  color: #fff;
+  top: 7px;
+  right: 15px;
+}
+.md-token-content{
+  overflow: hidden;
+}
+.md-token-content form{
+  width: 100%;
+  margin: 0;
+}
+.md-token-content-top{
+  padding: 45px;
+  border-bottom: 1px solid #ddd;
+}
+.md-token-content-bottom{
+  padding: 30px 45px;
 }
