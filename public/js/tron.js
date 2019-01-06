@@ -1,5 +1,7 @@
 var TRON={
-    CONTRACT_ADDRESS:"TNGMcZVhfWVKVCP8g7xQe8vChAEt34bhEi",
+    CONTRACT_ADDRESS:"TTBn7ERdRz8WwyAqVLXKCP48UF55Sd9LFg",
+
+    // CONTRACT_ADDRESS:"TNGMcZVhfWVKVCP8g7xQe8vChAEt34bhEi",
     //CONTRACT_ADDRESS:"TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF",
     //CONTRACT_ADDRESS:"TQpVtBmX3kpaWudFuupVsrxXEwJfTh66gp",
     contractInstance:"",
@@ -25,22 +27,12 @@ var TRON={
         let buyPositions=[];
         let buyColors=[];
         pixelsData.forEach(item=>{
-            let tempPosition=new Uint16Array(2);
-            tempPosition.set([item.x,item.y]);
-            let position= new Uint8Array(tempPosition.buffer);
-            buyPositions.push(position);
-            let tempColor=new Uint16Array(3);
-            let num=getColor(item.color);
-            let b = num & 0xFF;
-            let g = (num & 0xFF00) >>> 8;
-            let r = (num & 0xFF0000) >>> 16;
-            tempColor.set([r,g,b]);
-            let color=new Uint8Array(tempColor.buffer);
-            buyColors.push(color);
+            buyPositions.push(convertXY2Hex(item.x,item.y));
+            buyColors.push(getColor(item.color));
         })
         //let buyPrice=10000000*buyColors.length;
         let buyPrice=10000000*buyColors.length;
-        //console.log(buyPositions);console.log(buyColors);
+        console.log(buyPositions);console.log(buyColors);
         return await this.contractInstance.buyPixels(buyPositions,buyColors).send({callValue:buyPrice});
     },
     joinCommunity:async function(name){

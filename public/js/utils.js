@@ -121,3 +121,28 @@ helper.arr = {
         });
     }
 }
+//@dev 
+ function convertXY2Hex(x, y) {
+	var signX=x>0?0:1;
+	var signY=y>0?0:1;
+    var hexX = window.tronWeb.toHex(Math.abs(x)).substr(2);
+    var hexY = window.tronWeb.toHex(Math.abs(y)).substr(2);
+
+    var hexReturn = "0x" + signX+(new Array(32 - hexX.length)).join(0) + hexX + signY+ (new Array(32 - hexY.length)).join(0) + hexY
+    return hexReturn
+}
+ function hex2XY(hexInput) {
+    let hex= (new Array(64+1 - (hexInput.length-2))).join(0);
+	hex=hex+hexInput.substr(2);
+    let hexY=hex.substr(hex.length-31,31);
+    let signY=hex.substr(hex.length-32,1);
+    let hexX=hex.substr(hex.length-63,31);
+    let signX=hex.substr(hex.length-64,1);
+    if(hexX=="") hexX="0";
+    if(hexY=="") hexY="0";
+    if(signX=="") signX="0";
+    if(signY=="") signY="0";
+    let y = window.tronWeb.toDecimal("0x" + hexY)*(signY=="0"?1:-1);
+    let x = window.tronWeb.toDecimal("0x" + hexX)*(signX=="0"?1:-1);
+    return { x, y }
+}
