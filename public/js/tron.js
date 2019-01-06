@@ -174,7 +174,7 @@ async function upDateGameStatus(){
     $('#CommunityPixels').val(await TRON.viewTotalPixelsInCommunity());
     $('#UserPixels').val(await TRON.userTotalPixels());
     $('#CommunityUsers').val(await TRON.viewTotalUsersInCommunity());
-    $('#UserTokens').val(await TRON.balanceOf());
+    $('#UserTokens').html(await TRON.balanceOf());
     $('#pool_value_dividend').val(await TRON.communityPoolVolume());
     let pool_value = await TRON.communityPoolVolume()
     $('#pool_value').html(pool_value);
