@@ -305,7 +305,8 @@ $(document).ready(() => {
     if(oldPixels.length>=100){
  	showModalError(
         "uh-oh..",
-        "You can not buy more than 100 pixel",
+        "You can buy maximum 100 pixels at once!",
+	"Lets buy to add more!",	
         ""
       );
  	return false;
