@@ -900,10 +900,10 @@ color: #4c3d3d;
 .cmt {
   background: #e4e4e4;
 }
-.cmt btn-danger {
+.cmt .btn-danger {
   background-color: #4149a2;
   border-color: #4149a2;
 }
 .cmt-title{
-  background: #e4e4e4;
+  background: #4149a2;
 }
