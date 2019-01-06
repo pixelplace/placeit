@@ -5,7 +5,7 @@ $(document).ready(() => {
   var socket = io();
   const CANVAS_ROWS = 1000;
   const CANVAS_COLS = 1000;
-
+  var firstTime = 0;
   var step = 1;
 
   var canvas = $("#place")[0];
@@ -302,6 +302,14 @@ $(document).ready(() => {
       return;
     }
 
+    if(oldPixels.length>=100){
+ 	showModalError(
+        "uh-oh..",
+        "You can not buy more than 100 pixel",
+        ""
+      );
+ 	return false;
+    }
     var row = parseInt((mousePos.x - xleftView) / step);
     var col = parseInt((mousePos.y - ytopView) / step);
 
@@ -597,6 +605,7 @@ $(document).ready(() => {
   }
 
   async function draw() {
+  	if(firstTime==0){
     setTimeout(async function() {
       let ALLPixelDimensions = await TRON.viewALLPixelDimensions();
       let ALLPixelColors = await TRON.viewALLPixelColors();
@@ -616,6 +625,9 @@ $(document).ready(() => {
       });
       //draw()
     }, 3000);
+    firstTime=1;
+	}
+	
 
     // let ALLPixelDimensions = TRON.viewALLPixelDimensions()
     // console.log(ALLPixelDimensions)
