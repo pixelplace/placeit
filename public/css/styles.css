@@ -897,3 +897,13 @@ color: #4c3d3d;
 .md-token-content-top .form-control{
       background: rgba(0,0,0,.075);
 }
+.cmt {
+  background: #e4e4e4;
+}
+.cmt btn-danger {
+  background-color: #4149a2;
+  border-color: #4149a2;
+}
+.cmt-title{
+  background: #e4e4e4;
+}
