@@ -836,10 +836,14 @@ table#t01 > tbody > tr:nth-child(odd) {
 .md-token-content-bottom{
   padding: 30px 45px;
 }
+.md-token-content-bottom .btn{
+  background-color: #4149a2;
+  border-color: #4149a2;
+}
 
 /* background color*/
 .bgBlue{
-  background: #0794e9 !important;
+  background: #4149a2 !important;
 }
 .modal-dividend {
   background: #e4e4e4;
