@@ -813,8 +813,8 @@ table#t01 > tbody > tr:nth-child(odd) {
 }
 .md-token-title h3{
   margin: 0;
-  padding: 30px 15px;
-  font-weight: bold;
+  padding: 20px 15px;
+  font-weight: 500;
 }
 .md-token-title button{
   position: absolute;
@@ -893,4 +893,7 @@ color: #4c3d3d;
  font-size:16px;
  font-weight: 600;
  color: #4149a2;
+}
+.md-token-content-top .form-control{
+      background: rgba(0,0,0,.075);
 }
