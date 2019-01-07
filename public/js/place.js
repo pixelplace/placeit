@@ -302,10 +302,10 @@ $(document).ready(() => {
       return;
     }
 
-    if(oldPixels.length>=100){
+    if(oldPixels.length>=5){
  	showModalError(
         "uh-oh..",
-        "You can buy maximum 100 pixels at once!<br>Lets buy to add more pixels!",	
+        "You can buy maximum 5 pixels at once!<br>Lets buy to add more pixels!",	
         ""
       );
  	return false;
@@ -610,11 +610,7 @@ $(document).ready(() => {
       let ALLPixelDimensions = await TRON.viewALLPixelDimensions();
       let ALLPixelColors = await TRON.viewALLPixelColors();
       ALLPixelDimensions.forEach((item, index) => {
-        //@dev Uint32 version. hexUint32toXY is defined at utils.js file
-        let coordition = hexUint32toXY(item);
-        
-        // let coordition = hex2XY(item);//@dev Uint256 version
-        // let coordition = convertCoord(item.substr(2, 9));
+        let coordition = convertCoord(item.substr(2, 9));
         let colorArray = ALLPixelColors[index];
         let color = convertColor(colorArray.substr(2, 13));
         let x = coordition.x;
