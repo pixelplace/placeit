@@ -302,10 +302,10 @@ $(document).ready(() => {
   		return;
   	}
 
-  	if(oldPixels.length>=5){
+  	if(oldPixels.length>=25){
   		showModalError(
   			"uh-oh..",
-  			"You can buy maximum 5 pixels at once!<br>Lets buy to add more pixels!",	
+  			"You can buy maximum 25 pixels at once!<br>Lets buy to add more pixels!",	
   			""
   			);
   		return false;
