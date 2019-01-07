@@ -610,7 +610,10 @@ $(document).ready(() => {
       let ALLPixelDimensions = await TRON.viewALLPixelDimensions();
       let ALLPixelColors = await TRON.viewALLPixelColors();
       ALLPixelDimensions.forEach((item, index) => {
-        let coordition = hex2XY(item);
+        //@dev Uint32 version. hexUint32toXY is defined at utils.js file
+        let coordition = hexUint32toXY(item);
+        
+        // let coordition = hex2XY(item);//@dev Uint256 version
         // let coordition = convertCoord(item.substr(2, 9));
         let colorArray = ALLPixelColors[index];
         let color = convertColor(colorArray.substr(2, 13));

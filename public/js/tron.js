@@ -1,5 +1,6 @@
 var TRON={
-    CONTRACT_ADDRESS:"TTBn7ERdRz8WwyAqVLXKCP48UF55Sd9LFg",
+    CONTRACT_ADDRESS:"TV5WBpnxBk6UqNxYQQV9GfDV7KueZ7LN5H", //Uint32 deployed
+    // CONTRACT_ADDRESS:"TTBn7ERdRz8WwyAqVLXKCP48UF55Sd9LFg",//Uint256 deployed
 
     // CONTRACT_ADDRESS:"TNGMcZVhfWVKVCP8g7xQe8vChAEt34bhEi",
     //CONTRACT_ADDRESS:"TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF",
@@ -27,8 +28,13 @@ var TRON={
         let buyPositions=[];
         let buyColors=[];
         pixelsData.forEach(item=>{
-            buyPositions.push(convertXY2Hex(item.x,item.y));
+            //@dev: uint32 version. convertXYtoHexUint32 is defined at utils.js file
+            buyPositions.push(convertXYtoHexUint32(item.x,item.y));
             buyColors.push(getColor(item.color));
+
+            ////@dev: Uint256 version
+            // buyPositions.push(convertXY2Hex(item.x,item.y));
+            // buyColors.push(getColor(item.color));
         })
         //let buyPrice=10000000*buyColors.length;
         let buyPrice=10000000*buyColors.length;
