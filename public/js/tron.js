@@ -1,10 +1,7 @@
 var TRON={
-    //CONTRACT_ADDRESS:"TV5WBpnxBk6UqNxYQQV9GfDV7KueZ7LN5H", //Uint32 deployed
-    // CONTRACT_ADDRESS:"TTBn7ERdRz8WwyAqVLXKCP48UF55Sd9LFg",//Uint256 deployed
-
-    //CONTRACT_ADDRESS:"TSNr8WB3nKCT1QndMeisF7opCCvSVkJP7X",
+    CONTRACT_ADDRESS:"TNGMcZVhfWVKVCP8g7xQe8vChAEt34bhEi",
     //CONTRACT_ADDRESS:"TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF",
-    CONTRACT_ADDRESS:"TYueUJfUVwxxNnm1hzSb3VsPmH7ht2aBjc",
+    //CONTRACT_ADDRESS:"TQpVtBmX3kpaWudFuupVsrxXEwJfTh66gp",
     contractInstance:"",
     ListCommunity:[],
     init:async function(){
@@ -28,17 +25,22 @@ var TRON={
         let buyPositions=[];
         let buyColors=[];
         pixelsData.forEach(item=>{
-            //@dev: uint32 version. convertXYtoHexUint32 is defined at utils.js file
-            buyPositions.push(convertXYtoHexUint32(item.x,item.y));
-            buyColors.push(getColor(item.color));
-
-            ////@dev: Uint256 version
-            // buyPositions.push(convertXY2Hex(item.x,item.y));
-            // buyColors.push(getColor(item.color));
+            let tempPosition=new Uint16Array(2);
+            tempPosition.set([item.x,item.y]);
+            let position= new Uint8Array(tempPosition.buffer);
+            buyPositions.push(position);
+            let tempColor=new Uint16Array(3);
+            let num=getColor(item.color);
+            let b = num & 0xFF;
+            let g = (num & 0xFF00) >>> 8;
+            let r = (num & 0xFF0000) >>> 16;
+            tempColor.set([r,g,b]);
+            let color=new Uint8Array(tempColor.buffer);
+            buyColors.push(color);
         })
         //let buyPrice=10000000*buyColors.length;
         let buyPrice=10000000*buyColors.length;
-        console.log(buyPositions);console.log(buyColors);
+        //console.log(buyPositions);console.log(buyColors);
         return await this.contractInstance.buyPixels(buyPositions,buyColors).send({callValue:buyPrice});
     },
     joinCommunity:async function(name){
