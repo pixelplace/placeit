@@ -1,5 +1,5 @@
 var TRON={
-    CONTRACT_ADDRESS:"TUUhcsHPhUi2hWNKSenVQrqT7u42D2Botp",
+    CONTRACT_ADDRESS:"TSWvuie5du5YUhUKqTScEaais3jADsJNSB",
     //CONTRACT_ADDRESS:"TVrtszSXqrbV7TKfa9bFKekucHsPgAb7jF",
     //CONTRACT_ADDRESS:"TQpVtBmX3kpaWudFuupVsrxXEwJfTh66gp",
     contractInstance:"",
