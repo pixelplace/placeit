@@ -25,23 +25,28 @@ var TRON={
         let buyPositions=[];
         let buyColors=[];
         pixelsData.forEach(item=>{
-            let tempPosition=new Uint16Array(2);
-            tempPosition.set([item.x,item.y]);
+            console.log(item);
+            let tempPosition=new Uint16Array(3);
+            // tempPosition.set([item.x,item.y,item.color]);
+            // let position= new Uint16Array(tempPosition.buffer);
+            // buyPositions.push(position);
+            let tempColor=new Uint16Array(3);
+            // let num=getColor(item.color);
+            // let b = num & 0xFF;
+            // let g = (num & 0xFF00) >>> 8;
+            // let r = (num & 0xFF0000) >>> 16;
+            // tempColor.set([r,g,b]);
+            //let color=new Uint8Array(tempColor.buffer);
+            tempPosition.set([item.x,item.y,item.color]);
             let position= new Uint8Array(tempPosition.buffer);
             buyPositions.push(position);
-            let tempColor=new Uint16Array(3);
-            let num=getColor(item.color);
-            let b = num & 0xFF;
-            let g = (num & 0xFF00) >>> 8;
-            let r = (num & 0xFF0000) >>> 16;
-            tempColor.set([r,g,b]);
-            let color=new Uint8Array(tempColor.buffer);
-            buyColors.push(color);
+            //buyColors.push(color);
         })
         //let buyPrice=10000000*buyColors.length;
-        let buyPrice=10000000*buyColors.length;
+        let buyPrice=10000000*buyPositions.length;
         //console.log(buyPositions);console.log(buyColors);
-        return await this.contractInstance.buyPixels(buyPositions,buyColors).send({callValue:buyPrice});
+        console.log(buyPositions);
+        return await this.contractInstance.buyPixels(buyPositions).send({callValue:buyPrice});
     },
     joinCommunity:async function(name){
        return await this.contractInstance.joinCommunity(StringToBytes(name)).send({callValue:100000000});

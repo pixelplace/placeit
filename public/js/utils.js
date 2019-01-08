@@ -18,14 +18,19 @@ function hex2a(hexx) {
 //      return {x,y};
 // }
 
+// function convertCoord(hexString) {
+//     let x = parseInt(hexString.substr(2, 2)+hexString.substr(0,2), 16);
+//     let y =parseInt(hexString.substr(6,2)+hexString.substr(4,2), 16);
+//     return {x,y};
+// }
 function convertCoord(hexString) {
-    let x = parseInt(hexString.substr(2, 2)+hexString.substr(0,2), 16);
-    let y =parseInt(hexString.substr(6,2)+hexString.substr(4,2), 16);
-    return {x,y};
+    let x= parseInt(hexString.substr(2, 2)+hexString.substr(0,2), 16);
+    let y=parseInt(hexString.substr(6,2)+hexString.substr(4,2), 16);
+    let z=parseInt(hexString.substr(10,2)+hexString.substr(8,2), 16);
+    return {x,y,z};
 }
-
 function convertColor(hexString) {
-    let r= parseInt(hexString.substr(0, 2), 16);
+    let r= parseInt(hexString.substr(2, 4), 16);
     let g=parseInt(hexString.substr(4, 2), 16);
     let b= parseInt(hexString.substr(8, 2), 16);
     return {r,g,b};
@@ -120,4 +125,15 @@ helper.arr = {
             return multisort_recursive(a,b,columns,order_by,0);
         });
     }
+}
+function rgb2hex(rgb) {
+     if (  rgb.search("rgb") == -1 ) {
+          return rgb;
+     } else {
+          rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+))?\)$/);
+          function hex(x) {
+               return ("0" + parseInt(x).toString(16)).slice(-2);
+          }
+          return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]); 
+     }
 }

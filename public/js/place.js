@@ -36,6 +36,10 @@ $(document).ready(() => {
 
   var countDownDate = 0;
 
+  //pixel colors 
+  var pixelColors = ["#000000","#ffffff","#e4e4e4","#888888","#222222","#a06a42","#e50000","#e59500","#e5d900","#94e044","#02be01","#00d3dd","#0083c7","#0000ea","#820080","#cf6ee4","#ffa7d1"];
+
+
   function setCanvasColor(x, y, cr) {
   	idx = (y * widthCanvas + x) * 4;
   	canvasImg.data[idx] = (cr & 0xff0000) >> 16;
@@ -252,6 +256,7 @@ $(document).ready(() => {
 
     $(".color-item").click(function() {
     	var newColor = $(this).css("background-color");
+
     	$(".color-pan").css("background-color", newColor);
 
     	if (dragEnable) $("#drag").click();
@@ -351,11 +356,12 @@ $(document).ready(() => {
 
   		$(".pixel_list").append(newItem);
   	}
-
+    var rgbColor = rgb2hex(currentColor);
+    var colorIndex = $.inArray(rgbColor, pixelColors);
   	oldPixels.push({
   		x: parseInt($("#x-coord").val()),
   		y: parseInt($("#y-coord").val()),
-  		color: currentColor
+  		color: colorIndex
   	});
 
   	$(".count").html(cartCnt);
@@ -461,9 +467,11 @@ $(document).ready(() => {
           $(".coord-x").text(row + 1);
           $(".coord-y").text(col + 1);
           //console.log(tronWeb.address.toHex("TBBnsH1UJMMyjAKWQj3cKtfSmQzsDK78aN"))
-
-          let tempPosition = new Uint16Array(2);
-          tempPosition.set([pixelX, pixelY]);
+          
+          let tempColor = global.canvasData[col][row];          
+          var colorIndex = $.inArray(tempColor, pixelColors);
+          let tempPosition = new Uint16Array(3);
+          tempPosition.set([pixelX, pixelY,colorIndex]);
           let position = new Uint8Array(tempPosition.buffer);
           let results = await TRON.viewPixelOwner(position);
           // console.log('pixelX = ' + pixelX + ' pixelY= ' + pixelY)
@@ -607,22 +615,30 @@ $(document).ready(() => {
   async function draw() {
   	if(firstTime==0){
   		setTimeout(async function() {
+        
   			let ALLPixelDimensions = await TRON.viewALLPixelDimensions();
-  			let ALLPixelColors = await TRON.viewALLPixelColors();
-  			ALLPixelDimensions.forEach((item, index) => {
-  				let coordition = convertCoord(item.substr(2, 9));
-  				let colorArray = ALLPixelColors[index];
-  				let color = convertColor(colorArray.substr(2, 13));
+       // console.log(ALLPixelDimensions);
+  			//let ALLPixelColors = await TRON.viewALLPixelColors();
+  			//ALLPixelDimensions.forEach((item, index) => {
+          for(var j=0;j<ALLPixelDimensions.length;j++){
+           
+  				//let coordition = convertCoord(item.substr(2, 13));
+          let coordition =convertCoord(ALLPixelDimensions[j].substr(2, 13));
+         // console.log(coordition);
+  				//let colorArray = ALLPixelColors[index];
+  				//let color = convertColor(colorArray.substr(2, 13));
   				let x = coordition.x;
   				let y = coordition.y;
   				x = x - 1;
   				y = y - 1;
-  				let r = color.r;
-  				let g = color.g;
-  				let b = color.b;
-  				let colorCode = rgbToHex(r, g, b);
+          let colorCode = pixelColors[coordition.z];
+  				//let r = color.r;
+  				//let g = color.g;
+  				//let b = color.b;
+  				//let colorCode = rgbToHex(r, g, b);
   				global.canvasData[y][x] = colorCode;
-  			});
+        }
+  			//});
       //draw()
     }, 3000);
   		firstTime=1;
