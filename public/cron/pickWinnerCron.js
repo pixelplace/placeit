@@ -14,9 +14,9 @@ fs.createReadStream('.sample-env').pipe(fs.createWriteStream('.env'));
 async function pickWinnerCalling() {
 
 const HttpProvider = TronWeb.providers.HttpProvider;
-const fullNode = new HttpProvider('https://api.shasta.trongrid.io');
-const solidityNode = new HttpProvider('https://api.shasta.trongrid.io');
-const eventServer = 'https://api.shasta.trongrid.io/';
+const fullNode = new HttpProvider('https://api.trongrid.io');
+const solidityNode = new HttpProvider('https://api.trongrid.io');
+const eventServe = "https://api.trongrid.io/"
 const privateKey = process.env.PRIVATE_KEY;
 
 const tronWeb = new TronWeb(
