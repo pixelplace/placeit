@@ -774,7 +774,7 @@ $(document).ready(() => {
   				"Hooray!",
   				"Community " +
   				name +
-  				' created successfully. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/' +
+  				' created successfully. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://tronscan.org/#/transaction/' +
   				result +
   				'">Go To Explorer</a><br/> <span class="cool">Ok cool, Lets own some pixels!</span>  ',
   				""
@@ -804,7 +804,7 @@ $(document).ready(() => {
     		$(".modal").modal("hide");
     		showModalSuccess(
     			"wow",
-    			'Tokens buying was successfull. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/' +
+    			'Tokens buying was successfull. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://tronscan.org/#/transaction/' +
     			result +
     			'">Go To Explorer</a><br/> <span class="cool">Ok cool, Lets own some pixels!</span>  ',
     			showAccountInfo
@@ -837,7 +837,7 @@ $(document).ready(() => {
         // $("#spinning-page").modal("hide");
         showModalSuccess(
         	"yay!!",
-        	'You have successfully claimed pixels. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/' +
+        	'You have successfully claimed pixels. <br/>You can verify transaction below <a class="btn btn-success actBtn" target="_blank" href="https://tronscan.org/#/transaction/' +
         	result +
         	'">Go To Explorer</a><br/> <span class="cool">Ok cool, Lets have more fun!</span> ',
         	showAccountInfo
@@ -895,7 +895,7 @@ $(document).ready(() => {
   	$(".modal").modal("hide");
   	showModalSuccess(
   		"Success",
-  		'You Left Community. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://shasta.tronscan.org/#/transaction/' +
+  		'You Left Community. check transaction here <a class="btn btn-success actBtn" target="_blank" href="https://tronscan.org/#/transaction/' +
   		result +
   		'">tronscan.org</a> ',
   		showAccountInfo
