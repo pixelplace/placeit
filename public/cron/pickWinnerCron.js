@@ -26,7 +26,7 @@ const tronWeb = new TronWeb(
     privateKey
 );
 
-const contractInstance = await tronWeb.contract().at("TSWvuie5du5YUhUKqTScEaais3jADsJNSB");
+const contractInstance = await tronWeb.contract().at("TRTYkQX7aYTVKQ8dLGc3pK8mvdTXef66WM");
 const result  = await contractInstance.pickWinner().send();
 //writing log entry in the file for future reference
 const logEntry = new Date() +" -- " + result + "\n";
