@@ -9,7 +9,7 @@ var TRON={
     },
    total:async function(){
         //console.log(await this.contractInstance.maxNumbers().call()).toNumber();
-        var ned = (await this.contractInstance.total().call()).toString()/1000000;
+        var ned = (await this.contractInstance.total().call()).toNumber();
         console.log(ned);
     },
 
