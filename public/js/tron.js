@@ -8,7 +8,7 @@ var TRON={
         //this.hookPixelPurchased();
     },
     maxNumbers:async function(){
-        var ned = hex2a(await this.contractInstance.maxNumbers().call().substr(2));
+        var ned = hex2a(await this.contractInstance.maxNumbers().call()).substr(2);
         console.log(ned);
     },
 
