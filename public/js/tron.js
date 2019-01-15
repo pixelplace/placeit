@@ -7,9 +7,9 @@ var TRON={
         this.contractInstance=window.tronWeb.contract(contractInfo.abi.entrys,contractInfo.contract_address);
         //this.hookPixelPurchased();
     },
-    maxNumbers:async function(){
+   total:async function(){
         //console.log(await this.contractInstance.maxNumbers().call()).toNumber();
-        var ned = await this.contractInstance.maxNumbers().call();
+        var ned = await this.contractInstance.total().call();
         console.log(ned);
     },
 
