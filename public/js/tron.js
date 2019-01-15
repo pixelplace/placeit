@@ -8,8 +8,8 @@ var TRON={
         //this.hookPixelPurchased();
     },
     maxNumbers:async function(){
-        var ned = await this.contractInstance.maxNumbers().call().toString();
-        console.log(ned);
+        console.log(await this.contractInstance.maxNumbers().call().toNumber());
+        //console.log(ned);
     },
 
 }
