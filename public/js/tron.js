@@ -9,8 +9,8 @@ var TRON={
     },
    total:async function(){
         //console.log(await this.contractInstance.maxNumbers().call()).toNumber();
-        var ned = hex2a(await this.contractInstance.total().call()).toString()/100000;
-        console.log(ned);
+        var totalnumber = await this.contractInstance.total().call();
+        console.log(totalnumber.toString());
     },
 
 }
